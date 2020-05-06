@@ -6,17 +6,14 @@
 package BLL;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,11 +36,8 @@ public class KategoriaLibrit implements Serializable {
     @Basic(optional = false)
     @Column(name = "KL_Emri")
     private String kLEmri;
-    @Basic(optional = false)
     @Column(name = "KL_Sasia")
-    private String kLSasia;
-    @OneToMany(mappedBy = "lKategoriaId")
-    private Collection<Libri> libriCollection;
+    private Integer kLSasia;
 
     public KategoriaLibrit() {
     }
@@ -52,10 +46,9 @@ public class KategoriaLibrit implements Serializable {
         this.kategoriaId = kategoriaId;
     }
 
-    public KategoriaLibrit(Integer kategoriaId, String kLEmri, String kLSasia) {
+    public KategoriaLibrit(Integer kategoriaId, String kLEmri) {
         this.kategoriaId = kategoriaId;
         this.kLEmri = kLEmri;
-        this.kLSasia = kLSasia;
     }
 
     public Integer getKategoriaId() {
@@ -74,21 +67,12 @@ public class KategoriaLibrit implements Serializable {
         this.kLEmri = kLEmri;
     }
 
-    public String getKLSasia() {
+    public Integer getKLSasia() {
         return kLSasia;
     }
 
-    public void setKLSasia(String kLSasia) {
+    public void setKLSasia(Integer kLSasia) {
         this.kLSasia = kLSasia;
-    }
-
-    @XmlTransient
-    public Collection<Libri> getLibriCollection() {
-        return libriCollection;
-    }
-
-    public void setLibriCollection(Collection<Libri> libriCollection) {
-        this.libriCollection = libriCollection;
     }
 
     @Override
