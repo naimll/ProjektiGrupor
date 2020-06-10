@@ -38,14 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Klienti.findByKDataLindjes", query = "SELECT k FROM Klienti k WHERE k.kDataLindjes = :kDataLindjes"),
     @NamedQuery(name = "Klienti.findByKTel", query = "SELECT k FROM Klienti k WHERE k.kTel = :kTel"),
     @NamedQuery(name = "Klienti.findByKShteti", query = "SELECT k FROM Klienti k WHERE k.kShteti = :kShteti"),
-    @NamedQuery(name = "Klienti.findByKEmail", query = "SELECT k FROM Klienti k WHERE k.kEmail = :kEmail"),
-    @NamedQuery(name = "Klienti.findByKUser", query = "SELECT k FROM Klienti k WHERE k.kUser = :kUser"),
-    @NamedQuery(name = "Klienti.findByKPassword", query = "SELECT k FROM Klienti k WHERE k.kPassword = :kPassword")})
+    @NamedQuery(name = "Klienti.findByKEmail", query = "SELECT k FROM Klienti k WHERE k.kEmail = :kEmail")})
 public class Klienti implements Serializable {
-    @OneToMany(mappedBy = "kthLKlientiId")
-    private Collection<KthimiLibrit> kthimiLibritCollection;
-    @OneToMany(mappedBy = "hLKlientiId")
-    private Collection<HuazimiLibrit> huazimiLibritCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -75,12 +69,10 @@ public class Klienti implements Serializable {
     @Basic(optional = false)
     @Column(name = "K_Email")
     private String kEmail;
-    @Basic(optional = false)
-    @Column(name = "K_User")
-    private String kUser;
-    @Basic(optional = false)
-    @Column(name = "K_Password")
-    private String kPassword;
+    @OneToMany(mappedBy = "hLKlientiId")
+    private Collection<HuazimiLibrit> huazimiLibritCollection;
+    @OneToMany(mappedBy = "kthLKlientiId")
+    private Collection<KthimiLibrit> kthimiLibritCollection;
 
     public Klienti() {
     }
@@ -89,7 +81,7 @@ public class Klienti implements Serializable {
         this.kId = kId;
     }
 
-    public Klienti(Integer kId, String kEmri, String kMbiemri, int kMosha, String kGjinia, String kTel, String kShteti, String kEmail, String kUser, String kPassword) {
+    public Klienti(Integer kId, String kEmri, String kMbiemri, int kMosha, String kGjinia, String kTel, String kShteti, String kEmail) {
         this.kId = kId;
         this.kEmri = kEmri;
         this.kMbiemri = kMbiemri;
@@ -98,8 +90,6 @@ public class Klienti implements Serializable {
         this.kTel = kTel;
         this.kShteti = kShteti;
         this.kEmail = kEmail;
-        this.kUser = kUser;
-        this.kPassword = kPassword;
     }
 
     public Integer getKId() {
@@ -174,20 +164,22 @@ public class Klienti implements Serializable {
         this.kEmail = kEmail;
     }
 
-    public String getKUser() {
-        return kUser;
+    @XmlTransient
+    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
+        return huazimiLibritCollection;
     }
 
-    public void setKUser(String kUser) {
-        this.kUser = kUser;
+    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
+        this.huazimiLibritCollection = huazimiLibritCollection;
     }
 
-    public String getKPassword() {
-        return kPassword;
+    @XmlTransient
+    public Collection<KthimiLibrit> getKthimiLibritCollection() {
+        return kthimiLibritCollection;
     }
 
-    public void setKPassword(String kPassword) {
-        this.kPassword = kPassword;
+    public void setKthimiLibritCollection(Collection<KthimiLibrit> kthimiLibritCollection) {
+        this.kthimiLibritCollection = kthimiLibritCollection;
     }
 
     @Override
@@ -213,24 +205,6 @@ public class Klienti implements Serializable {
     @Override
     public String toString() {
         return "BLL.Klienti[ kId=" + kId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
-        return huazimiLibritCollection;
-    }
-
-    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
-        this.huazimiLibritCollection = huazimiLibritCollection;
-    }
-
-    @XmlTransient
-    public Collection<KthimiLibrit> getKthimiLibritCollection() {
-        return kthimiLibritCollection;
-    }
-
-    public void setKthimiLibritCollection(Collection<KthimiLibrit> kthimiLibritCollection) {
-        this.kthimiLibritCollection = kthimiLibritCollection;
     }
     
 }

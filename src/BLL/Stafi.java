@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Stafi.findBySMbiemri", query = "SELECT s FROM Stafi s WHERE s.sMbiemri = :sMbiemri"),
     @NamedQuery(name = "Stafi.findBySTel", query = "SELECT s FROM Stafi s WHERE s.sTel = :sTel"),
     @NamedQuery(name = "Stafi.findBySUser", query = "SELECT s FROM Stafi s WHERE s.sUser = :sUser"),
-    @NamedQuery(name = "Stafi.findBySPassword", query = "SELECT s FROM Stafi s WHERE s.sPassword = :sPassword")})
+    @NamedQuery(name = "Stafi.findBySPassword", query = "SELECT s FROM Stafi s WHERE s.sPassword = :sPassword"),
+    @NamedQuery(name = "Stafi.findBySRoli", query = "SELECT s FROM Stafi s WHERE s.sRoli = :sRoli")})
 public class Stafi implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,6 +55,9 @@ public class Stafi implements Serializable {
     @Basic(optional = false)
     @Column(name = "S_Password")
     private String sPassword;
+    @Basic(optional = false)
+    @Column(name = "S_Roli")
+    private int sRoli;
     @OneToMany(mappedBy = "lStafiId")
     private Collection<Libri> libriCollection;
 
@@ -64,13 +68,14 @@ public class Stafi implements Serializable {
         this.stafiId = stafiId;
     }
 
-    public Stafi(Integer stafiId, String sEmri, String sMbiemri, String sTel, String sUser, String sPassword) {
+    public Stafi(Integer stafiId, String sEmri, String sMbiemri, String sTel, String sUser, String sPassword, int sRoli) {
         this.stafiId = stafiId;
         this.sEmri = sEmri;
         this.sMbiemri = sMbiemri;
         this.sTel = sTel;
         this.sUser = sUser;
         this.sPassword = sPassword;
+        this.sRoli = sRoli;
     }
 
     public Integer getStafiId() {
@@ -119,6 +124,14 @@ public class Stafi implements Serializable {
 
     public void setSPassword(String sPassword) {
         this.sPassword = sPassword;
+    }
+
+    public int getSRoli() {
+        return sRoli;
+    }
+
+    public void setSRoli(int sRoli) {
+        this.sRoli = sRoli;
     }
 
     @XmlTransient

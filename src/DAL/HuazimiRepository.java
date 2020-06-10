@@ -20,13 +20,7 @@ public class HuazimiRepository extends EntMngClass implements HuazimiInterface{
             em.getTransaction().begin();
             em.persist(k);
             em.getTransaction().commit();
-             Libri l=(Libri) em.createNamedQuery("select l from Libri l join Huazimi_Librit hl on l.ISBN=hl.HL_ISBN where hl.HL_ISBN="+k.getHlIsbn()).getSingleResult();
-            int sasia=l.getLSasia();
-            sasia--;
-            l.setLSasia(sasia);
-            em.getTransaction().begin();
-            em.merge(l);
-            em.getTransaction().commit();
+            
         }catch(Exception e){
             throw new LibraryException(e.getMessage());
         }
@@ -49,13 +43,7 @@ public class HuazimiRepository extends EntMngClass implements HuazimiInterface{
         em.getTransaction().begin();
         em.remove(k);
         em.getTransaction().commit();
-         Libri l=(Libri) em.createNamedQuery("select l from Libri l join Huazimi_Librit hl on l.ISBN=hl.HL_ISBN where hl.HL_ISBN="+k.getHlIsbn()).getSingleResult();
-            int sasia=l.getLSasia();
-            sasia++;
-            l.setLSasia(sasia);
-            em.getTransaction().begin();
-            em.merge(l);
-            em.getTransaction().commit();
+         
         }catch(Exception e){
         throw new LibraryException(e.getMessage());
         }

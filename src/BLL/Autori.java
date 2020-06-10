@@ -16,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,8 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Autori.findByAMbiemri", query = "SELECT a FROM Autori a WHERE a.aMbiemri = :aMbiemri"),
     @NamedQuery(name = "Autori.findByAVendlindja", query = "SELECT a FROM Autori a WHERE a.aVendlindja = :aVendlindja")})
 public class Autori implements Serializable {
-    @OneToMany(mappedBy = "aId")
-    private Collection<LibriAutoret> libriAutoretCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -135,15 +132,6 @@ public class Autori implements Serializable {
     @Override
     public String toString() {
         return "BLL.Autori[ aId=" + aId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<LibriAutoret> getLibriAutoretCollection() {
-        return libriAutoretCollection;
-    }
-
-    public void setLibriAutoretCollection(Collection<LibriAutoret> libriAutoretCollection) {
-        this.libriAutoretCollection = libriAutoretCollection;
     }
     
 }

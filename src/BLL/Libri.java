@@ -34,16 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Libri.findByLTitulli", query = "SELECT l FROM Libri l WHERE l.lTitulli = :lTitulli"),
     @NamedQuery(name = "Libri.findByLVitiBotimit", query = "SELECT l FROM Libri l WHERE l.lVitiBotimit = :lVitiBotimit"),
     @NamedQuery(name = "Libri.findByLShtepiaBotuese", query = "SELECT l FROM Libri l WHERE l.lShtepiaBotuese = :lShtepiaBotuese"),
-    @NamedQuery(name = "Libri.findByLSasia", query = "SELECT l FROM Libri l WHERE l.lSasia = :lSasia")})
+    @NamedQuery(name = "Libri.findByLSasia", query = "SELECT l FROM Libri l WHERE l.lSasia = :lSasia"),
+    @NamedQuery(name = "Libri.findByLCmimiMujor", query = "SELECT l FROM Libri l WHERE l.lCmimiMujor = :lCmimiMujor")})
 public class Libri implements Serializable {
-    @OneToMany(mappedBy = "isbn")
-    private Collection<LibriAutoret> libriAutoretCollection;
-    @ManyToMany(mappedBy = "libriCollection")
-    private Collection<Autori> autoriCollection;
-    @OneToMany(mappedBy = "kthLISBN")
-    private Collection<KthimiLibrit> kthimiLibritCollection;
-    @OneToMany(mappedBy = "hlIsbn")
-    private Collection<HuazimiLibrit> huazimiLibritCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -61,12 +54,21 @@ public class Libri implements Serializable {
     @Basic(optional = false)
     @Column(name = "L_Sasia")
     private int lSasia;
+    @Basic(optional = false)
+    @Column(name = "L_Cmimi_Mujor")
+    private double lCmimiMujor;
+    @ManyToMany(mappedBy = "libriCollection")
+    private Collection<Autori> autoriCollection;
+    @OneToMany(mappedBy = "hlIsbn")
+    private Collection<HuazimiLibrit> huazimiLibritCollection;
     @JoinColumn(name = "L_Kategoria_Id", referencedColumnName = "Kategoria_Id")
     @ManyToOne
     private KategoriaLibrit lKategoriaId;
     @JoinColumn(name = "L_Stafi_Id", referencedColumnName = "Stafi_Id")
     @ManyToOne
     private Stafi lStafiId;
+    @OneToMany(mappedBy = "kthLISBN")
+    private Collection<KthimiLibrit> kthimiLibritCollection;
 
     public Libri() {
     }
@@ -75,12 +77,13 @@ public class Libri implements Serializable {
         this.isbn = isbn;
     }
 
-    public Libri(String isbn, String lTitulli, int lVitiBotimit, String lShtepiaBotuese, int lSasia) {
+    public Libri(String isbn, String lTitulli, int lVitiBotimit, String lShtepiaBotuese, int lSasia, double lCmimiMujor) {
         this.isbn = isbn;
         this.lTitulli = lTitulli;
         this.lVitiBotimit = lVitiBotimit;
         this.lShtepiaBotuese = lShtepiaBotuese;
         this.lSasia = lSasia;
+        this.lCmimiMujor = lCmimiMujor;
     }
 
     public String getIsbn() {
@@ -123,6 +126,32 @@ public class Libri implements Serializable {
         this.lSasia = lSasia;
     }
 
+    public double getLCmimiMujor() {
+        return lCmimiMujor;
+    }
+
+    public void setLCmimiMujor(double lCmimiMujor) {
+        this.lCmimiMujor = lCmimiMujor;
+    }
+
+    @XmlTransient
+    public Collection<Autori> getAutoriCollection() {
+        return autoriCollection;
+    }
+
+    public void setAutoriCollection(Collection<Autori> autoriCollection) {
+        this.autoriCollection = autoriCollection;
+    }
+
+    @XmlTransient
+    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
+        return huazimiLibritCollection;
+    }
+
+    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
+        this.huazimiLibritCollection = huazimiLibritCollection;
+    }
+
     public KategoriaLibrit getLKategoriaId() {
         return lKategoriaId;
     }
@@ -137,6 +166,15 @@ public class Libri implements Serializable {
 
     public void setLStafiId(Stafi lStafiId) {
         this.lStafiId = lStafiId;
+    }
+
+    @XmlTransient
+    public Collection<KthimiLibrit> getKthimiLibritCollection() {
+        return kthimiLibritCollection;
+    }
+
+    public void setKthimiLibritCollection(Collection<KthimiLibrit> kthimiLibritCollection) {
+        this.kthimiLibritCollection = kthimiLibritCollection;
     }
 
     @Override
@@ -162,42 +200,6 @@ public class Libri implements Serializable {
     @Override
     public String toString() {
         return "BLL.Libri[ isbn=" + isbn + " ]";
-    }
-
-    @XmlTransient
-    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
-        return huazimiLibritCollection;
-    }
-
-    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
-        this.huazimiLibritCollection = huazimiLibritCollection;
-    }
-
-    @XmlTransient
-    public Collection<KthimiLibrit> getKthimiLibritCollection() {
-        return kthimiLibritCollection;
-    }
-
-    public void setKthimiLibritCollection(Collection<KthimiLibrit> kthimiLibritCollection) {
-        this.kthimiLibritCollection = kthimiLibritCollection;
-    }
-
-    @XmlTransient
-    public Collection<Autori> getAutoriCollection() {
-        return autoriCollection;
-    }
-
-    public void setAutoriCollection(Collection<Autori> autoriCollection) {
-        this.autoriCollection = autoriCollection;
-    }
-
-    @XmlTransient
-    public Collection<LibriAutoret> getLibriAutoretCollection() {
-        return libriAutoretCollection;
-    }
-
-    public void setLibriAutoretCollection(Collection<LibriAutoret> libriAutoretCollection) {
-        this.libriAutoretCollection = libriAutoretCollection;
     }
     
 }

@@ -21,13 +21,7 @@ public class LibriRepository extends EntMngClass implements LibriInterface{
             em.getTransaction().begin();
             em.persist(l);
             em.getTransaction().commit();
-            KategoriaLibrit kl=(KategoriaLibrit) em.createNamedQuery("select k from Libri l join Kategoria_Librit k on l.L_Kategoria_Id=k.Kategoria_Id where l.ISBN="+l.getIsbn()).getSingleResult();
-            int sasia=kl.getKLSasia();
-            sasia++;
-            kl.setKLSasia(sasia);
-            em.getTransaction().begin();
-            em.merge(kl);
-            em.getTransaction().commit();
+            
         }catch(Exception e){
             throw new LibraryException(e.getMessage());
         }
@@ -50,13 +44,7 @@ public class LibriRepository extends EntMngClass implements LibriInterface{
         em.getTransaction().begin();
         em.remove(l);
         em.getTransaction().commit();
-        KategoriaLibrit kl=(KategoriaLibrit) em.createNamedQuery("select k from Libri l join Kategoria_Librit k on l.L_Kategoria_Id=k.Kategoria_Id where l.ISBN="+l.getIsbn()).getSingleResult();
-            int sasia=kl.getKLSasia();
-            sasia--;
-            kl.setKLSasia(sasia);
-            em.getTransaction().begin();
-            em.merge(kl);
-            em.getTransaction().commit();
+       
         }catch(Exception e){
         throw new LibraryException(e.getMessage());
         }

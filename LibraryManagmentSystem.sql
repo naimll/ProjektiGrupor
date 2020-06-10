@@ -8,6 +8,7 @@ S_Mbiemri varchar(50) not null,
 S_Tel varchar(30) not null,
 S_User varchar(40) not null,
 S_Password varchar(50) not null,
+S_Roli int not null
 )
 
 create table Klienti(
@@ -19,9 +20,7 @@ K_Gjinia varchar(50) not null,
 K_Data_Lindjes date,
 K_Tel varchar(30) not null,
 K_Shteti varchar(50) not null,
-K_Email varchar(100) not null,
-K_User varchar(50) not null,
-K_Password varchar(50) not null
+K_Email varchar(100) not null
 )
 
 create table Autori(
@@ -49,6 +48,7 @@ L_Titulli varchar(255) not null,
 L_Viti_Botimit int not null,
 L_Shtepia_Botuese varchar(100) not null,
 L_Sasia int not null,
+L_Cmimi_Mujor float not null,
 L_Stafi_Id int,
 L_Kategoria_Id int,
 foreign key(L_Stafi_Id) references Stafi(Stafi_Id),
