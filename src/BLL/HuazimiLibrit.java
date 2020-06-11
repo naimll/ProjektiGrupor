@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "HuazimiLibrit.findAll", query = "SELECT h FROM HuazimiLibrit h"),
     @NamedQuery(name = "HuazimiLibrit.findByHLId", query = "SELECT h FROM HuazimiLibrit h WHERE h.hLId = :hLId"),
     @NamedQuery(name = "HuazimiLibrit.findByHLDataLeshimit", query = "SELECT h FROM HuazimiLibrit h WHERE h.hLDataLeshimit = :hLDataLeshimit"),
-    @NamedQuery(name = "HuazimiLibrit.findByHLAfatiKthimit", query = "SELECT h FROM HuazimiLibrit h WHERE h.hLAfatiKthimit = :hLAfatiKthimit")})
+    @NamedQuery(name = "HuazimiLibrit.findByHLDataKthimit", query = "SELECT h FROM HuazimiLibrit h WHERE h.hLDataKthimit = :hLDataKthimit")})
 public class HuazimiLibrit implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,9 +43,9 @@ public class HuazimiLibrit implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date hLDataLeshimit;
     @Basic(optional = false)
-    @Column(name = "HL_Afati_Kthimit")
+    @Column(name = "HL_Data_Kthimit")
     @Temporal(TemporalType.DATE)
-    private Date hLAfatiKthimit;
+    private Date hLDataKthimit;
     @JoinColumn(name = "HL_Klienti_Id", referencedColumnName = "K_Id")
     @ManyToOne
     private Klienti hLKlientiId;
@@ -60,10 +60,10 @@ public class HuazimiLibrit implements Serializable {
         this.hLId = hLId;
     }
 
-    public HuazimiLibrit(Integer hLId, Date hLDataLeshimit, Date hLAfatiKthimit) {
+    public HuazimiLibrit(Integer hLId, Date hLDataLeshimit, Date hLDataKthimit) {
         this.hLId = hLId;
         this.hLDataLeshimit = hLDataLeshimit;
-        this.hLAfatiKthimit = hLAfatiKthimit;
+        this.hLDataKthimit = hLDataKthimit;
     }
 
     public Integer getHLId() {
@@ -82,12 +82,12 @@ public class HuazimiLibrit implements Serializable {
         this.hLDataLeshimit = hLDataLeshimit;
     }
 
-    public Date getHLAfatiKthimit() {
-        return hLAfatiKthimit;
+    public Date getHLDataKthimit() {
+        return hLDataKthimit;
     }
 
-    public void setHLAfatiKthimit(Date hLAfatiKthimit) {
-        this.hLAfatiKthimit = hLAfatiKthimit;
+    public void setHLDataKthimit(Date hLDataKthimit) {
+        this.hLDataKthimit = hLDataKthimit;
     }
 
     public Klienti getHLKlientiId() {

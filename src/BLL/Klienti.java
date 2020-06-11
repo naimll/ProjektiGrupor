@@ -6,7 +6,6 @@
 package BLL;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,12 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -69,10 +66,6 @@ public class Klienti implements Serializable {
     @Basic(optional = false)
     @Column(name = "K_Email")
     private String kEmail;
-    @OneToMany(mappedBy = "hLKlientiId")
-    private Collection<HuazimiLibrit> huazimiLibritCollection;
-    @OneToMany(mappedBy = "kthLKlientiId")
-    private Collection<KthimiLibrit> kthimiLibritCollection;
 
     public Klienti() {
     }
@@ -162,24 +155,6 @@ public class Klienti implements Serializable {
 
     public void setKEmail(String kEmail) {
         this.kEmail = kEmail;
-    }
-
-    @XmlTransient
-    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
-        return huazimiLibritCollection;
-    }
-
-    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
-        this.huazimiLibritCollection = huazimiLibritCollection;
-    }
-
-    @XmlTransient
-    public Collection<KthimiLibrit> getKthimiLibritCollection() {
-        return kthimiLibritCollection;
-    }
-
-    public void setKthimiLibritCollection(Collection<KthimiLibrit> kthimiLibritCollection) {
-        this.kthimiLibritCollection = kthimiLibritCollection;
     }
 
     @Override
