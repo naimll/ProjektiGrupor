@@ -119,6 +119,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         SurnameTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        AdminRadioButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         AdminRadioButton.setText("Admin");
         AdminRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +127,7 @@ public class RegisterGUI extends javax.swing.JFrame {
             }
         });
 
+        UserRadioButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         UserRadioButton.setText("User");
 
         UsernameTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -193,7 +195,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PasswrodLabel)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout RegiserPanelLayout = new javax.swing.GroupLayout(RegiserPanel);
