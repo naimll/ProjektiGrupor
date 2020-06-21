@@ -30,7 +30,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         WelcomePanel = new javax.swing.JPanel();
         WelcomeLabel = new javax.swing.JLabel();
         RegiserPanel = new javax.swing.JPanel();
-        RegisterLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         NameLabel = new javax.swing.JLabel();
         SurnameLabel = new javax.swing.JLabel();
@@ -59,7 +58,8 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         WelcomeLabel.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        WelcomeLabel.setText("Welcome to Library");
+        WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WelcomeLabel.setText("Register");
 
         javax.swing.GroupLayout WelcomePanelLayout = new javax.swing.GroupLayout(WelcomePanel);
         WelcomePanel.setLayout(WelcomePanelLayout);
@@ -83,10 +83,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         RegiserPanel.setMinimumSize(new java.awt.Dimension(800, 500));
         RegiserPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 
-        RegisterLabel.setFont(new java.awt.Font("Tahoma", 2, 20)); // NOI18N
-        RegisterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        RegisterLabel.setText("Register");
-
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
 
         NameLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -99,7 +95,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         TelephoneLabel.setBackground(new java.awt.Color(255, 255, 255));
         TelephoneLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        TelephoneLabel.setText("Telephone");
+        TelephoneLabel.setText("Phone");
 
         RoleLabel.setBackground(new java.awt.Color(255, 255, 255));
         RoleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -147,7 +143,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                             .addComponent(RoleLabel)
                             .addComponent(UsernameLabel)
                             .addComponent(PasswrodLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,24 +198,17 @@ public class RegisterGUI extends javax.swing.JFrame {
         RegiserPanel.setLayout(RegiserPanelLayout);
         RegiserPanelLayout.setHorizontalGroup(
             RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegiserPanelLayout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
-                .addGroup(RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegiserPanelLayout.createSequentialGroup()
-                        .addComponent(RegisterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(352, 352, 352))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegiserPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(196, 196, 196))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegiserPanelLayout.createSequentialGroup()
+                .addContainerGap(212, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(188, 188, 188))
         );
         RegiserPanelLayout.setVerticalGroup(
             RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegiserPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RegisterLabel)
-                .addGap(22, 22, 22)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegiserPanelLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,7 +277,6 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswrodLabel;
     private javax.swing.JPanel RegiserPanel;
-    private javax.swing.JLabel RegisterLabel;
     private javax.swing.JLabel RoleLabel;
     private javax.swing.JLabel SurnameLabel;
     private javax.swing.JTextField SurnameTextField;
