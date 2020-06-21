@@ -3,21 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/LibrarianSuccess.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/UserLoginSuccess.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/BookForm.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/UsersDao.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/UserForm.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/AllStudent.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/About.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/IssueBookForm.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/LibrarianDao.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/DeleteBook.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/UserLogin.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/Login.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/BookDao.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/ViewBook.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/LibrarianLogin.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/tWelcomeGUI.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/tRegisterGUI.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/BLL/Stafi.java</file>
         </group>
     </open-files>
 </project-private>
