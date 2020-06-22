@@ -9,12 +9,12 @@ package GUI.View;
  *
  * @author Lenovo
  */
-public class AddClientGUI extends javax.swing.JFrame {
+public class RegisterClientGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form AddClientGUI
      */
-    public AddClientGUI() {
+    public RegisterClientGUI() {
         initComponents();
     }
 
@@ -49,8 +49,8 @@ public class AddClientGUI extends javax.swing.JFrame {
         EmailLabel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
         AddClientButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        EditClientButton = new javax.swing.JButton();
+        DeleteClientButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -66,16 +66,16 @@ public class AddClientGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add Client");
+        jLabel1.setText("Register Client");
 
         javax.swing.GroupLayout TitelPanelLayout = new javax.swing.GroupLayout(TitelPanel);
         TitelPanel.setLayout(TitelPanelLayout);
         TitelPanelLayout.setHorizontalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitelPanelLayout.createSequentialGroup()
-                .addContainerGap(329, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(330, 330, 330))
+            .addGroup(TitelPanelLayout.createSequentialGroup()
+                .addGap(302, 302, 302)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         TitelPanelLayout.setVerticalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,6 +86,9 @@ public class AddClientGUI extends javax.swing.JFrame {
         );
 
         AddClientPanel.setBackground(new java.awt.Color(204, 204, 204));
+        AddClientPanel.setMaximumSize(new java.awt.Dimension(800, 500));
+        AddClientPanel.setMinimumSize(new java.awt.Dimension(800, 500));
+        AddClientPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -177,15 +180,15 @@ public class AddClientGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(51, 102, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 255));
-        jButton1.setText("Edit");
+        EditClientButton.setBackground(new java.awt.Color(51, 102, 255));
+        EditClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        EditClientButton.setForeground(new java.awt.Color(51, 51, 255));
+        EditClientButton.setText("Edit");
 
-        jButton2.setBackground(new java.awt.Color(255, 51, 102));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 51, 51));
-        jButton2.setText("Delete");
+        DeleteClientButton.setBackground(new java.awt.Color(255, 51, 102));
+        DeleteClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        DeleteClientButton.setForeground(new java.awt.Color(255, 51, 51));
+        DeleteClientButton.setText("Delete");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -228,12 +231,12 @@ public class AddClientGUI extends javax.swing.JFrame {
                         .addComponent(EmailLabel)
                         .addGap(67, 67, 67)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(DeleteClientButton)
                             .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(26, 26, 26))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(95, 95, 95)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EditClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(AddClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -270,26 +273,26 @@ public class AddClientGUI extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddClientButton)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(DeleteClientButton)
+                    .addComponent(EditClientButton))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AddClientPanelLayout = new javax.swing.GroupLayout(AddClientPanel);
         AddClientPanel.setLayout(AddClientPanelLayout);
         AddClientPanelLayout.setHorizontalGroup(
             AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddClientPanelLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddClientPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(80, 80, 80))
         );
         AddClientPanelLayout.setVerticalGroup(
             AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddClientPanelLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+            .addGroup(AddClientPanelLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,8 +308,8 @@ public class AddClientGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(TitelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(AddClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(AddClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -361,20 +364,21 @@ public class AddClientGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddClientGUI().setVisible(true);
+                new RegisterClientGUI().setVisible(true);
             }
         });
     }
@@ -386,6 +390,8 @@ public class AddClientGUI extends javax.swing.JFrame {
     private javax.swing.JTextField AgeTextField;
     private javax.swing.JLabel BirthdayLabel;
     private com.toedter.calendar.JDateChooser DateChooser;
+    private javax.swing.JButton DeleteClientButton;
+    private javax.swing.JButton EditClientButton;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JRadioButton FemaleRadioButton;
@@ -400,8 +406,6 @@ public class AddClientGUI extends javax.swing.JFrame {
     private javax.swing.JLabel SurnameLabel;
     private javax.swing.JTextField SurnameTextField;
     private javax.swing.JPanel TitelPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

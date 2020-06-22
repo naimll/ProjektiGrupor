@@ -83,6 +83,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         RegiserPanel.setMinimumSize(new java.awt.Dimension(800, 500));
         RegiserPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
 
         NameLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -130,6 +131,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         PasswordField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        RegisterButton.setBackground(new java.awt.Color(102, 255, 102));
         RegisterButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         RegisterButton.setText("Register");
         RegisterButton.addActionListener(new java.awt.event.ActionListener() {
