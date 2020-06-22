@@ -29,11 +29,18 @@ A_Emri varchar(50) not null,
 A_Mbiemri varchar(50) not null,
 A_Vendlindja varchar(50) not null,
 )
+
+
 Create table Kategoria_Librit(
 Kategoria_Id int primary key,
 KL_Emri varchar(50) not null,
 KL_Sasia varchar(50) not null,
 )
+
+insert into Kategoria_Librit values (1, 'Naim' , 'Frasher')
+
+insert into Kategoria_Librit values (2, 'Sami' , 'Frasheri')
+
 create table Libri_Autoret(
 ISBN varchar(100),
 A_Id int,

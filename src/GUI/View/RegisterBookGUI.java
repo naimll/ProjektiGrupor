@@ -11,6 +11,8 @@ import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
 import GUI.Model.CategoryComboBoxModel;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,13 +27,17 @@ public class RegisterBookGUI extends javax.swing.JFrame {
      */
     public RegisterBookGUI() {
         initComponents();
+         loadCategoryComboBox();
     }
     
-        public void loadCategoryComboBox() throws LibraryException{
-            List<KategoriaLibrit> lista = klrepo.findAll();
+        public void loadCategoryComboBox(){
+            try{List<KategoriaLibrit> lista = klrepo.findAll();
             ccbox.add(lista);
-            jComboBox1.setModel(cbm);
+            jComboBox1.setModel(ccbox);
             jComboBox1.repaint();
+            } catch (LibraryException ex) {
+            Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -181,7 +187,6 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -220,11 +225,11 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                                 .addComponent(AgeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PhoneTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SurnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(PhoneTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(DeleteClientButton)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26))
         );
         jPanel3Layout.setVerticalGroup(
@@ -385,7 +390,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     private javax.swing.JLabel SurnameLabel;
     private javax.swing.JTextField SurnameTextField;
     private javax.swing.JPanel TitelPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<KategoriaLibrit> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
