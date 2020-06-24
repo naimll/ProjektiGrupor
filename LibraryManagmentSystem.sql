@@ -11,6 +11,8 @@ S_Password varchar(50) not null,
 S_Roli int not null
 )
 
+insert into Stafi values (1 , 'Admin' , 'Admin' , '044123456', 'admin' , 'admin' , 1)
+
 create table Klienti(
 K_Id int primary key,
 K_Emri varchar(50) not null,
@@ -65,6 +67,9 @@ L_Kategoria_Id int,
 foreign key(L_Stafi_Id) references Stafi(Stafi_Id),
 foreign key(L_Kategoria_Id) references Kategoria_Librit(Kategoria_Id)
 )
+
+insert into Libri values (123456789,'Shqiperia','1950','ShtepiaBotuese',10, 20, 1 , 1 )
+
 create table Huazimi_Librit(
 HL_Id int primary key,
 HL_Data_Leshimit date not null,

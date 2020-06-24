@@ -7,15 +7,25 @@ package GUI.View;
 
 import BLL.Autori;
 import BLL.KategoriaLibrit;
+import BLL.Libri;
 import DAL.AutoriRepository;
 import DAL.CrudFormException;
 import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
+import DAL.LibriRepository;
 import GUI.Model.AuthorComboBoxModel;
+import GUI.Model.BookTableModel;
 import GUI.Model.CategoryComboBoxModel;
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import static java.time.Clock.system;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -28,15 +38,87 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     
     AutoriRepository arepo = new AutoriRepository();
     AuthorComboBoxModel acbox = new AuthorComboBoxModel();
+    
+    LibriRepository lrepo = new LibriRepository();
+    BookTableModel btm = new BookTableModel();
     /**
      * Creates new form RegisterBookGUI
      */
     public RegisterBookGUI() {
         initComponents();
          loadCategoryComboBox();
+         this.tableSelectedIndexChange();
          loadAuthorComboBox();
+         loadBookTable();
     }
     
+
+    
+    public void tableSelectedIndexChange(){
+         final ListSelectionModel rowSM = table.getSelectionModel();
+         rowSM.addListSelectionListener(new ListSelectionListener(){
+             
+             @Override
+             public void valueChanged(ListSelectionEvent e) {
+                    if(e.getValueIsAdjusting()){
+                    return;             }
+                    
+                    ListSelectionModel rowSM = (ListSelectionModel) e.getSource();
+                    int selectedIndex = rowSM.getAnchorSelectionIndex();
+                    if(selectedIndex > -1){
+                    Libri l = btm.getLibri(selectedIndex);
+                    TitleTextField.setText(l.getLTitulli().toString());
+                    PublisherTextField.setText(l.getLShtepiaBotuese().toString());
+                    PublishigYearDate.setYear(l.getLVitiBotimit());
+                    
+                    
+                    CategoryComboBox.setSelectedItem(l.getLKategoriaId());
+                    
+                    
+                     
+                    
+                    QuantityTextField.setText(Integer.toString(l.getLSasia()));
+                    PriceTextField.setText(Double.toString(l.getLCmimiMujor()));
+                    //AuthorComboBox.setSelectedItem(l.getAutoriName(0));
+                    //AuthorComboBox2.setSelectedItem(l.getAutoriName(1));
+                    //System.out.println(l.getIsbn());
+                    IsbnTextField.setText(l.getIsbn());
+                    
+                    
+                }
+            }
+         });
+
+    }
+    
+    public void clear(){
+        this.TitleTextField.setText("");
+        this.PublisherTextField.setText("");
+        this.PublishigYearDate.setYear(2020);
+        this.QuantityTextField.setText("");
+        this.CategoryComboBox.setSelectedItem(0);
+        this.AuthorComboBox.setSelectedIndex(0);
+        this.AuthorComboBox2.setSelectedIndex(1);
+        this.IsbnTextField.setText("");
+        this.PriceTextField.setText("");
+    }
+    
+        public void loadBookTable(){
+        
+        try{
+            List<Libri> lista = lrepo.findAll();
+            btm.addList(lista);
+            table.setModel(btm);
+            btm.fireTableDataChanged();
+        }catch(LibraryException ex){
+           
+           java.util.logging.Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE,null,ex);
+
+        }
+            
+        }
+                
+
         public void loadCategoryComboBox(){
             try{
             List<KategoriaLibrit> lista = klrepo.findAll();
@@ -51,9 +133,14 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         public void loadAuthorComboBox(){
             try{
             List<Autori> lista = arepo.findAll();
+            
+            
+            
             acbox.add(lista);
             AuthorComboBox.setModel(acbox);
             AuthorComboBox.repaint();
+            AuthorComboBox2.setModel(acbox);
+            AuthorComboBox2.repaint();
             }catch(LibraryException ex){
                 Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -82,7 +169,6 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         CategoryLabel = new javax.swing.JLabel();
         QuantityLabel = new javax.swing.JLabel();
         AddClientButton = new javax.swing.JButton();
-        EditClientButton = new javax.swing.JButton();
         DeleteClientButton = new javax.swing.JButton();
         PriceTextField = new javax.swing.JTextField();
         AuthorLabel = new javax.swing.JLabel();
@@ -90,12 +176,16 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         CategoryComboBox = new javax.swing.JComboBox<>();
         IsbnTextField = new javax.swing.JTextField();
         IsbnLabel = new javax.swing.JLabel();
-        PublishinYearGetYear = new com.toedter.calendar.JYearChooser();
+        PublishigYearDate = new com.toedter.calendar.JYearChooser();
+        AuthorLabel2 = new javax.swing.JLabel();
+        AuthorComboBox2 = new javax.swing.JComboBox<>();
+        javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 650));
-        setMinimumSize(new java.awt.Dimension(800, 650));
-        setPreferredSize(new java.awt.Dimension(800, 650));
+        setMaximumSize(new java.awt.Dimension(1200, 800));
+        setMinimumSize(new java.awt.Dimension(1200, 800));
+        setPreferredSize(new java.awt.Dimension(1200, 800));
         setResizable(false);
 
         TitelPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -112,16 +202,16 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         TitelPanelLayout.setHorizontalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
+                .addGap(505, 505, 505)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         TitelPanelLayout.setVerticalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         AddClientPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -174,25 +264,21 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
         AddClientButton.setBackground(new java.awt.Color(51, 255, 51));
         AddClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AddClientButton.setText("Add ");
+        AddClientButton.setText("Save");
         AddClientButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddClientButtonActionPerformed(evt);
             }
         });
 
-        EditClientButton.setBackground(new java.awt.Color(51, 102, 255));
-        EditClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        EditClientButton.setText("Edit");
-        EditClientButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditClientButtonActionPerformed(evt);
-            }
-        });
-
         DeleteClientButton.setBackground(new java.awt.Color(255, 51, 102));
         DeleteClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         DeleteClientButton.setText("Delete");
+        DeleteClientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteClientButtonActionPerformed(evt);
+            }
+        });
 
         PriceTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PriceTextField.setMaximumSize(new java.awt.Dimension(150, 28));
@@ -205,7 +291,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         });
 
         AuthorLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AuthorLabel.setText("Author");
+        AuthorLabel.setText("Author 1");
 
         AuthorComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -232,40 +318,41 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         IsbnLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         IsbnLabel.setText("Isbn");
 
-        PublishinYearGetYear.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AuthorLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AuthorLabel2.setText("Author 2");
+
+        AuthorComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AddClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TitleLabel)
                             .addComponent(PublishingYearLabel)
                             .addComponent(QuantityLabel)
-                            .addComponent(AuthorLabel))
+                            .addComponent(AuthorLabel)
+                            .addComponent(AuthorLabel2))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(QuantityTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(TitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(AuthorComboBox, 0, 150, Short.MAX_VALUE)
-                            .addComponent(PublishinYearGetYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PublisherLabel)
-                            .addComponent(CategoryLabel)
-                            .addComponent(PriceLabel)
-                            .addComponent(IsbnLabel))
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(EditClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124)
-                        .addComponent(AddClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)))
+                            .addComponent(AuthorComboBox2, 0, 150, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(QuantityTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(TitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(AuthorComboBox, 0, 150, Short.MAX_VALUE)
+                                .addComponent(PublishigYearDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PublisherLabel)
+                    .addComponent(CategoryLabel)
+                    .addComponent(PriceLabel)
+                    .addComponent(IsbnLabel))
+                .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DeleteClientButton)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -290,7 +377,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                         .addComponent(PublishingYearLabel)
                         .addComponent(CategoryLabel)
                         .addComponent(CategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(PublishinYearGetYear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PublishigYearDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(QuantityLabel)
@@ -305,15 +392,27 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                         .addComponent(AuthorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(IsbnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(IsbnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AuthorLabel2)
+                    .addComponent(AuthorComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddClientButton)
-                    .addComponent(EditClientButton)
-                    .addComponent(DeleteClientButton))
-                .addGap(52, 52, 52))
+                    .addComponent(DeleteClientButton)))
         );
+
+        table.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout AddClientPanelLayout = new javax.swing.GroupLayout(AddClientPanel);
         AddClientPanel.setLayout(AddClientPanelLayout);
@@ -322,24 +421,26 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             .addGroup(AddClientPanelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addContainerGap())
         );
         AddClientPanelLayout.setVerticalGroup(
             AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddClientPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(TitelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(AddClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TitelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,16 +466,64 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_QuantityTextFieldActionPerformed
 
     private void AddClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClientButtonActionPerformed
-        // TODO add your handling code here:
+     try{
+            int row = table.getSelectedRow();
+            if(row == -1){
+              Libri l = new Libri();
+              l.setLTitulli(TitleTextField.getText());
+              
+             
+              Autori a1 = (Autori) AuthorComboBox.getSelectedItem();
+              Autori a2 = (Autori) AuthorComboBox2.getSelectedItem();
+              
+              System.out.println(a1);
+              System.out.println(a2);
+              l.getAutoriCollection().add(a1) ;
+                        // l.getAutoriCollection().add((Autori) AuthorComboBox.getSelectedItem());
+                        // l.getAutoriCollection().add((Autori) AuthorComboBox2.getSelectedItem()); 
+;
+
+              
+              
+              
+              
+              l.setLShtepiaBotuese(PublisherTextField.getText());
+              l.setLVitiBotimit(PublishigYearDate.getValue());            
+              l.setLKategoriaId((KategoriaLibrit) CategoryComboBox.getSelectedItem());
+              l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
+              l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
+              l.setIsbn(IsbnTextField.getText());
+              
+              lrepo.create(l);
+            }else{
+                
+                Libri l = btm.getLibri(row);
+                
+                
+               l.setLTitulli(TitleTextField.getText());
+              l.setLShtepiaBotuese(PublisherTextField.getText());
+              l.setLVitiBotimit(PublishigYearDate.getValue());            
+              l.setLKategoriaId((KategoriaLibrit) CategoryComboBox.getSelectedItem());
+              l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
+              l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
+              
+              lrepo.edit(l);
+                
+                
+            }
+            //E krijojm ni metode per me i clear fieldat mbasi ti shtojme
+            clear();
+            this.loadBookTable();
+     }catch(LibraryException ex){
+            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+        }
+     
+     
     }//GEN-LAST:event_AddClientButtonActionPerformed
 
     private void PriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PriceTextFieldActionPerformed
-
-    private void EditClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditClientButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EditClientButtonActionPerformed
 
     private void CategoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryComboBoxActionPerformed
         // TODO add your handling code here:
@@ -383,6 +532,23 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     private void IsbnTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IsbnTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_IsbnTextFieldActionPerformed
+
+    private void DeleteClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteClientButtonActionPerformed
+                try{
+                    int row = table.getSelectedRow();
+                    if(row != -1){
+                        Libri l = btm.getLibri(row);
+                        lrepo.delete(l);
+                    
+                    }
+            this.clear();
+            this.loadBookTable();
+        }   
+        catch (Exception ex){
+                   
+          
+        }
+    }//GEN-LAST:event_DeleteClientButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,18 +591,19 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     private javax.swing.JButton AddClientButton;
     private javax.swing.JPanel AddClientPanel;
     private javax.swing.JComboBox<Autori> AuthorComboBox;
+    private javax.swing.JComboBox<Autori> AuthorComboBox2;
     private javax.swing.JLabel AuthorLabel;
+    private javax.swing.JLabel AuthorLabel2;
     private javax.swing.JComboBox<KategoriaLibrit> CategoryComboBox;
     private javax.swing.JLabel CategoryLabel;
     private javax.swing.JButton DeleteClientButton;
-    private javax.swing.JButton EditClientButton;
     private javax.swing.JLabel IsbnLabel;
     private javax.swing.JTextField IsbnTextField;
     private javax.swing.JLabel PriceLabel;
     private javax.swing.JTextField PriceTextField;
     private javax.swing.JLabel PublisherLabel;
     private javax.swing.JTextField PublisherTextField;
-    private com.toedter.calendar.JYearChooser PublishinYearGetYear;
+    private com.toedter.calendar.JYearChooser PublishigYearDate;
     private javax.swing.JLabel PublishingYearLabel;
     private javax.swing.JLabel QuantityLabel;
     private javax.swing.JTextField QuantityTextField;
@@ -445,5 +612,6 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     private javax.swing.JTextField TitleTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

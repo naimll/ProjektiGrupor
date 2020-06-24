@@ -178,6 +178,22 @@ public class Libri implements Serializable {
     public Collection<Autori> getAutoriCollection() {
         return autoriCollection;
     }
+    
+    public String getAutoriName(int index){
+        Autori a = (Autori) this.autoriCollection.toArray()[index];
+        return a.getAEmri()+" "+a.getAMbiemri();
+    }
+    
+    /* Titan 
+    @XmlTransient
+    public String getAutoriCollection() {
+        String names = "";
+        for (Autori e : this.autoriCollection){
+           names += e.getAEmri()+", " ;
+            
+        }
+        return names ;
+    }*/
 
     public void setAutoriCollection(Collection<Autori> autoriCollection) {
         this.autoriCollection = autoriCollection;
@@ -191,5 +207,7 @@ public class Libri implements Serializable {
     public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
         this.huazimiLibritCollection = huazimiLibritCollection;
     }
+    
+
     
 }
