@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/RegisterGUI.java</file>
-            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/AddClientGUI.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/DAL/KategoriaLibritRepository.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/DAL/KategoriaInterface.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Projekti%20Repository/src/GUI/View/RegisterBookGUI.java</file>
         </group>
     </open-files>
 </project-private>

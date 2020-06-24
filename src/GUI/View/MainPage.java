@@ -77,7 +77,6 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem\\user-icon.png")); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(0, 102, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -138,10 +137,8 @@ public class MainPage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(910, 200, 310, 450);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem\\image6.jpg")); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 2400, 1111);
+        jLabel2.setBounds(0, 0, 2400, 0);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -5,10 +5,13 @@
  */
 package GUI.View;
 
+import BLL.Autori;
 import BLL.KategoriaLibrit;
+import DAL.AutoriRepository;
 import DAL.CrudFormException;
 import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
+import GUI.Model.AuthorComboBoxModel;
 import GUI.Model.CategoryComboBoxModel;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,23 +25,39 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
     KategoriaLibritRepository klrepo = new KategoriaLibritRepository();
     CategoryComboBoxModel ccbox = new CategoryComboBoxModel();
+    
+    AutoriRepository arepo = new AutoriRepository();
+    AuthorComboBoxModel acbox = new AuthorComboBoxModel();
     /**
      * Creates new form RegisterBookGUI
      */
     public RegisterBookGUI() {
         initComponents();
          loadCategoryComboBox();
+         loadAuthorComboBox();
     }
     
         public void loadCategoryComboBox(){
-            try{List<KategoriaLibrit> lista = klrepo.findAll();
+            try{
+            List<KategoriaLibrit> lista = klrepo.findAll();
             ccbox.add(lista);
-            jComboBox1.setModel(ccbox);
-            jComboBox1.repaint();
+            CategoryComboBox.setModel(ccbox);
+            CategoryComboBox.repaint();
             } catch (LibraryException ex) {
             Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+        
+        public void loadAuthorComboBox(){
+            try{
+            List<Autori> lista = arepo.findAll();
+            acbox.add(lista);
+            AuthorComboBox.setModel(acbox);
+            AuthorComboBox.repaint();
+            }catch(LibraryException ex){
+                Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,25 +72,31 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         AddClientPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        NameLabel = new javax.swing.JLabel();
-        NameTextField = new javax.swing.JTextField();
-        SurnameLabel = new javax.swing.JLabel();
-        SurnameTextField = new javax.swing.JTextField();
-        AgeLabel = new javax.swing.JLabel();
-        AgeTextField = new javax.swing.JTextField();
-        BirthdayLabel = new javax.swing.JLabel();
-        PhoneTextField = new javax.swing.JTextField();
-        StateLabel = new javax.swing.JLabel();
-        PhoneLabel = new javax.swing.JLabel();
+        TitleLabel = new javax.swing.JLabel();
+        TitleTextField = new javax.swing.JTextField();
+        PublisherLabel = new javax.swing.JLabel();
+        PublisherTextField = new javax.swing.JTextField();
+        PublishingYearLabel = new javax.swing.JLabel();
+        PriceLabel = new javax.swing.JLabel();
+        QuantityTextField = new javax.swing.JTextField();
+        CategoryLabel = new javax.swing.JLabel();
+        QuantityLabel = new javax.swing.JLabel();
         AddClientButton = new javax.swing.JButton();
         EditClientButton = new javax.swing.JButton();
         DeleteClientButton = new javax.swing.JButton();
-        PhoneTextField1 = new javax.swing.JTextField();
-        PhoneLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        PriceTextField = new javax.swing.JTextField();
+        AuthorLabel = new javax.swing.JLabel();
+        AuthorComboBox = new javax.swing.JComboBox<>();
+        CategoryComboBox = new javax.swing.JComboBox<>();
+        IsbnTextField = new javax.swing.JTextField();
+        IsbnLabel = new javax.swing.JLabel();
+        PublishinYearGetYear = new com.toedter.calendar.JYearChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 650));
+        setMinimumSize(new java.awt.Dimension(800, 650));
+        setPreferredSize(new java.awt.Dimension(800, 650));
+        setResizable(false);
 
         TitelPanel.setBackground(new java.awt.Color(153, 153, 153));
         TitelPanel.setMaximumSize(new java.awt.Dimension(800, 100));
@@ -105,51 +130,47 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        NameLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        NameLabel.setText("Title");
+        TitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TitleLabel.setText("Title");
 
-        NameTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+        TitleTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TitleTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameTextFieldActionPerformed(evt);
+                TitleTextFieldActionPerformed(evt);
             }
         });
 
-        SurnameLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        SurnameLabel.setText("Publisher");
+        PublisherLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PublisherLabel.setText("Publisher");
 
-        SurnameTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        SurnameTextField.addActionListener(new java.awt.event.ActionListener() {
+        PublisherTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PublisherTextField.setMaximumSize(new java.awt.Dimension(150, 28));
+        PublisherTextField.setMinimumSize(new java.awt.Dimension(150, 28));
+        PublisherTextField.setPreferredSize(new java.awt.Dimension(150, 28));
+        PublisherTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SurnameTextFieldActionPerformed(evt);
+                PublisherTextFieldActionPerformed(evt);
             }
         });
 
-        AgeLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AgeLabel.setText("Publishing year");
+        PublishingYearLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PublishingYearLabel.setText("Publishing year");
 
-        AgeTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AgeTextField.addActionListener(new java.awt.event.ActionListener() {
+        PriceLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PriceLabel.setText("Price");
+
+        QuantityTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        QuantityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgeTextFieldActionPerformed(evt);
+                QuantityTextFieldActionPerformed(evt);
             }
         });
 
-        BirthdayLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BirthdayLabel.setText("Price");
+        CategoryLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CategoryLabel.setText("Category");
 
-        PhoneTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PhoneTextFieldActionPerformed(evt);
-            }
-        });
-
-        StateLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        StateLabel.setText("Category");
-
-        PhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PhoneLabel.setText("Quantity");
+        QuantityLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        QuantityLabel.setText("Quantity");
 
         AddClientButton.setBackground(new java.awt.Color(51, 255, 51));
         AddClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -162,7 +183,6 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
         EditClientButton.setBackground(new java.awt.Color(51, 102, 255));
         EditClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        EditClientButton.setForeground(new java.awt.Color(51, 51, 255));
         EditClientButton.setText("Edit");
         EditClientButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,26 +192,47 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
         DeleteClientButton.setBackground(new java.awt.Color(255, 51, 102));
         DeleteClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DeleteClientButton.setForeground(new java.awt.Color(255, 51, 51));
         DeleteClientButton.setText("Delete");
 
-        PhoneTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PhoneTextField1.addActionListener(new java.awt.event.ActionListener() {
+        PriceTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PriceTextField.setMaximumSize(new java.awt.Dimension(150, 28));
+        PriceTextField.setMinimumSize(new java.awt.Dimension(150, 28));
+        PriceTextField.setPreferredSize(new java.awt.Dimension(150, 28));
+        PriceTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PhoneTextField1ActionPerformed(evt);
+                PriceTextFieldActionPerformed(evt);
             }
         });
 
-        PhoneLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PhoneLabel1.setText("Author");
+        AuthorLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AuthorLabel.setText("Author");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AuthorComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CategoryComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CategoryComboBox.setMaximumSize(new java.awt.Dimension(150, 28));
+        CategoryComboBox.setMinimumSize(new java.awt.Dimension(150, 28));
+        CategoryComboBox.setPreferredSize(new java.awt.Dimension(150, 28));
+        CategoryComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CategoryComboBoxActionPerformed(evt);
             }
         });
+
+        IsbnTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IsbnTextField.setMaximumSize(new java.awt.Dimension(150, 28));
+        IsbnTextField.setMinimumSize(new java.awt.Dimension(150, 28));
+        IsbnTextField.setPreferredSize(new java.awt.Dimension(150, 28));
+        IsbnTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IsbnTextFieldActionPerformed(evt);
+            }
+        });
+
+        IsbnLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IsbnLabel.setText("Isbn");
+
+        PublishinYearGetYear.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -200,36 +241,38 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(EditClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126)
-                        .addComponent(AddClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SurnameLabel)
-                            .addComponent(StateLabel)
-                            .addComponent(BirthdayLabel))
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NameLabel)
-                            .addComponent(AgeLabel)
-                            .addComponent(PhoneLabel)
-                            .addComponent(PhoneLabel1))
+                            .addComponent(TitleLabel)
+                            .addComponent(PublishingYearLabel)
+                            .addComponent(QuantityLabel)
+                            .addComponent(AuthorLabel))
                         .addGap(30, 30, 30)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(QuantityTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(TitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(AuthorComboBox, 0, 150, Short.MAX_VALUE)
+                            .addComponent(PublishinYearGetYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(PhoneTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(NameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(AgeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SurnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(PhoneTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(PublisherLabel)
+                            .addComponent(CategoryLabel)
+                            .addComponent(PriceLabel)
+                            .addComponent(IsbnLabel))
+                        .addGap(40, 40, 40))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(EditClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(AddClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DeleteClientButton)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(PublisherTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PriceTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CategoryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(IsbnTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
         );
         jPanel3Layout.setVerticalGroup(
@@ -237,33 +280,39 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NameLabel)
-                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SurnameLabel)
-                    .addComponent(SurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TitleLabel)
+                    .addComponent(TitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PublisherLabel)
+                    .addComponent(PublisherTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AgeLabel)
-                    .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(StateLabel)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PhoneLabel)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BirthdayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(PhoneTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(PublishingYearLabel)
+                        .addComponent(CategoryLabel)
+                        .addComponent(CategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PublishinYearGetYear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PhoneLabel1)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                    .addComponent(QuantityLabel)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(QuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AuthorLabel)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AuthorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(IsbnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(IsbnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(151, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EditClientButton)
                     .addComponent(AddClientButton)
+                    .addComponent(EditClientButton)
                     .addComponent(DeleteClientButton))
-                .addGap(41, 41, 41))
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout AddClientPanelLayout = new javax.swing.GroupLayout(AddClientPanel);
@@ -280,7 +329,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             .addGroup(AddClientPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,37 +352,37 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+    private void TitleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TitleTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NameTextFieldActionPerformed
+    }//GEN-LAST:event_TitleTextFieldActionPerformed
 
-    private void SurnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameTextFieldActionPerformed
+    private void PublisherTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublisherTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SurnameTextFieldActionPerformed
+    }//GEN-LAST:event_PublisherTextFieldActionPerformed
 
-    private void AgeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgeTextFieldActionPerformed
+    private void QuantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuantityTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AgeTextFieldActionPerformed
-
-    private void PhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PhoneTextFieldActionPerformed
+    }//GEN-LAST:event_QuantityTextFieldActionPerformed
 
     private void AddClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClientButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AddClientButtonActionPerformed
 
-    private void PhoneTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextField1ActionPerformed
+    private void PriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PhoneTextField1ActionPerformed
+    }//GEN-LAST:event_PriceTextFieldActionPerformed
 
     private void EditClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditClientButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditClientButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void CategoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_CategoryComboBoxActionPerformed
+
+    private void IsbnTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IsbnTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IsbnTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,23 +424,25 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddClientButton;
     private javax.swing.JPanel AddClientPanel;
-    private javax.swing.JLabel AgeLabel;
-    private javax.swing.JTextField AgeTextField;
-    private javax.swing.JLabel BirthdayLabel;
+    private javax.swing.JComboBox<Autori> AuthorComboBox;
+    private javax.swing.JLabel AuthorLabel;
+    private javax.swing.JComboBox<KategoriaLibrit> CategoryComboBox;
+    private javax.swing.JLabel CategoryLabel;
     private javax.swing.JButton DeleteClientButton;
     private javax.swing.JButton EditClientButton;
-    private javax.swing.JLabel NameLabel;
-    private javax.swing.JTextField NameTextField;
-    private javax.swing.JLabel PhoneLabel;
-    private javax.swing.JLabel PhoneLabel1;
-    private javax.swing.JTextField PhoneTextField;
-    private javax.swing.JTextField PhoneTextField1;
-    private javax.swing.JLabel StateLabel;
-    private javax.swing.JLabel SurnameLabel;
-    private javax.swing.JTextField SurnameTextField;
+    private javax.swing.JLabel IsbnLabel;
+    private javax.swing.JTextField IsbnTextField;
+    private javax.swing.JLabel PriceLabel;
+    private javax.swing.JTextField PriceTextField;
+    private javax.swing.JLabel PublisherLabel;
+    private javax.swing.JTextField PublisherTextField;
+    private com.toedter.calendar.JYearChooser PublishinYearGetYear;
+    private javax.swing.JLabel PublishingYearLabel;
+    private javax.swing.JLabel QuantityLabel;
+    private javax.swing.JTextField QuantityTextField;
     private javax.swing.JPanel TitelPanel;
-    private javax.swing.JComboBox<KategoriaLibrit> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel TitleLabel;
+    private javax.swing.JTextField TitleTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

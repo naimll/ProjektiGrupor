@@ -6,16 +6,20 @@
 package BLL;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +37,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Libri.findByLSasia", query = "SELECT l FROM Libri l WHERE l.lSasia = :lSasia"),
     @NamedQuery(name = "Libri.findByLCmimiMujor", query = "SELECT l FROM Libri l WHERE l.lCmimiMujor = :lCmimiMujor")})
 public class Libri implements Serializable {
+
+    @ManyToMany(mappedBy = "libriCollection")
+    private Collection<Autori> autoriCollection;
+    @OneToMany(mappedBy = "hlIsbn")
+    private Collection<HuazimiLibrit> huazimiLibritCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -163,6 +172,24 @@ public class Libri implements Serializable {
     @Override
     public String toString() {
         return "BLL.Libri[ isbn=" + isbn + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Autori> getAutoriCollection() {
+        return autoriCollection;
+    }
+
+    public void setAutoriCollection(Collection<Autori> autoriCollection) {
+        this.autoriCollection = autoriCollection;
+    }
+
+    @XmlTransient
+    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
+        return huazimiLibritCollection;
+    }
+
+    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
+        this.huazimiLibritCollection = huazimiLibritCollection;
     }
     
 }

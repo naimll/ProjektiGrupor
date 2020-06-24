@@ -13,5 +13,5 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 public abstract class EntMngClass {
-     EntityManager em = Persistence.createEntityManagerFactory("MyFirstDesktopAppPU").createEntityManager();
+     EntityManager em = Persistence.createEntityManagerFactory("LibraryManagmentSystemPU").createEntityManager();
 }

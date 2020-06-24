@@ -30,6 +30,10 @@ A_Mbiemri varchar(50) not null,
 A_Vendlindja varchar(50) not null,
 )
 
+insert into Autori values (1,'Naim','Frasheri','00,00,1997')
+insert into Autori values (2,'Sami','Frasheri','00,00,1997')
+
+
 
 Create table Kategoria_Librit(
 Kategoria_Id int primary key,
@@ -37,9 +41,9 @@ KL_Emri varchar(50) not null,
 KL_Sasia varchar(50) not null,
 )
 
-insert into Kategoria_Librit values (1, 'Naim' , 'Frasher')
 
-insert into Kategoria_Librit values (2, 'Sami' , 'Frasheri')
+insert into Kategoria_Librit values (1, 'Drama' , '1')
+insert into Kategoria_Librit values (2, 'Romance' , '2')
 
 create table Libri_Autoret(
 ISBN varchar(100),
