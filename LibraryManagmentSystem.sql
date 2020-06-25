@@ -24,22 +24,24 @@ K_Email varchar(100) not null
 )
 
 create table Autori(
-A_Id int primary key,
+A_Id int primary key identity(1,1),
 A_Emri varchar(50) not null,
 A_Mbiemri varchar(50) not null,
 A_Vendlindja varchar(50) not null,
 )
 
+insert into Autori values('Ismail','Kadare','Shqiperi')
+insert into Autori values('Ismail','Kadare','Shqiperi')
 
 Create table Kategoria_Librit(
-Kategoria_Id int primary key,
+Kategoria_Id int primary key identity(1,1),
 KL_Emri varchar(50) not null,
 KL_Sasia varchar(50) not null,
 )
 
-insert into Kategoria_Librit values (1, 'Naim' , 'Frasher')
+insert into Kategoria_Librit values ('Naim' , 'Frasher')
 
-insert into Kategoria_Librit values (2, 'Sami' , 'Frasheri')
+insert into Kategoria_Librit values ('Sami' , 'Frasheri')
 
 create table Libri_Autoret(
 ISBN varchar(100),
@@ -62,7 +64,7 @@ foreign key(L_Stafi_Id) references Stafi(Stafi_Id),
 foreign key(L_Kategoria_Id) references Kategoria_Librit(Kategoria_Id)
 )
 create table Huazimi_Librit(
-HL_Id int primary key,
+HL_Id int primary key identity(1,1),
 HL_Data_Leshimit date not null,
 HL_Data_Kthimit date not null,
 HL_Klienti_Id int,

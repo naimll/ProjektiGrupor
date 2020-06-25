@@ -10,10 +10,12 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,6 +37,8 @@ public class KategoriaLibrit implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "Kategoria_Id")
+    @GeneratedValue(generator="InvSeq")
+    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ",allocationSize=1)
     private Integer kategoriaId;
     @Basic(optional = false)
     @Column(name = "KL_Emri")
