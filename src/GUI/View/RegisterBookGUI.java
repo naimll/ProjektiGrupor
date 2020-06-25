@@ -8,7 +8,7 @@ package GUI.View;
 import BLL.Autori;
 import BLL.KategoriaLibrit;
 import BLL.Libri;
-import DAL.AutoriRepository;
+import DAL.asdf;
 import DAL.CrudFormException;
 import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
@@ -36,7 +36,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     KategoriaLibritRepository klrepo = new KategoriaLibritRepository();
     CategoryComboBoxModel ccbox = new CategoryComboBoxModel();
     
-    AutoriRepository arepo = new AutoriRepository();
+    asdf arepo = new asdf();
     AuthorComboBoxModel acbox = new AuthorComboBoxModel();
     
     LibriRepository lrepo = new LibriRepository();

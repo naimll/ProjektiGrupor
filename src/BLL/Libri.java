@@ -6,20 +6,14 @@
 package BLL;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,11 +31,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Libri.findByLSasia", query = "SELECT l FROM Libri l WHERE l.lSasia = :lSasia"),
     @NamedQuery(name = "Libri.findByLCmimiMujor", query = "SELECT l FROM Libri l WHERE l.lCmimiMujor = :lCmimiMujor")})
 public class Libri implements Serializable {
-
-    @ManyToMany(mappedBy = "libriCollection")
-    private Collection<Autori> autoriCollection;
-    @OneToMany(mappedBy = "hlIsbn")
-    private Collection<HuazimiLibrit> huazimiLibritCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -62,16 +51,6 @@ public class Libri implements Serializable {
     @Basic(optional = false)
     @Column(name = "L_Cmimi_Mujor")
     private double lCmimiMujor;
-    @ManyToMany(mappedBy = "libriCollection")
-    private Collection<Autori> autoriCollection;
-    @OneToMany(mappedBy = "hlIsbn")
-    private Collection<HuazimiLibrit> huazimiLibritCollection;
-    @JoinColumn(name = "L_Kategoria_Id", referencedColumnName = "Kategoria_Id")
-    @ManyToOne
-    private KategoriaLibrit lKategoriaId;
-    @JoinColumn(name = "L_Stafi_Id", referencedColumnName = "Stafi_Id")
-    @ManyToOne
-    private Stafi lStafiId;
 
     public Libri() {
     }
@@ -137,40 +116,6 @@ public class Libri implements Serializable {
         this.lCmimiMujor = lCmimiMujor;
     }
 
-    @XmlTransient
-    public Collection<Autori> getAutoriCollection() {
-        return autoriCollection;
-    }
-
-    public void setAutoriCollection(Collection<Autori> autoriCollection) {
-        this.autoriCollection = autoriCollection;
-    }
-
-    @XmlTransient
-    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
-        return huazimiLibritCollection;
-    }
-
-    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
-        this.huazimiLibritCollection = huazimiLibritCollection;
-    }
-
-    public KategoriaLibrit getLKategoriaId() {
-        return lKategoriaId;
-    }
-
-    public void setLKategoriaId(KategoriaLibrit lKategoriaId) {
-        this.lKategoriaId = lKategoriaId;
-    }
-
-    public Stafi getLStafiId() {
-        return lStafiId;
-    }
-
-    public void setLStafiId(Stafi lStafiId) {
-        this.lStafiId = lStafiId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -195,41 +140,5 @@ public class Libri implements Serializable {
     public String toString() {
         return "BLL.Libri[ isbn=" + isbn + " ]";
     }
-
-    @XmlTransient
-    public Collection<Autori> getAutoriCollection() {
-        return autoriCollection;
-    }
-    
-    public String getAutoriName(int index){
-        Autori a = (Autori) this.autoriCollection.toArray()[index];
-        return a.getAEmri()+" "+a.getAMbiemri();
-    }
-    
-    /* Titan 
-    @XmlTransient
-    public String getAutoriCollection() {
-        String names = "";
-        for (Autori e : this.autoriCollection){
-           names += e.getAEmri()+", " ;
-            
-        }
-        return names ;
-    }*/
-
-    public void setAutoriCollection(Collection<Autori> autoriCollection) {
-        this.autoriCollection = autoriCollection;
-    }
-
-    @XmlTransient
-    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
-        return huazimiLibritCollection;
-    }
-
-    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
-        this.huazimiLibritCollection = huazimiLibritCollection;
-    }
-    
-
     
 }

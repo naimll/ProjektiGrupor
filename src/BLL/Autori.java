@@ -6,21 +6,14 @@
 package BLL;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,8 +33,6 @@ public class Autori implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "A_Id")
-    @GeneratedValue(generator="InvSeq")
-    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ",allocationSize=1)
     private Integer aId;
     @Basic(optional = false)
     @Column(name = "A_Emri")
@@ -52,11 +43,6 @@ public class Autori implements Serializable {
     @Basic(optional = false)
     @Column(name = "A_Vendlindja")
     private String aVendlindja;
-    @JoinTable(name = "Libri_Autoret", joinColumns = {
-        @JoinColumn(name = "A_Id", referencedColumnName = "A_Id")}, inverseJoinColumns = {
-        @JoinColumn(name = "ISBN", referencedColumnName = "ISBN")})
-    @ManyToMany
-    private Collection<Libri> libriCollection;
 
     public Autori() {
     }
@@ -104,15 +90,6 @@ public class Autori implements Serializable {
         this.aVendlindja = aVendlindja;
     }
 
-    @XmlTransient
-    public Collection<Libri> getLibriCollection() {
-        return libriCollection;
-    }
-
-    public void setLibriCollection(Collection<Libri> libriCollection) {
-        this.libriCollection = libriCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -135,7 +112,7 @@ public class Autori implements Serializable {
 
     @Override
     public String toString() {
-        return this.aEmri +" "+this.aMbiemri;
+        return "BLL.Autori[ aId=" + aId + " ]";
     }
     
 }
