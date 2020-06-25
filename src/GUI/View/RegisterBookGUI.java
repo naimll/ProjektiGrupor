@@ -8,7 +8,8 @@ package GUI.View;
 import BLL.Autori;
 import BLL.KategoriaLibrit;
 import BLL.Libri;
-import DAL.asdf;
+import DAL.AutoriRepository;
+
 import DAL.CrudFormException;
 import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
@@ -36,7 +37,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     KategoriaLibritRepository klrepo = new KategoriaLibritRepository();
     CategoryComboBoxModel ccbox = new CategoryComboBoxModel();
     
-    asdf arepo = new asdf();
+   AutoriRepository arepo = new AutoriRepository();
     AuthorComboBoxModel acbox = new AuthorComboBoxModel();
     
     LibriRepository lrepo = new LibriRepository();
@@ -232,15 +233,15 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         DeleteClientButton = new javax.swing.JButton();
         PriceTextField = new javax.swing.JTextField();
         AuthorLabel = new javax.swing.JLabel();
-        AuthorComboBox = new javax.swing.JComboBox<>();
-        CategoryComboBox = new javax.swing.JComboBox<>();
+        AuthorComboBox = new javax.swing.JComboBox<Autori>();
+        CategoryComboBox = new javax.swing.JComboBox<KategoriaLibrit>();
         IsbnTextField = new javax.swing.JTextField();
         IsbnLabel = new javax.swing.JLabel();
         PublishigYearDate = new com.toedter.calendar.JYearChooser();
         AuthorLabel2 = new javax.swing.JLabel();
-        AuthorComboBox2 = new javax.swing.JComboBox<>();
+        AuthorComboBox2 = new javax.swing.JComboBox<Autori>();
         AuthorLabel3 = new javax.swing.JLabel();
-        AuthorComboBox3 = new javax.swing.JComboBox<>();
+        AuthorComboBox3 = new javax.swing.JComboBox<Autori>();
         NrAuthorsLabel = new javax.swing.JLabel();
         NrAuthors1 = new javax.swing.JButton();
         NrAuthors2 = new javax.swing.JButton();

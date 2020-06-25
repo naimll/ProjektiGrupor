@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -51,6 +53,15 @@ public class Libri implements Serializable {
     @Basic(optional = false)
     @Column(name = "L_Cmimi_Mujor")
     private double lCmimiMujor;
+    @JoinColumn(name = "Autori_Id", referencedColumnName = "A_Id")
+    @ManyToOne
+    private Autori autoriId;
+    @JoinColumn(name = "L_Kategoria_Id", referencedColumnName = "Kategoria_Id")
+    @ManyToOne
+    private KategoriaLibrit lKategoriaId;
+    @JoinColumn(name = "L_Stafi_Id", referencedColumnName = "Stafi_Id")
+    @ManyToOne
+    private Stafi lStafiId;
 
     public Libri() {
     }
@@ -114,6 +125,30 @@ public class Libri implements Serializable {
 
     public void setLCmimiMujor(double lCmimiMujor) {
         this.lCmimiMujor = lCmimiMujor;
+    }
+
+    public Autori getAutoriId() {
+        return autoriId;
+    }
+
+    public void setAutoriId(Autori autoriId) {
+        this.autoriId = autoriId;
+    }
+
+    public KategoriaLibrit getLKategoriaId() {
+        return lKategoriaId;
+    }
+
+    public void setLKategoriaId(KategoriaLibrit lKategoriaId) {
+        this.lKategoriaId = lKategoriaId;
+    }
+
+    public Stafi getLStafiId() {
+        return lStafiId;
+    }
+
+    public void setLStafiId(Stafi lStafiId) {
+        this.lStafiId = lStafiId;
     }
 
     @Override

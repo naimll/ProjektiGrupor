@@ -6,14 +6,17 @@
 package BLL;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,6 +46,8 @@ public class Autori implements Serializable {
     @Basic(optional = false)
     @Column(name = "A_Vendlindja")
     private String aVendlindja;
+    @OneToMany(mappedBy = "autoriId")
+    private Collection<Libri> libriCollection;
 
     public Autori() {
     }
@@ -88,6 +93,15 @@ public class Autori implements Serializable {
 
     public void setAVendlindja(String aVendlindja) {
         this.aVendlindja = aVendlindja;
+    }
+
+    @XmlTransient
+    public Collection<Libri> getLibriCollection() {
+        return libriCollection;
+    }
+
+    public void setLibriCollection(Collection<Libri> libriCollection) {
+        this.libriCollection = libriCollection;
     }
 
     @Override
