@@ -19,4 +19,5 @@ public interface LibriInterface {
     void delete(Libri l) throws LibraryException;
     Libri findById(String isbn) throws LibraryException;
     List <Libri> findAll() throws LibraryException;
+
 }

@@ -30,13 +30,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Libri.findAll", query = "SELECT l FROM Libri l"),
     @NamedQuery(name = "Libri.findByIsbn", query = "SELECT l FROM Libri l WHERE l.isbn = :isbn"),
-    @NamedQuery(name = "Libri.findByLTitulli", query = "SELECT l FROM Libri l WHERE l.lTitulli = :lTitulli"),
+    @NamedQuery(name = "Libri.findByLTitulli", query = "SELECT l FROM Libri l WHERE l.lTitulli = :lTitulli"),    
     @NamedQuery(name = "Libri.findByLVitiBotimit", query = "SELECT l FROM Libri l WHERE l.lVitiBotimit = :lVitiBotimit"),
     @NamedQuery(name = "Libri.findByLShtepiaBotuese", query = "SELECT l FROM Libri l WHERE l.lShtepiaBotuese = :lShtepiaBotuese"),
     @NamedQuery(name = "Libri.findByLSasia", query = "SELECT l FROM Libri l WHERE l.lSasia = :lSasia"),
     @NamedQuery(name = "Libri.findByLCmimiMujor", query = "SELECT l FROM Libri l WHERE l.lCmimiMujor = :lCmimiMujor")})
 public class Libri implements Serializable {
-
+    
     @OneToMany(mappedBy = "hlIsbn")
     private Collection<HuazimiLibrit> huazimiLibritCollection;
     private static final long serialVersionUID = 1L;

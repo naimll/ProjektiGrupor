@@ -11,6 +11,7 @@ import BLL.Libri;
 import DAL.AutoriRepository;
 
 import DAL.CrudFormException;
+import DAL.EntMngClass;
 import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
 import DAL.LibriRepository;
@@ -25,8 +26,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -429,6 +434,11 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                 SearchActionPerformed(evt);
             }
         });
+        Search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel2.setText("Search");
@@ -573,6 +583,29 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchActionPerformed
+
+    private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
+        
+        BookTableModel model =  (BookTableModel) this.table.getModel();
+        String search = this.Search.getText();//.toLowerCase();
+        TableRowSorter<BookTableModel> tr = new TableRowSorter<BookTableModel>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+        
+        /* try{
+                
+                String search = this.Search.getText();//.toLowerCase();         
+                List<Libri> lista = lrepo.findLikeName(search);           
+                this.btm.addList(lista);
+                table.setModel(btm);
+                btm.fireTableDataChanged();
+            }catch(Exception e){             
+                 //throw new LibraryException(e.getMessage()); 
+                             Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE, null, e);
+
+         }
+       */
+    }//GEN-LAST:event_SearchKeyReleased
 
     /**
      * @param args the command line arguments

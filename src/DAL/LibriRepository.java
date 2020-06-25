@@ -59,8 +59,12 @@ public class LibriRepository extends EntMngClass implements LibriInterface{
         } catch (Exception e) {
             throw new LibraryException(e.getMessage());
         }
-    }
-
+    }/*
+    public List<Libri> findLikeName(String title){
+        
+        return (List<Libri>) em.createQuery("SELECT * FROM 'Libri' WHERE L_Titulli like '"+title+"%'").getResultList();
+    
+    }*/
     @Override
     public List<Libri> findAll() throws LibraryException {
         try{
