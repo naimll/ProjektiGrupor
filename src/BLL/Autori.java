@@ -135,7 +135,7 @@ public class Autori implements Serializable {
 
     @Override
     public String toString() {
-        return "BLL.Autori[ aId=" + aId + " ]";
+        return this.aEmri +" "+this.aMbiemri;
     }
     
 }

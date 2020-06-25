@@ -11,6 +11,8 @@ S_Password varchar(50) not null,
 S_Roli int not null
 )
 
+insert into Stafi values (1 , 'Admin' , 'Admin' , '044123456', 'admin' , 'admin' , 1)
+
 create table Klienti(
 K_Id int primary key,
 K_Emri varchar(50) not null,
@@ -30,8 +32,15 @@ A_Mbiemri varchar(50) not null,
 A_Vendlindja varchar(50) not null,
 )
 
+<<<<<<< HEAD
 insert into Autori values('Ismail','Kadare','Shqiperi')
 insert into Autori values('Ismail','Kadare','Shqiperi')
+=======
+insert into Autori values (1,'Naim','Frasheri','00,00,1997')
+insert into Autori values (2,'Sami','Frasheri','00,00,1997')
+
+
+>>>>>>> 8e57ccc8a7f92cb6687fedc52c05f1590627144c
 
 Create table Kategoria_Librit(
 Kategoria_Id int primary key identity(1,1),
@@ -39,9 +48,15 @@ KL_Emri varchar(50) not null,
 KL_Sasia varchar(50) not null,
 )
 
+<<<<<<< HEAD
 insert into Kategoria_Librit values ('Naim' , 'Frasher')
 
 insert into Kategoria_Librit values ('Sami' , 'Frasheri')
+=======
+
+insert into Kategoria_Librit values (1, 'Drama' , '1')
+insert into Kategoria_Librit values (2, 'Romance' , '2')
+>>>>>>> 8e57ccc8a7f92cb6687fedc52c05f1590627144c
 
 create table Libri_Autoret(
 ISBN varchar(100),
@@ -63,6 +78,9 @@ L_Kategoria_Id int,
 foreign key(L_Stafi_Id) references Stafi(Stafi_Id),
 foreign key(L_Kategoria_Id) references Kategoria_Librit(Kategoria_Id)
 )
+
+insert into Libri values (123456789,'Shqiperia','1950','ShtepiaBotuese',10, 20, 1 , 1 )
+
 create table Huazimi_Librit(
 HL_Id int primary key identity(1,1),
 HL_Data_Leshimit date not null,

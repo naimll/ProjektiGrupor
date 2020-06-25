@@ -37,6 +37,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Libri.findByLSasia", query = "SELECT l FROM Libri l WHERE l.lSasia = :lSasia"),
     @NamedQuery(name = "Libri.findByLCmimiMujor", query = "SELECT l FROM Libri l WHERE l.lCmimiMujor = :lCmimiMujor")})
 public class Libri implements Serializable {
+
+    @ManyToMany(mappedBy = "libriCollection")
+    private Collection<Autori> autoriCollection;
+    @OneToMany(mappedBy = "hlIsbn")
+    private Collection<HuazimiLibrit> huazimiLibritCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -190,5 +195,41 @@ public class Libri implements Serializable {
     public String toString() {
         return "BLL.Libri[ isbn=" + isbn + " ]";
     }
+
+    @XmlTransient
+    public Collection<Autori> getAutoriCollection() {
+        return autoriCollection;
+    }
+    
+    public String getAutoriName(int index){
+        Autori a = (Autori) this.autoriCollection.toArray()[index];
+        return a.getAEmri()+" "+a.getAMbiemri();
+    }
+    
+    /* Titan 
+    @XmlTransient
+    public String getAutoriCollection() {
+        String names = "";
+        for (Autori e : this.autoriCollection){
+           names += e.getAEmri()+", " ;
+            
+        }
+        return names ;
+    }*/
+
+    public void setAutoriCollection(Collection<Autori> autoriCollection) {
+        this.autoriCollection = autoriCollection;
+    }
+
+    @XmlTransient
+    public Collection<HuazimiLibrit> getHuazimiLibritCollection() {
+        return huazimiLibritCollection;
+    }
+
+    public void setHuazimiLibritCollection(Collection<HuazimiLibrit> huazimiLibritCollection) {
+        this.huazimiLibritCollection = huazimiLibritCollection;
+    }
+    
+
     
 }

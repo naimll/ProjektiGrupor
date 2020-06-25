@@ -26,24 +26,30 @@ public class AuthorComboBoxModel extends AbstractListModel<Autori> implements Co
     this.data = data;
     }
     
+    public void add(List<Autori> data){
+        this.data = data ;
+    }
+    
     @Override
     public int getSize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data.size();
     }
 
     @Override
     public Autori getElementAt(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data.get(i);
     }
 
     @Override
     public void setSelectedItem(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                this.selectedItem = (Autori) o ;
+
     }
 
     @Override
     public Object getSelectedItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return this.selectedItem;
+
     }
     
 }

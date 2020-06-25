@@ -117,7 +117,7 @@ public class KategoriaLibrit implements Serializable {
 
     @Override
     public String toString() {
-        return "BLL.KategoriaLibrit[ kategoriaId=" + kategoriaId + " ]";
+        return this.kLEmri;
     }
     
 }
