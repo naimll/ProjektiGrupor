@@ -62,7 +62,7 @@ public class BookTableModel extends AbstractTableModel{
             case 0:
                 return l.getLTitulli();
             case 1:
-                return l.getAutoriCollection();
+                return l.getAutoriId();
             default:
                 return null;
             
