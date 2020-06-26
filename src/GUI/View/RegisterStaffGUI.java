@@ -147,7 +147,6 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
-        setPreferredSize(new java.awt.Dimension(1200, 800));
         setResizable(false);
 
         WelcomePanel.setBackground(new java.awt.Color(153, 153, 153));
