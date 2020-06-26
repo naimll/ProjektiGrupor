@@ -176,8 +176,8 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         DeleteClientButton = new javax.swing.JButton();
         PriceTextField = new javax.swing.JTextField();
         AuthorLabel = new javax.swing.JLabel();
-        AuthorComboBox = new javax.swing.JComboBox<>();
-        CategoryComboBox = new javax.swing.JComboBox<>();
+        AuthorComboBox = new javax.swing.JComboBox<Autori>();
+        CategoryComboBox = new javax.swing.JComboBox<KategoriaLibrit>();
         IsbnTextField = new javax.swing.JTextField();
         IsbnLabel = new javax.swing.JLabel();
         PublishigYearDate = new com.toedter.calendar.JYearChooser();
@@ -403,12 +403,13 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                     .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(QuantityLabel))
                 .addGap(42, 42, 42)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IsbnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IsbnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(AuthorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AuthorLabel)))
+                        .addComponent(AuthorLabel))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(IsbnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(IsbnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddClientButton)

@@ -73,14 +73,15 @@ public class StafiRepository extends EntMngClass implements StafiInterface {
     public Stafi login(String u, String p) throws LibraryException {
        
         try {
-            Query query = em.createQuery("SELECT s FROM Stafi s WHERE s.S_User = :u AND s.S_Password=:p");
-            query.setParameter("u", u);
-            query.setParameter("p", p);
+            Query query = em.createQuery("SELECT p FROM Stafi p WHERE p.sUser = :us AND p.sPassword=:psw");
+            query.setParameter("us", u);
+            query.setParameter("psw", p);
             return (Stafi) query.getSingleResult();
         } catch (Exception e) {
             throw new LibraryException( e.getMessage());
         }
     }
+
     
     
 
