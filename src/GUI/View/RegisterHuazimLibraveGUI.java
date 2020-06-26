@@ -66,7 +66,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     public void loadComboBoxLibrat(){
         try{
             List<Libri> lista = libriRepository.findAll();
-            libriComboBoxModel.addList(lista);
+            libriComboBoxModel.add(lista);            
             libricmb.setModel(libriComboBoxModel);
             libricmb.repaint();
             
@@ -362,6 +362,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         this.clear();
+        this.table.clearSelection();
     }                                            
 
         public void clear(){

@@ -176,8 +176,8 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         DeleteClientButton = new javax.swing.JButton();
         PriceTextField = new javax.swing.JTextField();
         AuthorLabel = new javax.swing.JLabel();
-        AuthorComboBox = new javax.swing.JComboBox<Autori>();
-        CategoryComboBox = new javax.swing.JComboBox<KategoriaLibrit>();
+        AuthorComboBox = new javax.swing.JComboBox<>();
+        CategoryComboBox = new javax.swing.JComboBox<>();
         IsbnTextField = new javax.swing.JTextField();
         IsbnLabel = new javax.swing.JLabel();
         PublishigYearDate = new com.toedter.calendar.JYearChooser();
@@ -578,6 +578,8 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteClientButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+        
+        this.table.clearSelection();
         this.clear();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
