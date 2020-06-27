@@ -294,8 +294,10 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
             int row = table.getSelectedRow();
             System.out.println("row = " +row);
             if (row == -1){
-                System.out.println("create");
                 KategoriaLibrit k = new KategoriaLibrit() ;
+                if(this.NameTextField.getText() == "" || this.NameTextField.getText().length() < 6){
+                    throw new LibraryException("Name should not be null or shorter than 6");
+                }
                 k.setKLEmri(this.NameTextField.getText());
                 k.setKLSasia("0");
                 krepo.create(k);
@@ -312,7 +314,7 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
             this.Clear();
             this.loadTable();
         }catch(LibraryException ex){
-         JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+         JOptionPane.showMessageDialog(this, ex.getMessage());
 
         }
 
@@ -323,14 +325,19 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
             int row = table.getSelectedRow();
             if(row != -1){
                 KategoriaLibrit k = ctm.getKategoriaLibrit(row);
+                try{
                 krepo.delete(k);
-
+                }catch(LibraryException ex){
+                    JOptionPane.showMessageDialog(this, "The category can't be deleted because books are registred in this category");
+                }
+            }else{
+                throw new LibraryException("Please select a category from the table");
             }
             this.Clear();
             this.loadTable();
         }
         catch(LibraryException ex){
-            javax.swing.JOptionPane.showMessageDialog(this, "Nuk mund te fshihet kategoria, pasi disa libra i takojne ksaj kategorie!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
                 
             
         }  

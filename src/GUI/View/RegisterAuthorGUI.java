@@ -337,15 +337,20 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
                     int row = table.getSelectedRow();
                     if(row != -1){
                         Autori a = atm.getAutori(row);
+                        try{
                         arepo.delete(a);
-                    
+                        }catch(LibraryException ex){
+                        JOptionPane.showMessageDialog(this, "Author can't be deleted because it's an author of registred books");
+                        }
+                    }else{
+                        throw new LibraryException ("Please select an author from the table");
                     }
             this.clear();
             this.loadTable();
         }   
         catch (Exception ex){
                    //  java.util.logging.Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE,null,ex);
-            JOptionPane.showMessageDialog(this, "Nuk mund te fshihet autori, i cili eshte autori i librave qe gjenden ne databaze");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
     
           
         }    }//GEN-LAST:event_DeleteActionPerformed
@@ -356,16 +361,43 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
             if(row == -1){
               Autori a = new Autori();
               
+              if(NameTextField.getText() == "" || NameTextField.getText() == null || NameTextField.getText().length() < 4){
+                  throw new LibraryException("Name should not be null or shorter than 4");
+              }
               a.setAEmri(NameTextField.getText());
+              
+               if(SurnameTextField.getText() == "" || SurnameTextField.getText() == null || SurnameTextField.getText().length() < 4){
+               throw new LibraryException("Surname should not be null or shorter than 4");
+              }
               a.setAMbiemri(SurnameTextField.getText());
+              
+               if(VendlindjaTextField.getText() == "" || VendlindjaTextField.getText() == null || VendlindjaTextField.getText().length() < 5){
+               throw new LibraryException("Birthplace should not be null or shorter than 5");
+              }              
               a.setAVendlindja(VendlindjaTextField.getText());
               
+              try{
               arepo.create(a);
+              }catch(LibraryException ex){
+             JOptionPane.showMessageDialog(this, "Author already exists in the database");
+                 
+              }
             }else{
-                Autori a = new Autori() ;
+                Autori a = this.atm.getAutori(row) ;
                
+              if(NameTextField.getText() == "" || NameTextField.getText() == null || NameTextField.getText().length() < 4){
+                  throw new LibraryException("Name should not be null or shorter than 4");
+              }
               a.setAEmri(NameTextField.getText());
+              
+               if(SurnameTextField.getText() == "" || SurnameTextField.getText() == null || SurnameTextField.getText().length() < 4){
+               throw new LibraryException("Surname should not be null or shorter than 4");
+              }
               a.setAMbiemri(SurnameTextField.getText());
+              
+               if(VendlindjaTextField.getText() == "" || VendlindjaTextField.getText() == null || VendlindjaTextField.getText().length() < 5){
+               throw new LibraryException("Birthplace should not be null or shorter than 5");
+              }              
               a.setAVendlindja(VendlindjaTextField.getText());
               
               arepo.edit(a);
@@ -376,7 +408,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
             this.clear();
             this.loadTable();
      }catch(LibraryException ex){
-            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
      
      

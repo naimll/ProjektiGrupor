@@ -17,6 +17,8 @@ import GUI.Model.HuazimiLibritTableModel;
 import GUI.Model.KlientiComboBoxModel;
 import GUI.Model.LibriComboBoxModel;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +47,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     
     KlientiComboBoxModel klientiComboBoxModel = new KlientiComboBoxModel();
     
-    public RegisterHuazimLibraveGUI() {
+    public RegisterHuazimLibraveGUI() throws LibraryException {
         initComponents();
         loadComboBoxKlientet();
         loadTableHuazimi();
@@ -54,7 +56,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     }
     
     
-    public void loadComboBoxKlientet(){
+    public void loadComboBoxKlientet() throws LibraryException{
         try{
             List<Klienti> lista = klientiRepository.findAll();
             klientiComboBoxModel.add(lista);
@@ -62,11 +64,11 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
             klientetCmb.repaint();
             
         } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new LibraryException(ex.getMessage());
         }
         
     }
-    public void loadComboBoxLibrat(){
+    public void loadComboBoxLibrat() throws LibraryException{
         try{
             List<Libri> lista = libriRepository.findAll();
             libriComboBoxModel.add(lista);            
@@ -74,18 +76,18 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
             libricmb.repaint();
             
         } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new LibraryException(ex.getMessage());
         }
         
     }
-    public void loadTableHuazimi(){
+    public void loadTableHuazimi() throws LibraryException{
         try {
             List<HuazimiLibrit> lista = huazimiRepository.findAll();
             huazimiLibritTableModel.addList(lista);
             table.setModel(huazimiLibritTableModel);
             huazimiLibritTableModel.fireTableDataChanged();
         } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new LibraryException(ex.getMessage());
         }
     }
 
@@ -109,14 +111,14 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         AuthorLabel = new javax.swing.JLabel();
         NrAuthorsLabel = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
-<<<<<<< HEAD
+
         klientetCmb = new javax.swing.JComboBox<String>();
-=======
+
         klientetCmb = new javax.swing.JComboBox();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         libricmb = new javax.swing.JComboBox();
->>>>>>> 2860344b6b1a592c32e4c4583d9bf842e7ee4732
+
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         Search = new javax.swing.JTextField();
@@ -167,7 +169,11 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         AddClientButton.setText("Save");
         AddClientButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddClientButtonMouseClicked(evt);
+                try {
+                    AddClientButtonMouseClicked(evt);
+                } catch (LibraryException ex) {
+                    Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         AddClientButton.addActionListener(new java.awt.event.ActionListener() {
@@ -200,11 +206,11 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
+
         klientetCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-=======
->>>>>>> 2860344b6b1a592c32e4c4583d9bf842e7ee4732
+
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -371,15 +377,20 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
                     int sasia = l.getLSasia() + 1;
                     LibriRepository lrepo = new LibriRepository();
                     l.setLSasia(sasia);
-                    
-                huazimiRepository.delete(hl);
+                                 
+                huazimiRepository.delete(hl);               
                 lrepo.edit(l);
 
+            }else{
+                throw new LibraryException("Please select a category from the table");
             }
             this.clear();
             this.loadTableHuazimi();
+            klientetCmb.setSelectedItem(-1);                   
+            klientetCmb.repaint();
         }
         catch (Exception ex){
+          JOptionPane.showMessageDialog(this, ex.getMessage());
 
         }
     }                                                  
@@ -387,14 +398,16 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         this.table.clearSelection();
         this.clear();
+        klientetCmb.setSelectedItem(-1);                   
+        klientetCmb.repaint();
         
     }                                            
 
         public void clear(){
             
             libricmb.setSelectedIndex(-1);
-            libricmb.repaint();
             klientetCmb.setSelectedItem(-1);
+            libricmb.repaint();        
             klientetCmb.repaint();
             jDateChooser1.setDate(null);
             jDateChooser2.setDate(null);
@@ -403,13 +416,13 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }   
     
-        private void SearchKeyReleased(java.awt.event.KeyEvent evt) {                                   
+       /* private void SearchKeyReleased(java.awt.event.KeyEvent evt) {                                   
         HuazimiLibritTableModel model = (HuazimiLibritTableModel) this.table.getModel();
         String search = this.Search.getText();//.toLowerCase();
         TableRowSorter<HuazimiLibritTableModel> tr = new TableRowSorter<HuazimiLibritTableModel>(model);
         table.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search));
-    }  
+    }  */
 
     
  
@@ -438,37 +451,99 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         });
         }
         
-    private void AddClientButtonMouseClicked(java.awt.event.MouseEvent evt) {                                             
+    private void AddClientButtonMouseClicked(java.awt.event.MouseEvent evt) throws LibraryException {                                             
         
             try{
                 int row = table.getSelectedRow();
                 if(row == -1){
                     HuazimiLibrit p = new HuazimiLibrit();
+                    if(klientetCmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Client");
+                    }
                     p.setHLKlientiId((Klienti)klientetCmb.getSelectedItem());
+                    if(libricmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Book");                        
+                    }
                     p.setHlIsbn((Libri)libricmb.getSelectedItem());
+                    if(jDateChooser1.getDate()== null){
+                        throw new LibraryException("Please select a delivery date");
+                    }
                     p.setHLDataLeshimit(jDateChooser1.getDate());
+                    if(jDateChooser2.getDate() == null){
+                        throw new LibraryException("Please select a receipt date");
+                    }                    
                     p.setHLDataKthimit(jDateChooser2.getDate());
                     
-                    Libri l = p.getHlIsbn();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     
-                    int sasia = l.getLSasia() ;
-                    if(sasia == 0){
-                        JOptionPane.showMessageDialog(this, "Nuk ka me libra ne stock");
-                        return ;
+                    Date date = new Date();
+                    Date date1 = this.jDateChooser1.getDate();
+                    Date date2 = this.jDateChooser2.getDate();
+                   
+                    
+                   
+                    if(date1.getYear() < date.getYear() || date1.getMonth() < date.getMonth() || date1.getDate() < date.getDate()){
+                        throw new LibraryException("Please choose a correct delivery Date");
                     }
+                    
+                        if(date2.getYear() > date1.getYear()){
+                        
+                    }   else if(date1.getYear() > date2.getYear() || date1.getMonth() > date2.getMonth()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }   else if(date1.getDate() > date2.getDate()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }
+                        
+                    Libri l = p.getHlIsbn();                   
+                    int sasia = l.getLSasia() ;
+                    
+                    if(sasia == 0){
+                        throw new LibraryException("Nuk ka me libra ne stock");                      
+                    }
+                    
                      sasia -= 1;
                     LibriRepository lrepo = new LibriRepository();
                     l.setLSasia(sasia);
-                    lrepo.edit(l);
-
                     huazimiRepository.create(p);
-
+                    lrepo.edit(l);
                 }else{
-                     HuazimiLibrit p = new HuazimiLibrit();
+                     HuazimiLibrit p = this.huazimiLibritTableModel.getHuazimiLibrit(row);
+                    if(klientetCmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Client");
+                    }
                     p.setHLKlientiId((Klienti)klientetCmb.getSelectedItem());
+                    if(libricmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Book");                        
+                    }
                     p.setHlIsbn((Libri)libricmb.getSelectedItem());
+                    if(jDateChooser1.getDate()== null){
+                        throw new LibraryException("Please select a delivery date");
+                    }
                     p.setHLDataLeshimit(jDateChooser1.getDate());
+                    if(jDateChooser2.getDate() == null){
+                        throw new LibraryException("Please select a receipt date");
+                    }                    
                     p.setHLDataKthimit(jDateChooser2.getDate());
+                    
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    
+                    Date date = new Date();
+                    Date date1 = this.jDateChooser1.getDate();
+                    Date date2 = this.jDateChooser2.getDate();
+                   
+                    
+                   
+                    if(date1.getYear() < date.getYear() || date1.getMonth() < date.getMonth() || date1.getDate() < date.getDate()){
+                        throw new LibraryException("Please choose a correct delivery Date");
+                    }
+                    
+                        if(date2.getYear() > date1.getYear()){
+                        
+                    }   else if(date1.getYear() > date2.getYear() || date1.getMonth() > date2.getMonth()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }   else if(date1.getDate() > date2.getDate()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }
 
                     huazimiRepository.edit(p);
                 }
@@ -476,11 +551,10 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
                 this.loadTableHuazimi();
                 
             } catch (LibraryException ex) {
-            JOptionPane.showMessageDialog(this, "Plotsoni fushat!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
-                clear();
-                loadTableHuazimi();
+                
            
         
             
@@ -488,9 +562,13 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
             
         
     }                                            
-
+    
     private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
-        // search key release
+        HuazimiLibritTableModel model = (HuazimiLibritTableModel) this.table.getModel();
+        String search = this.Search.getText();//.toLowerCase();
+        TableRowSorter<HuazimiLibritTableModel> tr = new TableRowSorter<HuazimiLibritTableModel>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));    
     }//GEN-LAST:event_SearchKeyReleased
 
     /**
@@ -523,7 +601,11 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterHuazimLibraveGUI().setVisible(true);
+                try {
+                    new RegisterHuazimLibraveGUI().setVisible(true);
+                } catch (LibraryException ex) {
+                    Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

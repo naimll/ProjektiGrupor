@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Klienti.findByKMbiemri", query = "SELECT k FROM Klienti k WHERE k.kMbiemri = :kMbiemri"),
     @NamedQuery(name = "Klienti.findByKMosha", query = "SELECT k FROM Klienti k WHERE k.kMosha = :kMosha"),
     @NamedQuery(name = "Klienti.findByKGjinia", query = "SELECT k FROM Klienti k WHERE k.kGjinia = :kGjinia"),
-    @NamedQuery(name = "Klienti.findByKDataLindjes", query = "SELECT k FROM Klienti k WHERE k.kDataLindjes = :kDataLindjes"),
+   // @NamedQuery(name = "Klienti.findByKDataLindjes", query = "SELECT k FROM Klienti k WHERE k.kDataLindjes = :kDataLindjes"),
     @NamedQuery(name = "Klienti.findByKTel", query = "SELECT k FROM Klienti k WHERE k.kTel = :kTel"),
     @NamedQuery(name = "Klienti.findByKShteti", query = "SELECT k FROM Klienti k WHERE k.kShteti = :kShteti"),
     @NamedQuery(name = "Klienti.findByKEmail", query = "SELECT k FROM Klienti k WHERE k.kEmail = :kEmail")})
@@ -60,9 +60,9 @@ public class Klienti implements Serializable {
     @Basic(optional = false)
     @Column(name = "K_Gjinia")
     private String kGjinia;
-    @Column(name = "K_Data_Lindjes")
-    @Temporal(TemporalType.DATE)
-    private Date kDataLindjes;
+   // @Column(name = "K_Data_Lindjes")
+    //@Temporal(TemporalType.DATE)
+    //private Date kDataLindjes;
     @Basic(optional = false)
     @Column(name = "K_Tel")
     private String kTel;
@@ -131,14 +131,14 @@ public class Klienti implements Serializable {
         this.kGjinia = kGjinia;
     }
 
-    public Date getKDataLindjes() {
+    /*public Date getKDataLindjes() {
         return kDataLindjes;
-    }
+    }*/
 
-    public void setKDataLindjes(Date kDataLindjes) {
+    /*public void setKDataLindjes(Date kDataLindjes) {
         this.kDataLindjes = kDataLindjes;
     }
-
+*/
     public String getKTel() {
         return kTel;
     }

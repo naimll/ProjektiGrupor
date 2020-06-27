@@ -26,6 +26,10 @@ K_Shteti varchar(50) not null,
 K_Email varchar(100) not null
 )
 
+ALTER TABLE Klienti DROP Column K_Data_lindjes
+
+Select * from Klienti
+
 create table Autori(
 A_Id int primary key identity(1,1),
 A_Emri varchar(50) not null,
@@ -71,6 +75,8 @@ foreign key(L_Kategoria_Id) references Kategoria_Librit(Kategoria_Id)
 )
 alter table Libri
 add Autori_Id int
+
+
 
 ALTER TABLE Libri
 ADD FOREIGN KEY (Autori_Id) REFERENCES Autori(A_Id);

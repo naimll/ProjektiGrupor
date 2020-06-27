@@ -10,8 +10,13 @@ import DAL.KlientiRepository;
 import DAL.LibraryException;
 import GUI.Model.ClientTableModel;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.util.Calendar;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import static javax.persistence.TemporalType.DATE;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
@@ -38,6 +43,8 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         this.tableSelectedIndexChange();
         this.IdTextField.setEnabled(true);
     }
+    
+    
     
     public void tableSelectedIndexChange(){
          
@@ -69,7 +76,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                     
                     PhoneTextField.setText(k.getKTel());
                     StateTextField.setText(k.getKShteti());
-                    DateChooser.setDate(k.getKDataLindjes());
+                    
                     EmailTextField.setText(k.getKEmail());
                     IdTextField.setText(Integer.toString(k.getKId()));
                     IdTextField.setEnabled(false);
@@ -92,7 +99,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         this.PhoneTextField.setText("");
         this.StateTextField.setText("");
         this.EmailTextField.setText("");
-        this.DateChooser.setDate(null);
+        
         this.IdTextField.setText("");
         IdTextField.setEnabled(true);
         
@@ -133,12 +140,10 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         GenderLabel = new javax.swing.JLabel();
         MaleRadioButton = new javax.swing.JRadioButton();
         FemaleRadioButton = new javax.swing.JRadioButton();
-        BirthdayLabel = new javax.swing.JLabel();
         PhoneTextField = new javax.swing.JTextField();
         StateLabel = new javax.swing.JLabel();
         StateTextField = new javax.swing.JTextField();
         PhoneLabel = new javax.swing.JLabel();
-        DateChooser = new com.toedter.calendar.JDateChooser();
         EmailLabel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
         Save = new javax.swing.JButton();
@@ -151,16 +156,9 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
-<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
-=======
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
->>>>>>> 2860344b6b1a592c32e4c4583d9bf842e7ee4732
         setResizable(false);
 
         TitelPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -246,9 +244,6 @@ public class RegisterClientGUI extends javax.swing.JFrame {
             }
         });
 
-        BirthdayLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BirthdayLabel.setText("Birthday");
-
         PhoneTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,8 +263,6 @@ public class RegisterClientGUI extends javax.swing.JFrame {
 
         PhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PhoneLabel.setText("Phone");
-
-        DateChooser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         EmailLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         EmailLabel.setText("Email");
@@ -321,49 +314,42 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
-                        .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(BirthdayLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NameLabel)
-                                    .addComponent(AgeLabel)
-                                    .addComponent(PhoneLabel))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(SurnameLabel)
-                                    .addComponent(StateLabel)
-                                    .addComponent(GenderLabel))
-                                .addGap(40, 40, 40)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(MaleRadioButton)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(FemaleRadioButton))
-                                        .addComponent(SurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(StateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(EmailLabel)
-                                .addGap(67, 67, 67)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DeleteClientButton)
-                                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(26, 26, 26))))
+                            .addComponent(NameLabel)
+                            .addComponent(AgeLabel)
+                            .addComponent(PhoneLabel))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SurnameLabel)
+                            .addComponent(StateLabel)
+                            .addComponent(GenderLabel))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(MaleRadioButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(FemaleRadioButton))
+                                .addComponent(SurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(StateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(EmailLabel)
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DeleteClientButton)
+                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(26, 26, 26))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(Cancel)
@@ -394,17 +380,12 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                     .addComponent(StateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PhoneLabel))
                 .addGap(47, 47, 47)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BirthdayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(EmailLabel)))
-                .addGap(47, 47, 47)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailLabel)
                     .addComponent(jLabel3)
                     .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancel)
                     .addComponent(Save)
@@ -521,6 +502,8 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTextFieldActionPerformed
 
+
+    
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
      try{
             int row = table.getSelectedRow();
@@ -528,9 +511,27 @@ public class RegisterClientGUI extends javax.swing.JFrame {
              Klienti k = new Klienti();
               
              
+             if(NameTextField.getText() == "" || NameTextField.getText().length() < 3){
+                 throw new LibraryException("Name should not be null or shorter than 3");
+             }
              k.setKEmri(NameTextField.getText());
+             
+             if(SurnameTextField.getText() == "" || SurnameTextField.getText().length() < 3){
+                 throw new LibraryException("Surname should not be null or shorter than 3");
+             }                        
              k.setKMbiemri(this.SurnameTextField.getText());
+                                           
+             
+              if(AgeTextField.getText() == "" || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
+                
+                 throw new LibraryException("Age should not be null or lower than 10"); 
+             }
+             
              k.setKMosha(Integer.parseInt(this.AgeTextField.getText()));
+             
+             if(!MaleRadioButton.isSelected() && !FemaleRadioButton.isSelected()){
+                 throw new LibraryException("Please choose a gender");
+             }
              if(MaleRadioButton.isSelected()){
                  k.setKGjinia("male");
              }
@@ -538,18 +539,56 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                  k.setKGjinia("female");
              }
              
+             if(PhoneTextField.getText().length()< 9){
+                 throw new LibraryException("Phone number should not be shorter than 9");
+             }
              k.setKTel(this.PhoneTextField.getText());
+             
+              if(StateTextField.getText().length()< 5){
+                 throw new LibraryException("State length should not be shorter 5");
+             }            
              k.setKShteti(this.StateTextField.getText());
-             k.setKDataLindjes(this.DateChooser.getDate());
+             
+             
+             if(EmailTextField.getText() == "" || EmailTextField.getText().length() < 5 || !EmailTextField.getText().contains("@")){
+                 throw new LibraryException("Email length should not be shorter 5 and should contatin @ character");   
+             }
+
+             
              k.setKEmail(this.EmailTextField.getText());
+             
+             if(IdTextField.getText() == "" || IdTextField.getText().length() < 9 ){
+                 throw new LibraryException ("Personal number should not be shorter than 9 numbers");
+             }
              k.setKId(Integer.parseInt(this.IdTextField.getText()));
               
+             try{
               krepo.create(k);
+             }catch(LibraryException ex){
+                 JOptionPane.showMessageDialog(this, "ID exists on database");
+             }
             }else{
-                Klienti k = new Klienti();
+                
+                Klienti k = ctm.getKlienti(row);
+             if(NameTextField.getText() =="" || NameTextField.getText().length() < 3){
+                 throw new LibraryException("Name should not be null or shorter than 3");
+             }
              k.setKEmri(NameTextField.getText());
+             
+             if(SurnameTextField.getText() =="" || SurnameTextField.getText().length() < 3){
+                 throw new LibraryException("Surname should not be null or shorter than 3");
+             }                        
              k.setKMbiemri(this.SurnameTextField.getText());
+                                           
+              if(AgeTextField.getText() == "" || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
+                
+                 throw new LibraryException("Age should not be null or lower than 10"); 
+             }
+            
              k.setKMosha(Integer.parseInt(this.AgeTextField.getText()));
+             if(!MaleRadioButton.isSelected() && !FemaleRadioButton.isSelected()){
+                 throw new LibraryException("Please choose a gender");
+             }
              if(MaleRadioButton.isSelected()){
                  k.setKGjinia("male");
              }
@@ -557,10 +596,26 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                  k.setKGjinia("female");
              }
              
+             if(PhoneTextField.getText().length()< 9){
+                 throw new LibraryException("Phone number should not be shorter than 9");
+             }
              k.setKTel(this.PhoneTextField.getText());
+             
+              if(StateTextField.getText().length()< 5){
+                 throw new LibraryException("State length should not be shorter 5");
+             }            
              k.setKShteti(this.StateTextField.getText());
-             k.setKDataLindjes(this.DateChooser.getDate());
+             
+             
+             if(EmailTextField.getText() == "" || EmailTextField.getText().length() < 5 || EmailTextField.getText().contains("@")){
+                 throw new LibraryException("Email length should not be shorter 5 and should contatin @ character");   
+             }
+
+             
              k.setKEmail(this.EmailTextField.getText());
+             if(k.getKId() == null || Integer.toString(k.getKId()).length() < 9 || Integer.toString(k.getKId()).contains(" ")){
+                 throw new LibraryException ("Personal number should not be shorter than 9 numbers and should not contatin spaces");
+             }
              k.setKId(Integer.parseInt(this.IdTextField.getText()));
               
               krepo.edit(k);
@@ -571,7 +626,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
             this.clear();
             this.loadTable();
      }catch(LibraryException ex){
-            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
      
      
@@ -588,15 +643,19 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                     int row = table.getSelectedRow();
                     if(row != -1){
                         Klienti k = ctm.getKlienti(row);
+                        try{
                         krepo.delete(k);
-                    
+                        }catch (LibraryException ex){
+                            JOptionPane.showMessageDialog(this, "The client can't be deleted because the are records of client's borrowings");
+                        }
+                    }else{
+                    throw new LibraryException("Please select a a client from the table");
                     }
             this.clear();
             this.loadTable();
         }   
         catch (Exception ex){
-            //java.util.logging.Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE,null,ex);
-                        JOptionPane.showMessageDialog(this, "Klienti nuk mund te fshihet, sepse se pari duhet te fshihen huazimet e klientit");
+                        JOptionPane.showMessageDialog(this, ex.getMessage());
 
         }
               }//GEN-LAST:event_DeleteClientButtonActionPerformed
@@ -659,9 +718,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
     private javax.swing.JPanel AddClientPanel;
     private javax.swing.JLabel AgeLabel;
     private javax.swing.JTextField AgeTextField;
-    private javax.swing.JLabel BirthdayLabel;
     private javax.swing.JButton Cancel;
-    private com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JButton DeleteClientButton;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;

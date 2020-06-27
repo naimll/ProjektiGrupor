@@ -381,9 +381,9 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         RegiserPanelLayout.setHorizontalGroup(
             RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegiserPanelLayout.createSequentialGroup()
-                .addGap(149, 149, 149)
+                .addGap(136, 136, 136)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addGroup(RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(search))
@@ -391,21 +391,21 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegiserPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(237, 237, 237))
+                .addGap(249, 249, 249))
         );
         RegiserPanelLayout.setVerticalGroup(
             RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegiserPanelLayout.createSequentialGroup()
-                .addGap(0, 37, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(RegiserPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(RegiserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(RegiserPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -420,8 +420,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(WelcomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RegiserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(RegiserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE))
         );
 
         pack();
@@ -438,40 +437,96 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
             int row = table.getSelectedRow();
             if(row == -1){
               Stafi s = new Stafi () ;
+              
+              
+              //if(IdTextField.getText())
+              
+              if(IdTextField.getText() == "" || IdTextField.getText().length() < 3){                   
+                  throw new LibraryException("Id should not be null or shorter than 3");
+                 
+              }
               s.setStafiId(Integer.parseInt(IdTextField.getText()));
+              
+              
+              if(NameTextField.getText() == "" || NameTextField.getText().length() < 3){
+                  throw new LibraryException("Name should not be null or shorter than 3");                  
+              }
               s.setSEmri(NameTextField.getText());
+              
+              if(SurnameTextField.getText() == "" || SurnameTextField.getText().length() < 3){
+                  throw new LibraryException("Surname should not be null or shorter than 3");                  
+              }              
               s.setSMbiemri(SurnameTextField.getText());
+              
+              if(TelephoneTextField.getText() == "" || TelephoneTextField.getText().length() < 9){
+                  throw new LibraryException("Phone Number should not be null or shorter than 9");                  
+              }              
               s.setSTel(TelephoneTextField.getText());
               
+              if(!AdminRadioButton.isSelected() && !UserRadioButton.isSelected()){
+                  throw new LibraryException("Admin or User should be checked");               
+              }
               if(AdminRadioButton.isSelected()){
                   s.setSRoli(1);
               }
               else if(UserRadioButton.isSelected()){
                   s.setSRoli(0);
               }
-              
+
+              if(UsernameTextField.getText() == "" || UsernameTextField.getText().length() < 6){
+                  throw new LibraryException("Username should not be null or shorter than 6");                  
+              }              
               s.setSUser(UsernameTextField.getText());
+              
+              if(PasswordField.getText() == "" || PasswordField.getText().length() < 6){
+                  throw new LibraryException("Password should not be null or shorter than 6");                  
+              }              
               s.setSPassword(PasswordField.getText());
               
 
-              
+              try{
               srepo.create(s);
+              }catch (LibraryException ex){
+                  JOptionPane.showMessageDialog(this,"Id already exists in database");
+              }
             }else{
                 Stafi s= sbtm.getStafi(row);
                
               //ID nuk ben te ndryshohet
+              if(NameTextField.getText() == "" || NameTextField.getText().length() < 6){
+                  
+                  throw new LibraryException("Name should not be null or shorter than 6");
+                                      
+              }              
               s.setSEmri(NameTextField.getText());
+              if(SurnameTextField.getText() == "" || SurnameTextField.getText().length() < 6){
+                  throw new LibraryException ("Surname should not be null or shorter than 6");                  
+              }              
               s.setSMbiemri(SurnameTextField.getText());
+              
+              if(TelephoneTextField.getText() == "" || TelephoneTextField.getText().length() < 6){
+                  throw new LibraryException("Phone Number should not be null or shorter than 6");                  
+              }              
               s.setSTel(TelephoneTextField.getText());
               
+              if(!AdminRadioButton.isSelected() && !UserRadioButton.isSelected()){
+                  throw new LibraryException("Admin or User should be checked");               
+              }
               if(AdminRadioButton.isSelected()){
                   s.setSRoli(1);
               }
               else if(UserRadioButton.isSelected()){
                   s.setSRoli(0);
               }
-              
+
+              if(UsernameTextField.getText() == "" || UsernameTextField.getText().length() < 6){
+                  throw new LibraryException("Username should not be null or shorter than 3");                  
+              }              
               s.setSUser(UsernameTextField.getText());
+              
+              if(PasswordField.getText() == "" || PasswordField.getText().length() < 6){
+                  throw new LibraryException("Password should not be null or shorter than 6");                  
+              }              
               s.setSPassword(PasswordField.getText());
               
               srepo.edit(s);
@@ -482,7 +537,8 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
             Clear();
             this.loadTableModel();
      }catch(LibraryException ex){
-            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+            JOptionPane.showMessageDialog(this,ex.getMessage());
+            
         }
      
      
@@ -507,13 +563,15 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                         Stafi s = sbtm.getStafi(row);
                         srepo.delete(s);
                     
+                    }else{
+                    throw new LibraryException("Please select a staff from the table");
                     }
             this.Clear();
             this.loadTableModel();
         }   
-        catch (Exception ex){
+        catch (LibraryException ex){
                    
-          JOptionPane.showMessageDialog(this, "Stafi nuk mund te fshihet perderisa ka klient te regjistruar nga llogaria ne fjale e stafit");
+          JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
