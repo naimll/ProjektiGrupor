@@ -10,6 +10,7 @@ S_User varchar(40) not null,
 S_Password varchar(50) not null,
 S_Roli int not null
 )
+select * from Stafi s where s.S_User='naimll' and s.S_Password='admin'
 
 insert into Stafi values (1 , 'Admin' , 'Admin' , '044123456', 'admin' , 'admin' , 1)
 

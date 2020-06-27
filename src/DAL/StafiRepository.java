@@ -53,7 +53,7 @@ public class StafiRepository extends EntMngClass implements StafiInterface {
          try {
             Stafi sl=new Stafi();
             sl.setStafiId(id);
-          return  (Stafi) em.createQuery("SELECT s FROM Stafi s WHERE s.Stafi_Id= "+id).getSingleResult();
+          return  (Stafi) em.createQuery("SELECT s FROM Stafi s WHERE s.stafiId= "+id).getSingleResult();
              
         } catch (Exception e) {
             throw new LibraryException(e.getMessage());

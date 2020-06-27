@@ -89,7 +89,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         AuthorLabel = new javax.swing.JLabel();
         NrAuthorsLabel = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
-        klientetCmb = new javax.swing.JComboBox<>();
+        klientetCmb = new javax.swing.JComboBox<String>();
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         Search = new javax.swing.JTextField();
@@ -175,7 +175,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
             }
         });
 
-        klientetCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        klientetCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -234,7 +234,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
                         .addGap(160, 160, 160))))
         );
 
-        table.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        table.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -249,6 +249,11 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchActionPerformed(evt);
+            }
+        });
+        Search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchKeyReleased(evt);
             }
         });
 
@@ -409,6 +414,10 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchActionPerformed
+
+    private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
+        // search key release
+    }//GEN-LAST:event_SearchKeyReleased
 
     /**
      * @param args the command line arguments

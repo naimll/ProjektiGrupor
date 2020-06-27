@@ -298,14 +298,19 @@ public class LoginGUI extends javax.swing.JFrame {
                     EmployeeMenu em = new EmployeeMenu();
                     em.setNameLabel(s.getSEmri());
                     em.show();
+                    s=null;
+                    clear();
                    
                     
                 }else if(s.getSRoli() ==1){
                     //dritarja e adminit
                     this.dispose();
                     AdminFormGUI adminFormGUI = new AdminFormGUI();
-//                      adminFormGUI.setNameLabel(s.getSEmri());
+                      adminFormGUI.setNameLabel(s.getSEmri(),s.getStafiId());
+                     
                     adminFormGUI.setVisible(true);
+                    s=null;
+                    clear();
                     
                 }
                 
@@ -328,10 +333,11 @@ public class LoginGUI extends javax.swing.JFrame {
       }
       return true;
     }
-    
-    /**
-     * @param args the command line arguments
-     */
+    private void clear() {
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+    }
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -376,4 +382,6 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    
 }
