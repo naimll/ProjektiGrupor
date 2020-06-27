@@ -185,7 +185,7 @@ public class Klienti implements Serializable {
 
     @Override
     public String toString() {
-        return "BLL.Klienti[ kId=" + kId + " ]";
+        return this.kEmri+" "+this.kMbiemri;
     }
 
     @XmlTransient

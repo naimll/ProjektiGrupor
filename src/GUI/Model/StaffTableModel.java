@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import BLL.Libri;
+import BLL.Stafi;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,18 +13,18 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Lenovo
  */
-public class BookTableModel extends AbstractTableModel{
+public class StaffTableModel extends AbstractTableModel{
     
-    List<Libri> list;
-    String [] cols = {"Book Name" , "Author" , "Quantity"} ;
+    List<Stafi> list;
+    String [] cols = {"Id", "Name Surname" , "Username"} ;
     
-    public BookTableModel(){}
+    public StaffTableModel(){}
     
-    public BookTableModel(List<Libri> list){
+    public StaffTableModel(List<Stafi> list){
         this.list=list;
     }
     
-    public void addList(List<Libri> list){
+    public void addList(List<Stafi> list){
         this.list=list;
     }
 
@@ -44,7 +44,7 @@ public class BookTableModel extends AbstractTableModel{
     list.remove(row);
     }
     
-    public Libri getLibri(int index){
+    public Stafi getStafi(int index){
     return list.get(index);
     
     }
@@ -56,19 +56,18 @@ public class BookTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Libri l = list.get(rowIndex);
+        Stafi s = list.get(rowIndex);
         switch(columnIndex){
         
             case 0:
-                return l.getLTitulli();
+                return s.getStafiId();
             case 1:
-                return l.getAutoriId();
+                return s.getSEmri()+" "+s.getSMbiemri();
             case 2:
-                return l.getLSasia();
+                return s.getSUser();
             default:
                 return null;
             
             }
-    }
-    
+    }    
 }

@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Naim/Documents/NetBeansProjects/LibraryManagmentSystem/src/BLL/Stafi.java</file>
-            <file>file:/C:/Users/Naim/Documents/NetBeansProjects/LibraryManagmentSystem/src/DAL/StafiRepository.java</file>
-            <file>file:/C:/Users/Naim/Documents/NetBeansProjects/LibraryManagmentSystem/src/GUI/View/AdminFormGUI.java</file>
-            <file>file:/C:/Users/Naim/Documents/NetBeansProjects/LibraryManagmentSystem/src/GUI/View/MainPage.java</file>
-            <file>file:/C:/Users/Naim/Documents/NetBeansProjects/LibraryManagmentSystem/src/GUI/View/EmployeeMenu.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Project1/src/GUI/View/RegisterBookGUI.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Project1/src/BLL/Autori.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Project1/src/GUI/View/RegisterStaffGUI.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Project1/src/GUI/Model/StaffTableModel.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Project1/src/GUI/Model/AuthorTableModel.java</file>
+            <file>file:/D:/Fakultet/Lab1/Projekti%20Grupor/Project1/src/GUI/View/RegisterAuthorGUI.java</file>
         </group>
     </open-files>
 </project-private>

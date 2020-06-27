@@ -179,7 +179,7 @@ public class Libri implements Serializable {
 
     @Override
     public String toString() {
-        return "BLL.Libri[ isbn=" + isbn + " ]";
+        return this.lTitulli;
     }
 
     @XmlTransient

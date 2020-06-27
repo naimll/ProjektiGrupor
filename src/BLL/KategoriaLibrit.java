@@ -49,8 +49,7 @@ public class KategoriaLibrit implements Serializable {
     @OneToMany(mappedBy = "lKategoriaId")
     private Collection<Libri> libriCollection;
 
-    public KategoriaLibrit() {
-    }
+    public KategoriaLibrit() {}
 
     public KategoriaLibrit(Integer kategoriaId) {
         this.kategoriaId = kategoriaId;

@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class HuazimiLibritTableModel extends AbstractTableModel{
     
     List<HuazimiLibrit> list;
-    String [] cols = {"HuazimiID" , "Klienti ID","Kodi ISBN","Data e leshimit","Data e kthimit"};
+    String [] cols = {"HuazimiID" , "Klienti ID","Libri ID","Data e leshimit","Data e kthimit"};
     
     public HuazimiLibritTableModel(){}
     
@@ -63,9 +63,9 @@ public class HuazimiLibritTableModel extends AbstractTableModel{
             case 0:
                 return l.getHLId();
             case 1:
-                return l.getHLKlientiId();
+                return l.getHLKlientiId().getKId();
             case 2:
-                return l.getHlIsbn();
+                return l.getHlIsbn().getIsbn();
             case 3:
                 return l.getHLDataLeshimit();
             case 4:

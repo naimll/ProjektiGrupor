@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import BLL.Libri;
+import BLL.KategoriaLibrit;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,62 +13,57 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Lenovo
  */
-public class BookTableModel extends AbstractTableModel{
+public class CategoryTableModel extends AbstractTableModel {
+    List<KategoriaLibrit> list;
+    String[] cols = {"Id","Emri","Sasia e librave"};
     
-    List<Libri> list;
-    String [] cols = {"Book Name" , "Author" , "Quantity"} ;
+    public CategoryTableModel(){}
     
-    public BookTableModel(){}
-    
-    public BookTableModel(List<Libri> list){
-        this.list=list;
+    public CategoryTableModel(List<KategoriaLibrit> list){
+    this.list=list;
     }
     
-    public void addList(List<Libri> list){
-        this.list=list;
+    public void addList(List<KategoriaLibrit> list){
+    this.list=list;
     }
 
-    
     @Override
     public String getColumnName(int col){
     return cols[col] ;
+    }     
+
+    @Override
+    public int getRowCount() {
+        return this.list.size();
     }
     
     @Override
-    public int getRowCount() {
-            return list.size();
-            
-    }
-    
+    public int getColumnCount() {
+        return cols.length;
+    }    
+
     public void remove(int row){
     list.remove(row);
     }
     
-    public Libri getLibri(int index){
-    return list.get(index);
-    
-    }
-
-    @Override
-    public int getColumnCount() {
-        return cols.length;
-    }
+    public KategoriaLibrit getKategoriaLibrit(int index){
+        return this.list.get(index);
+    }    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Libri l = list.get(rowIndex);
+        KategoriaLibrit k = list.get(rowIndex);
         switch(columnIndex){
         
             case 0:
-                return l.getLTitulli();
+                return k.getKategoriaId();
             case 1:
-                return l.getAutoriId();
+                return k.getKLEmri();
             case 2:
-                return l.getLSasia();
+                return k.getKLSasia();
             default:
                 return null;
             
             }
     }
-    
 }

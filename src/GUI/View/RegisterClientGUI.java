@@ -5,6 +5,20 @@
  */
 package GUI.View;
 
+import BLL.Klienti;
+import DAL.KlientiRepository;
+import DAL.LibraryException;
+import GUI.Model.ClientTableModel;
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.util.List;
+import java.util.logging.Level;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Lenovo
@@ -14,9 +28,88 @@ public class RegisterClientGUI extends javax.swing.JFrame {
     /**
      * Creates new form AddClientGUI
      */
+    
+    KlientiRepository krepo = new KlientiRepository();
+    ClientTableModel ctm = new ClientTableModel();
+    
     public RegisterClientGUI() {
         initComponents();
+        this.loadTable();
+        this.tableSelectedIndexChange();
+        this.IdTextField.setEnabled(true);
     }
+    
+    public void tableSelectedIndexChange(){
+         
+        final ListSelectionModel rowSM = table.getSelectionModel();
+         rowSM.addListSelectionListener(new ListSelectionListener(){
+             
+             @Override
+             public void valueChanged(ListSelectionEvent e) {
+                    if(e.getValueIsAdjusting()){
+                    return;             }
+                    ListSelectionModel rowSM = (ListSelectionModel) e.getSource();
+                    int selectedIndex = rowSM.getAnchorSelectionIndex();
+                    if(selectedIndex > -1){
+                    Klienti k = ctm.getKlienti(selectedIndex);
+                    
+                    NameTextField.setText(k.getKEmri());
+                    SurnameTextField.setText(k.getKMbiemri());
+                    AgeTextField.setText(Integer.toString(k.getKMosha()));
+                    
+                    String Gender = k.getKGjinia().toLowerCase();
+                    if(Gender=="male"){
+                        MaleRadioButton.setSelected(true);
+                        FemaleRadioButton.setSelected(false);
+                    }
+                    else if(Gender =="female"){
+                        MaleRadioButton.setSelected(false);
+                        FemaleRadioButton.setSelected(true);                   
+                    }
+                    
+                    PhoneTextField.setText(k.getKTel());
+                    StateTextField.setText(k.getKShteti());
+                    DateChooser.setDate(k.getKDataLindjes());
+                    EmailTextField.setText(k.getKEmail());
+                    IdTextField.setText(Integer.toString(k.getKId()));
+                    IdTextField.setEnabled(false);
+                    
+                }
+            }
+
+             
+
+             
+         });
+    }
+    
+    public void clear(){
+        this.NameTextField.setText("");
+        this.SurnameTextField.setText("");
+        this.AgeTextField.setText("");
+        this.MaleRadioButton.setSelected(false);
+        this.FemaleRadioButton.setSelected(false);
+        this.PhoneTextField.setText("");
+        this.StateTextField.setText("");
+        this.EmailTextField.setText("");
+        this.DateChooser.setDate(null);
+        this.IdTextField.setText("");
+        IdTextField.setEnabled(true);
+        
+    }
+    
+    public void loadTable(){
+        try{
+        List<Klienti> lista = krepo.findAll();
+        ctm.addList(lista);
+        table.setModel(ctm);
+        ctm.fireTableDataChanged();
+        }catch(LibraryException ex){
+                    java.util.logging.Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE,null,ex);
+
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,14 +141,26 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         DateChooser = new com.toedter.calendar.JDateChooser();
         EmailLabel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
-        AddClientButton = new javax.swing.JButton();
-        EditClientButton = new javax.swing.JButton();
+        Save = new javax.swing.JButton();
+        Cancel = new javax.swing.JButton();
         DeleteClientButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        IdTextField = new javax.swing.JTextField();
+        search = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
+<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+=======
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1200, 800));
+        setMinimumSize(new java.awt.Dimension(1200, 800));
+>>>>>>> 2860344b6b1a592c32e4c4583d9bf842e7ee4732
         setResizable(false);
 
         TitelPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -73,16 +178,16 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         TitelPanelLayout.setHorizontalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
+                .addGap(489, 489, 489)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         TitelPanelLayout.setVerticalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         AddClientPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -135,6 +240,11 @@ public class RegisterClientGUI extends javax.swing.JFrame {
 
         FemaleRadioButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         FemaleRadioButton.setText("Female");
+        FemaleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FemaleRadioButtonActionPerformed(evt);
+            }
+        });
 
         BirthdayLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BirthdayLabel.setText("Birthday");
@@ -171,24 +281,37 @@ public class RegisterClientGUI extends javax.swing.JFrame {
             }
         });
 
-        AddClientButton.setBackground(new java.awt.Color(51, 255, 51));
-        AddClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AddClientButton.setText("Add ");
-        AddClientButton.addActionListener(new java.awt.event.ActionListener() {
+        Save.setBackground(new java.awt.Color(51, 255, 51));
+        Save.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Save.setText("Save");
+        Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddClientButtonActionPerformed(evt);
+                SaveActionPerformed(evt);
             }
         });
 
-        EditClientButton.setBackground(new java.awt.Color(51, 102, 255));
-        EditClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        EditClientButton.setForeground(new java.awt.Color(51, 51, 255));
-        EditClientButton.setText("Edit");
+        Cancel.setBackground(new java.awt.Color(51, 102, 255));
+        Cancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
 
         DeleteClientButton.setBackground(new java.awt.Color(255, 51, 102));
         DeleteClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DeleteClientButton.setForeground(new java.awt.Color(255, 51, 51));
         DeleteClientButton.setText("Delete");
+        DeleteClientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteClientButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Nr.Personal");
+
+        IdTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,49 +319,56 @@ public class RegisterClientGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(BirthdayLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NameLabel)
-                            .addComponent(AgeLabel)
-                            .addComponent(PhoneLabel))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SurnameLabel)
-                            .addComponent(StateLabel)
-                            .addComponent(GenderLabel))
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(MaleRadioButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(FemaleRadioButton))
-                                .addComponent(SurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(StateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3)
+                        .addGap(28, 28, 28)
+                        .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(EmailLabel)
-                        .addGap(67, 67, 67)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(BirthdayLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NameLabel)
+                                    .addComponent(AgeLabel)
+                                    .addComponent(PhoneLabel))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DeleteClientButton)
-                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(26, 26, 26))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SurnameLabel)
+                                    .addComponent(StateLabel)
+                                    .addComponent(GenderLabel))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(MaleRadioButton)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(FemaleRadioButton))
+                                        .addComponent(SurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(StateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(EmailLabel)
+                                .addGap(67, 67, 67)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DeleteClientButton)
+                                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(26, 26, 26))))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(EditClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(AddClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
+                .addComponent(Cancel)
+                .addGap(93, 93, 93)
+                .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -270,46 +400,92 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(EmailLabel)))
-                .addGap(59, 59, 59)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddClientButton)
-                    .addComponent(DeleteClientButton)
-                    .addComponent(EditClientButton))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cancel)
+                    .addComponent(Save)
+                    .addComponent(DeleteClientButton))
+                .addGap(56, 56, 56))
         );
+
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchKeyReleased(evt);
+            }
+        });
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Search");
 
         javax.swing.GroupLayout AddClientPanelLayout = new javax.swing.GroupLayout(AddClientPanel);
         AddClientPanel.setLayout(AddClientPanelLayout);
         AddClientPanelLayout.setHorizontalGroup(
             AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddClientPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(search))
+                .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddClientPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addComponent(jLabel2)
+                .addGap(219, 219, 219))
         );
         AddClientPanelLayout.setVerticalGroup(
             AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddClientPanelLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGroup(AddClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddClientPanelLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(AddClientPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(TitelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(AddClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TitelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(AddClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(TitelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(AddClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AddClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE))
         );
 
         pack();
@@ -328,7 +504,9 @@ public class RegisterClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AgeTextFieldActionPerformed
 
     private void MaleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleRadioButtonActionPerformed
-        // TODO add your handling code here:
+        if(MaleRadioButton.isSelected()){
+            FemaleRadioButton.setSelected(false);
+        }
     }//GEN-LAST:event_MaleRadioButtonActionPerformed
 
     private void PhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextFieldActionPerformed
@@ -343,10 +521,104 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTextFieldActionPerformed
 
-    private void AddClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClientButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddClientButtonActionPerformed
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+     try{
+            int row = table.getSelectedRow();
+            if(row == -1){
+             Klienti k = new Klienti();
+              
+             
+             k.setKEmri(NameTextField.getText());
+             k.setKMbiemri(this.SurnameTextField.getText());
+             k.setKMosha(Integer.parseInt(this.AgeTextField.getText()));
+             if(MaleRadioButton.isSelected()){
+                 k.setKGjinia("male");
+             }
+             else if(FemaleRadioButton.isSelected()){
+                 k.setKGjinia("female");
+             }
+             
+             k.setKTel(this.PhoneTextField.getText());
+             k.setKShteti(this.StateTextField.getText());
+             k.setKDataLindjes(this.DateChooser.getDate());
+             k.setKEmail(this.EmailTextField.getText());
+             k.setKId(Integer.parseInt(this.IdTextField.getText()));
+              
+              krepo.create(k);
+            }else{
+                Klienti k = new Klienti();
+             k.setKEmri(NameTextField.getText());
+             k.setKMbiemri(this.SurnameTextField.getText());
+             k.setKMosha(Integer.parseInt(this.AgeTextField.getText()));
+             if(MaleRadioButton.isSelected()){
+                 k.setKGjinia("male");
+             }
+             else if(FemaleRadioButton.isSelected()){
+                 k.setKGjinia("female");
+             }
+             
+             k.setKTel(this.PhoneTextField.getText());
+             k.setKShteti(this.StateTextField.getText());
+             k.setKDataLindjes(this.DateChooser.getDate());
+             k.setKEmail(this.EmailTextField.getText());
+             k.setKId(Integer.parseInt(this.IdTextField.getText()));
+              
+              krepo.edit(k);
+                
+                
+            }
+            //E krijojm ni metode per me i clear fieldat mbasi ti shtojme
+            this.clear();
+            this.loadTable();
+     }catch(LibraryException ex){
+            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+        }
+     
+     
+       
+    }//GEN-LAST:event_SaveActionPerformed
 
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        this.table.clearSelection();
+        this.clear();
+    }//GEN-LAST:event_CancelActionPerformed
+
+    private void DeleteClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteClientButtonActionPerformed
+                try{
+                    int row = table.getSelectedRow();
+                    if(row != -1){
+                        Klienti k = ctm.getKlienti(row);
+                        krepo.delete(k);
+                    
+                    }
+            this.clear();
+            this.loadTable();
+        }   
+        catch (Exception ex){
+            //java.util.logging.Logger.getLogger(RegisterBookGUI.class.getName()).log(Level.SEVERE,null,ex);
+                        JOptionPane.showMessageDialog(this, "Klienti nuk mund te fshihet, sepse se pari duhet te fshihen huazimet e klientit");
+
+        }
+              }//GEN-LAST:event_DeleteClientButtonActionPerformed
+
+    private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
+        ClientTableModel model = (ClientTableModel) this.table.getModel();
+        String search = this.search.getText();//.toLowerCase();
+        TableRowSorter<ClientTableModel> tr = new TableRowSorter<ClientTableModel>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_searchKeyReleased
+
+    private void FemaleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleRadioButtonActionPerformed
+        if(FemaleRadioButton.isSelected()){
+            MaleRadioButton.setSelected(false);
+        }
+    }//GEN-LAST:event_FemaleRadioButtonActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -384,29 +656,35 @@ public class RegisterClientGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddClientButton;
     private javax.swing.JPanel AddClientPanel;
     private javax.swing.JLabel AgeLabel;
     private javax.swing.JTextField AgeTextField;
     private javax.swing.JLabel BirthdayLabel;
+    private javax.swing.JButton Cancel;
     private com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JButton DeleteClientButton;
-    private javax.swing.JButton EditClientButton;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JRadioButton FemaleRadioButton;
     private javax.swing.JLabel GenderLabel;
+    private javax.swing.JTextField IdTextField;
     private javax.swing.JRadioButton MaleRadioButton;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JLabel PhoneLabel;
     private javax.swing.JTextField PhoneTextField;
+    private javax.swing.JButton Save;
     private javax.swing.JLabel StateLabel;
     private javax.swing.JTextField StateTextField;
     private javax.swing.JLabel SurnameLabel;
     private javax.swing.JTextField SurnameTextField;
     private javax.swing.JPanel TitelPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField search;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

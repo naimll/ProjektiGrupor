@@ -5,7 +5,8 @@
  */
 package GUI.Model;
 
-import BLL.Libri;
+import BLL.Autori;
+import static java.util.Collections.list;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,58 +14,52 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Lenovo
  */
-public class BookTableModel extends AbstractTableModel{
+public class AuthorTableModel extends AbstractTableModel{
+    List<Autori> lista;
+    String[] cols = {"Id","Name"} ;
     
-    List<Libri> list;
-    String [] cols = {"Book Name" , "Author" , "Quantity"} ;
+    public AuthorTableModel(){}
     
-    public BookTableModel(){}
-    
-    public BookTableModel(List<Libri> list){
-        this.list=list;
+    public AuthorTableModel(List<Autori> lista){
+        this.lista=lista ;
     }
     
-    public void addList(List<Libri> list){
-        this.list=list;
+    public void addList(List<Autori> lista){
+        this.lista=lista;
     }
-
     
     @Override
     public String getColumnName(int col){
     return cols[col] ;
-    }
+    }    
     
     @Override
     public int getRowCount() {
-            return list.size();
-            
-    }
-    
-    public void remove(int row){
-    list.remove(row);
-    }
-    
-    public Libri getLibri(int index){
-    return list.get(index);
-    
+        return this.lista.size();
     }
 
     @Override
     public int getColumnCount() {
         return cols.length;
     }
+    
+    public void remove(int row){
+    lista.remove(row);
+    }
+    
+    public Autori getAutori(int index){
+        return this.lista.get(index);
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Libri l = list.get(rowIndex);
+        Autori a = lista.get(rowIndex);
         switch(columnIndex){
         
             case 0:
-                return l.getLTitulli();
+                return a.getAId();
             case 1:
-                return l.getAutoriId();
-            case 2:
-                return l.getLSasia();
+                return a.getAEmri()+" "+a.getAMbiemri();
             default:
                 return null;
             
