@@ -97,8 +97,10 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         this.PublisherTextField.setText("");
         this.PublishigYearDate.setYear(2020);
         this.QuantityTextField.setText("");
-        this.CategoryComboBox.setSelectedItem(null);
-        this.AuthorComboBox.setSelectedItem(null);        
+        this.CategoryComboBox.setSelectedIndex(-1);
+        this.CategoryComboBox.repaint();
+        this.AuthorComboBox.setSelectedIndex(-1); 
+        this.AuthorComboBox.repaint();
         this.IsbnTextField.setText("");
         this.PriceTextField.setText("");
         
@@ -521,7 +523,12 @@ public class RegisterBookGUI extends javax.swing.JFrame {
               l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
               l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
               l.setIsbn(IsbnTextField.getText());
-              
+              //l.setLStafiId();
+              KategoriaLibrit kl = l.getLKategoriaId() ;
+              int sasia = Integer.parseInt(kl.getKLSasia()) + 1 ;
+              kl.setKLSasia(Integer.toString(sasia));
+              KategoriaLibritRepository krepo = new KategoriaLibritRepository();
+              krepo.edit(kl);               
               lrepo.create(l);
             }else{
                 Libri l = btm.getLibri(row);
@@ -565,14 +572,19 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                     int row = table.getSelectedRow();
                     if(row != -1){
                         Libri l = btm.getLibri(row);
+                        KategoriaLibrit k = l.getLKategoriaId();
                         lrepo.delete(l);
+                        int sasia = Integer.parseInt(k.getKLSasia()) - 1;
+                        k.setKLSasia(Integer.toString(sasia));
+                        KategoriaLibritRepository krepo = new KategoriaLibritRepository();
+                        krepo.edit(k);
                     
                     }
             this.clear();
             this.loadBookTable();
         }   
         catch (Exception ex){
-                   
+                   JOptionPane.showMessageDialog(this, "Libri nuk mund te fshihet, pasi disa libra jane te huazuar");
           
         }
     }//GEN-LAST:event_DeleteClientButtonActionPerformed

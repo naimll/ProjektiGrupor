@@ -20,9 +20,12 @@ import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabe
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -348,8 +351,15 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
         try{
             int row = table.getSelectedRow();
             if(row != -1){
-                HuazimiLibrit l = huazimiLibritTableModel.getHuazimiLibrit(row);
-                huazimiRepository.delete(l);
+                HuazimiLibrit hl = huazimiLibritTableModel.getHuazimiLibrit(row);
+                
+                    Libri l = hl.getHlIsbn();
+                    int sasia = l.getLSasia() + 1;
+                    LibriRepository lrepo = new LibriRepository();
+                    l.setLSasia(sasia);
+                    
+                huazimiRepository.delete(hl);
+                lrepo.edit(l);
 
             }
             this.clear();
@@ -361,20 +371,31 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     }                                                  
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        this.clear();
         this.table.clearSelection();
+        this.clear();
+        
     }                                            
 
         public void clear(){
             
-            libricmb.getModel().setSelectedItem(null);
-            klientetCmb.getModel().setSelectedItem(null);
+            libricmb.setSelectedIndex(-1);
+            libricmb.repaint();
+            klientetCmb.setSelectedItem(-1);
+            klientetCmb.repaint();
             jDateChooser1.setDate(null);
             jDateChooser2.setDate(null);
         }
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
-    }                                      
+    }   
+    
+        private void SearchKeyReleased(java.awt.event.KeyEvent evt) {                                   
+        HuazimiLibritTableModel model = (HuazimiLibritTableModel) this.table.getModel();
+        String search = this.Search.getText();//.toLowerCase();
+        TableRowSorter<HuazimiLibritTableModel> tr = new TableRowSorter<HuazimiLibritTableModel>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }  
 
     
  
@@ -413,6 +434,18 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
                     p.setHlIsbn((Libri)libricmb.getSelectedItem());
                     p.setHLDataLeshimit(jDateChooser1.getDate());
                     p.setHLDataKthimit(jDateChooser2.getDate());
+                    
+                    Libri l = p.getHlIsbn();
+                    
+                    int sasia = l.getLSasia() ;
+                    if(sasia == 0){
+                        JOptionPane.showMessageDialog(this, "Nuk ka me libra ne stock");
+                        return ;
+                    }
+                     sasia -= 1;
+                    LibriRepository lrepo = new LibriRepository();
+                    l.setLSasia(sasia);
+                    lrepo.edit(l);
 
                     huazimiRepository.create(p);
 
@@ -425,10 +458,11 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
 
                     huazimiRepository.edit(p);
                 }
-            
+                this.clear();
+                this.loadTableHuazimi();
                 
             } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Plotsoni fushat!");
         }
 
                 clear();

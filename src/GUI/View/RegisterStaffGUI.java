@@ -362,6 +362,11 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table);
 
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchKeyReleased(evt);
@@ -508,7 +513,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         }   
         catch (Exception ex){
                    
-          
+          JOptionPane.showMessageDialog(this, "Stafi nuk mund te fshihet perderisa ka klient te regjistruar nga llogaria ne fjale e stafit");
         }
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
@@ -519,6 +524,10 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         table.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search));
     }//GEN-LAST:event_searchKeyReleased
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
 
     /**
      * @param args the command line arguments
