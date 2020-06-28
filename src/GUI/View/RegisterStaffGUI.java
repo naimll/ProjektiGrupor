@@ -9,6 +9,7 @@ import BLL.Stafi;
 import DAL.LibraryException;
 import DAL.StafiRepository;
 import GUI.Model.StaffTableModel;
+import com.sun.glass.events.KeyEvent;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.util.List;
 import java.util.logging.Level;
@@ -265,6 +266,11 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         jLabel1.setText("ID");
 
         IdTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IdTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IdTextFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -445,9 +451,15 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                   throw new LibraryException("Id should not be null or shorter than 3");
                  
               }
-              s.setStafiId(Integer.parseInt(IdTextField.getText()));
-              
-              
+            int ErrorID = 0 ;//0 tregon error per id qe gjendet ne databaze, 1 tegon per error kur id nuk shkruhet si integer
+            try{
+              s.setStafiId(Integer.parseInt(IdTextField.getText())); 
+            }catch(Exception ex){
+                ErrorID = 1;
+             //JOptionPane.showMessageDialog(this,"Id is not typed as INTEGER");
+             
+            }
+            System.out.println("Hej2");
               if(NameTextField.getText() == "" || NameTextField.getText().length() < 3){
                   throw new LibraryException("Name should not be null or shorter than 3");                  
               }
@@ -487,7 +499,12 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
               try{
               srepo.create(s);
               }catch (LibraryException ex){
+                  if(ErrorID == 1){
+                   JOptionPane.showMessageDialog(this,"Id is not typed as INTEGER");
+                     
+                  }else{
                   JOptionPane.showMessageDialog(this,"Id already exists in database");
+                  }
               }
             }else{
                 Stafi s= sbtm.getStafi(row);
@@ -542,6 +559,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         }
      
      
+         
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -586,6 +604,20 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchActionPerformed
+
+    private void IdTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdTextFieldKeyPressed
+        //KEY TYPE FOR ID
+        try{ char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SPACE)) {
+           getToolkit().beep();
+          evt.consume();
+          throw new LibraryException("Type ID as digits");
+       }}catch (LibraryException ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());
+       this.IdTextField.setText("");
+       }
+    }//GEN-LAST:event_IdTextFieldKeyPressed
 
     /**
      * @param args the command line arguments

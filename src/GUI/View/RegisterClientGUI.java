@@ -9,6 +9,7 @@ import BLL.Klienti;
 import DAL.KlientiRepository;
 import DAL.LibraryException;
 import GUI.Model.ClientTableModel;
+import com.sun.glass.events.KeyEvent;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.util.Calendar;
 import static java.util.Calendar.MONTH;
@@ -16,6 +17,7 @@ import static java.util.Calendar.YEAR;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 import static javax.persistence.TemporalType.DATE;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -224,6 +226,11 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                 AgeTextFieldActionPerformed(evt);
             }
         });
+        AgeTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AgeTextFieldKeyPressed(evt);
+            }
+        });
 
         GenderLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         GenderLabel.setText("Gender");
@@ -305,6 +312,11 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         jLabel3.setText("Nr.Personal");
 
         IdTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IdTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IdTextFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -501,8 +513,15 @@ public class RegisterClientGUI extends javax.swing.JFrame {
     private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTextFieldActionPerformed
-
-
+/*
+private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {                                     
+         //KEY TYPE FOR AGE
+         char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE)) {
+           getToolkit().beep();
+          evt.consume();
+       }
+    }*/
     
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
      try{
@@ -520,15 +539,14 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                  throw new LibraryException("Surname should not be null or shorter than 3");
              }                        
              k.setKMbiemri(this.SurnameTextField.getText());
-                                           
-             
-              if(AgeTextField.getText() == "" || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
+                                                        
+                if(AgeTextField.getText() == "" || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
                 
                  throw new LibraryException("Age should not be null or lower than 10"); 
-             }
+                }            
              
-             k.setKMosha(Integer.parseInt(this.AgeTextField.getText()));
-             
+                k.setKMosha(Integer.parseInt(this.AgeTextField.getText()));
+   
              if(!MaleRadioButton.isSelected() && !FemaleRadioButton.isSelected()){
                  throw new LibraryException("Please choose a gender");
              }
@@ -565,7 +583,9 @@ public class RegisterClientGUI extends javax.swing.JFrame {
              try{
               krepo.create(k);
              }catch(LibraryException ex){
+                 getToolkit().beep();
                  JOptionPane.showMessageDialog(this, "ID exists on database");
+                 
              }
             }else{
                 
@@ -626,6 +646,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
             this.clear();
             this.loadTable();
      }catch(LibraryException ex){
+            getToolkit().beep();
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
      
@@ -677,6 +698,36 @@ public class RegisterClientGUI extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchActionPerformed
+
+    private void AgeTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AgeTextFieldKeyPressed
+         //KEY TYPE FOR AGE
+        try{ char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SPACE)) {
+           getToolkit().beep();
+          evt.consume();
+          throw new LibraryException("Type age as integer");
+       }}catch (LibraryException ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());
+       this.AgeTextField.setText("");
+       }
+    }//GEN-LAST:event_AgeTextFieldKeyPressed
+
+    private void IdTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdTextFieldKeyPressed
+        //KEY TYPE FOR ID
+        try{ char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SPACE)) {
+           getToolkit().beep();
+          evt.consume();
+          
+          throw new LibraryException("Type ID as integer");
+       }}catch (LibraryException ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());
+       this.IdTextField.setText("");
+       
+       }
+    }//GEN-LAST:event_IdTextFieldKeyPressed
     
     /**
      * @param args the command line arguments

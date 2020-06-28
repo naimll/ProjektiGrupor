@@ -18,9 +18,11 @@ import DAL.LibriRepository;
 import GUI.Model.AuthorComboBoxModel;
 import GUI.Model.BookTableModel;
 import GUI.Model.CategoryComboBoxModel;
+import com.sun.glass.events.KeyEvent;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import static java.time.Clock.system;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -262,6 +264,11 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                 QuantityTextFieldActionPerformed(evt);
             }
         });
+        QuantityTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                QuantityTextFieldKeyPressed(evt);
+            }
+        });
 
         CategoryLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CategoryLabel.setText("Category");
@@ -296,6 +303,11 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                 PriceTextFieldActionPerformed(evt);
             }
         });
+        PriceTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PriceTextFieldKeyPressed(evt);
+            }
+        });
 
         AuthorLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         AuthorLabel.setText("Author 1");
@@ -319,6 +331,11 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         IsbnTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IsbnTextFieldActionPerformed(evt);
+            }
+        });
+        IsbnTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IsbnTextFieldKeyPressed(evt);
             }
         });
 
@@ -515,13 +532,49 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             int row = table.getSelectedRow();
             if(row == -1){
               Libri l = new Libri();
+              if(TitleTextField.getText() == "" || TitleTextField.getText() == null || TitleTextField.getText().length() < 3){
+                  throw new LibraryException("Title should not be null or shorter than 3");
+              }
               l.setLTitulli(TitleTextField.getText());
+              
+              if(PublisherTextField.getText() == "" || PublisherTextField.getText() == null || PublisherTextField.getText().length() < 3){
+                  throw new LibraryException("Publisher should not be null or shorter than 3");
+              }              
               l.setLShtepiaBotuese(PublisherTextField.getText());
-              l.setLVitiBotimit(PublishigYearDate.getValue());            
+              
+              Date date = new Date();
+              int thisyear = date.getYear() + 1900 ;
+              int chosenyear = PublishigYearDate.getValue();
+              
+              
+              if(thisyear < chosenyear){
+                  throw new LibraryException("Please choose a correct publishing year");
+              }
+              l.setLVitiBotimit(PublishigYearDate.getValue());
+              
+              if(CategoryComboBox.getSelectedItem() == null){
+                  throw new LibraryException("Please select a category");
+              }
               l.setLKategoriaId((KategoriaLibrit) CategoryComboBox.getSelectedItem());
+              
+              if(AuthorComboBox.getSelectedItem() == null){
+                  throw new LibraryException("Please select an author");
+              }              
               l.setAutoriId((Autori) this.AuthorComboBox.getSelectedItem());
+              
+              if(QuantityTextField.getText() == "" || QuantityTextField.getText() == null || QuantityTextField.getText().length() < 1 || Integer.parseInt(QuantityTextField.getText()) < 1){
+                  throw new LibraryException("Quantity should not be null or lower than 1");
+              }
               l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
+              
+              if(PriceTextField.getText() == "" || PriceTextField.getText() == null || PriceTextField.getText().length() < 0 || Double.parseDouble(PriceTextField.getText()) < 0){
+                  throw new LibraryException("Price should not be null or lower than 0");                  
+              }
               l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
+              
+              if(IsbnTextField.getText() == "" || IsbnTextField.getText() == null || (IsbnTextField.getText().length()== 10 || IsbnTextField.getText().length() == 13)){
+                  throw new LibraryException("Isbn should not be null, and should contain 10 or 13 digits");
+              }
               l.setIsbn(IsbnTextField.getText());
               //l.setLStafiId();
               KategoriaLibrit kl = l.getLKategoriaId() ;
@@ -533,13 +586,50 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             }else{
                 Libri l = btm.getLibri(row);
                
+              if(TitleTextField.getText() == "" || TitleTextField.getText() == null || TitleTextField.getText().length() < 3){
+                  throw new LibraryException("Title should not be null or shorter than 3");
+              }
               l.setLTitulli(TitleTextField.getText());
+              
+              if(PublisherTextField.getText() == "" || PublisherTextField.getText() == null || PublisherTextField.getText().length() < 3){
+                  throw new LibraryException("Publisher should not be null or shorter than 3");
+              }              
               l.setLShtepiaBotuese(PublisherTextField.getText());
-              l.setLVitiBotimit(PublishigYearDate.getValue());            
+              
+              Date date = new Date();
+              int thisyear = date.getYear() + 1900 ;
+              int chosenyear = PublishigYearDate.getValue();
+              
+              
+              if(thisyear < chosenyear){
+                  throw new LibraryException("Please choose a correct publishing year");
+              }
+              l.setLVitiBotimit(PublishigYearDate.getValue());
+              
+              if(CategoryComboBox.getSelectedItem() == null){
+                  throw new LibraryException("Please select a category");
+              }
               l.setLKategoriaId((KategoriaLibrit) CategoryComboBox.getSelectedItem());
+              
+              if(AuthorComboBox.getSelectedItem() == null){
+                  throw new LibraryException("Please select an author");
+              }              
               l.setAutoriId((Autori) this.AuthorComboBox.getSelectedItem());
+              
+              if(QuantityTextField.getText() == "" || QuantityTextField.getText() == null || QuantityTextField.getText().length() < 1 || Integer.parseInt(QuantityTextField.getText()) < 1){
+                  throw new LibraryException("Quantity should not be null or lower than 1");
+              }
               l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
+              
+              if(PriceTextField.getText() == "" || PriceTextField.getText() == null || PriceTextField.getText().length() < 0 || Double.parseDouble(PriceTextField.getText()) < 0){
+                  throw new LibraryException("Price should not be null or lower than 0");                  
+              }
               l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
+              
+              if(IsbnTextField.getText() == "" || IsbnTextField.getText() == null || (IsbnTextField.getText().length()== 10 || IsbnTextField.getText().length() == 13)){
+                  throw new LibraryException("Isbn should not be null, and should contain 10 or 13 digits");
+              }
+              l.setIsbn(IsbnTextField.getText());
               
               lrepo.edit(l);
                 
@@ -549,7 +639,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             clear();
             this.loadBookTable();
      }catch(LibraryException ex){
-            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
      
      
@@ -621,6 +711,47 @@ public class RegisterBookGUI extends javax.swing.JFrame {
          }
        */
     }//GEN-LAST:event_SearchKeyReleased
+
+    private void QuantityTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_QuantityTextFieldKeyPressed
+         //KEY TYPE FOR QUANTITY
+        try{ char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SPACE)) {
+           getToolkit().beep();
+          evt.consume();
+          throw new LibraryException("Type quantity as integer");
+       }}catch (LibraryException ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());
+       this.QuantityTextField.setText("");
+       }    }//GEN-LAST:event_QuantityTextFieldKeyPressed
+
+    private void PriceTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PriceTextFieldKeyPressed
+        //KEY TYPE FOR Price
+        try{ char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SPACE)) {
+           getToolkit().beep();
+          evt.consume();
+          throw new LibraryException("Type Price as double");
+       }}catch (LibraryException ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());
+       this.PriceTextField.setText("");
+       }
+    }//GEN-LAST:event_PriceTextFieldKeyPressed
+
+    private void IsbnTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IsbnTextFieldKeyPressed
+        //KEY TYPE FOR ISBN
+        try{ char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) || (c==KeyEvent.VK_BACKSPACE) || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SPACE)) {
+           getToolkit().beep();
+          evt.consume();
+          throw new LibraryException("Type ISBN as DIGIT");
+       }}catch (LibraryException ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());
+       this.IsbnTextField.setText("");
+       }
+    }//GEN-LAST:event_IsbnTextFieldKeyPressed
 
     /**
      * @param args the command line arguments

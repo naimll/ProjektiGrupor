@@ -398,15 +398,14 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         this.table.clearSelection();
         this.clear();
-        klientetCmb.setSelectedItem(-1);                   
-        klientetCmb.repaint();
+
         
     }                                            
 
         public void clear(){
             
             libricmb.setSelectedIndex(-1);
-            klientetCmb.setSelectedItem(-1);
+            klientetCmb.setSelectedIndex(-1);
             libricmb.repaint();        
             klientetCmb.repaint();
             jDateChooser1.setDate(null);
