@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f75a4c3-d0f4-458d-93d9-41e625a2d22f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Libri]]>
+	</queryString>
+	<field name="ISBN" class="java.lang.String"/>
+	<field name="L_Titulli" class="java.lang.String"/>
+	<field name="L_Viti_Botimit" class="java.lang.Integer"/>
+	<field name="L_Shtepia_Botuese" class="java.lang.String"/>
+	<field name="L_Sasia" class="java.lang.Integer"/>
+	<field name="L_Cmimi_Mujor" class="java.lang.Double"/>
+	<field name="L_Stafi_Id" class="java.lang.Integer"/>
+	<field name="L_Kategoria_Id" class="java.lang.Integer"/>
+	<field name="Autori_Id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="386d9454-ff0a-4af7-b1c4-a8e8829e8467"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Raporti mbi librat]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="25f0a451-88f5-4cdb-856c-aa334bd9809c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="61" height="15" uuid="7a033a54-be60-4b27-97ba-0cea9e13175f"/>
+				<text><![CDATA[ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="61" y="19" width="61" height="15" uuid="a971c0d6-e3e5-4561-b77f-d6db3c989667"/>
+				<text><![CDATA[L_Titulli]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="122" y="19" width="61" height="15" uuid="ff72ce4b-c137-48e3-8c2f-3aaa60f16c60"/>
+				<text><![CDATA[L_Viti_Botimit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="183" y="19" width="61" height="15" uuid="b137c992-a5df-49e8-bfaa-e16c03651f46"/>
+				<text><![CDATA[L_Shtepia_Botuese]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="244" y="19" width="61" height="15" uuid="e714d225-14df-4f42-ae7c-f6be4df0fac3"/>
+				<text><![CDATA[L_Sasia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="305" y="19" width="61" height="15" uuid="971b2d47-8f41-48a3-88b6-4caa2d19b368"/>
+				<text><![CDATA[L_Cmimi_Mujor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="366" y="19" width="61" height="15" uuid="d30e0425-5ba1-444a-ae7f-1ce1fd46c9f8"/>
+				<text><![CDATA[L_Stafi_Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="427" y="19" width="61" height="15" uuid="24c9431f-c22f-4101-97a4-025bedfdbfa5"/>
+				<text><![CDATA[L_Kategoria_Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="488" y="19" width="61" height="15" uuid="c9813acc-2c8d-4146-9df8-94c62e982f3b"/>
+				<text><![CDATA[Autori_Id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="60d886df-a789-475b-81fd-8111734256ad"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="61" height="15" uuid="ca320aad-f90b-450e-98dd-74fd4896d11c"/>
+				<textFieldExpression><![CDATA[$F{ISBN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="61" y="0" width="61" height="15" uuid="54b38eda-7b2f-4b77-9f96-586f52ab170e"/>
+				<textFieldExpression><![CDATA[$F{L_Titulli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="122" y="0" width="61" height="15" uuid="5d56c2e3-c489-4386-93dd-806ec6fe8c82"/>
+				<textFieldExpression><![CDATA[$F{L_Viti_Botimit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="183" y="0" width="61" height="15" uuid="1b43d000-baf3-4210-b527-0b5d0cc0201e"/>
+				<textFieldExpression><![CDATA[$F{L_Shtepia_Botuese}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="244" y="0" width="61" height="15" uuid="5622ac1a-f34e-456f-a387-f130b99e7dbc"/>
+				<textFieldExpression><![CDATA[$F{L_Sasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="305" y="0" width="61" height="15" uuid="951d0a2c-1d92-4b39-a1fc-f8f8b4df233c"/>
+				<textFieldExpression><![CDATA[$F{L_Cmimi_Mujor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="366" y="0" width="61" height="15" uuid="5acc521a-e03c-42be-a408-dd0ea7dd1c49"/>
+				<textFieldExpression><![CDATA[$F{L_Stafi_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="427" y="0" width="61" height="15" uuid="b606cf17-9731-4c35-abb9-1af7673e831e"/>
+				<textFieldExpression><![CDATA[$F{L_Kategoria_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="488" y="0" width="61" height="15" uuid="d29d8ac7-b706-4705-9d9c-5a8b9325c8d6"/>
+				<textFieldExpression><![CDATA[$F{Autori_Id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="6fcb6dd2-f33b-4eac-bb7d-30e1ff321ee3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="143c96de-1d96-42a6-b8af-516b1304e78d"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="7bc62b2b-cba2-437e-94a9-461b5398964a"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="c9d78ec3-a0b7-46e9-bd9e-ca33ea7503f7"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

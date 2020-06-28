@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null"  pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6bb49a66-a9cb-457c-8377-d29324256a76">
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Klienti]]>
+	</queryString>
+	<field name="K_Id" class="java.lang.Integer"/>
+	<field name="K_Emri" class="java.lang.String"/>
+	<field name="K_Mbiemri" class="java.lang.String"/>
+	<field name="K_Mosha" class="java.lang.Integer"/>
+	<field name="K_Gjinia" class="java.lang.String"/>
+	<field name="K_Tel" class="java.lang.String"/>
+	<field name="K_Shteti" class="java.lang.String"/>
+	<field name="K_Email" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="8173bea7-908e-4d12-b00c-edb90f506bb5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Raporti mbi klientet]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="a87c8772-a4c5-4058-a997-afc31e9ef96c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="69" height="15" uuid="4ea460f5-4b7d-41b4-b09f-8cb362c592c7"/>
+				<text><![CDATA[K_Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="69" y="19" width="69" height="15" uuid="4f2086e2-1cf6-4eb6-988c-c4a01c9d9425"/>
+				<text><![CDATA[K_Emri]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="138" y="19" width="69" height="15" uuid="f4ea6dc8-9105-4d3b-a306-bea28a346466"/>
+				<text><![CDATA[K_Mbiemri]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="207" y="19" width="69" height="15" uuid="d2064067-6a3c-4c69-89ab-aa99bad5652b"/>
+				<text><![CDATA[K_Mosha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="276" y="19" width="69" height="15" uuid="53ec48d1-6144-4bc5-af7c-61d1760ee932"/>
+				<text><![CDATA[K_Gjinia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="345" y="19" width="69" height="15" uuid="3b6f3321-701a-482c-a753-398aa3f751d4"/>
+				<text><![CDATA[K_Tel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="414" y="19" width="69" height="15" uuid="67b13d57-3810-4d0b-8ef0-bdbbc09f78e4"/>
+				<text><![CDATA[K_Shteti]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="483" y="19" width="69" height="15" uuid="a344fdc8-1bf9-4770-bee8-02a0bb4b0ecc"/>
+				<text><![CDATA[K_Email]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="8ffd60eb-454a-4d63-ba71-09569c91f061"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="69" height="15" uuid="15a7ee7b-56a4-474b-b10e-7f9f36bf6aed"/>
+				<textFieldExpression><![CDATA[$F{K_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="69" y="0" width="69" height="15" uuid="81abe40d-d885-4fbe-91ec-1203d9de05b1"/>
+				<textFieldExpression><![CDATA[$F{K_Emri}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="138" y="0" width="69" height="15" uuid="06f3da5d-6834-44d7-bb3f-c52c6694ed40"/>
+				<textFieldExpression><![CDATA[$F{K_Mbiemri}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="207" y="0" width="69" height="15" uuid="2ea6f917-e2a1-4d65-afb2-bc2466788666"/>
+				<textFieldExpression><![CDATA[$F{K_Mosha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="276" y="0" width="69" height="15" uuid="97a61db9-6b86-4513-a127-a8bab0a0e8b0"/>
+				<textFieldExpression><![CDATA[$F{K_Gjinia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="345" y="0" width="69" height="15" uuid="7787e3ec-5613-4181-a994-4c9002a9ef7c"/>
+				<textFieldExpression><![CDATA[$F{K_Tel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="414" y="0" width="69" height="15" uuid="13d62d37-6f5c-4670-9e2a-e6101832dce1"/>
+				<textFieldExpression><![CDATA[$F{K_Shteti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="483" y="0" width="69" height="15" uuid="98e491d6-2452-4c8a-bcce-fa1ba680694c"/>
+				<textFieldExpression><![CDATA[$F{K_Email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="0286670b-1b8f-48b4-99c9-47cd829379ba"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="2b17429a-76b3-4d44-b058-02608c7e95eb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="c6e4e584-4c26-4e1e-b860-2c086e35dddc"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="9537a4c4-db9a-49d3-b98f-9c57dd9587ff"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

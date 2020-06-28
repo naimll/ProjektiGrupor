@@ -82,6 +82,10 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -323,21 +327,90 @@ public class AdminFormGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Librat");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Kategoria e Librave");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Huazimi Librave");
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Klientet");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jButton6)
                 .addGap(45, 45, 45)
-                .addComponent(jButton3)
-                .addContainerGap(632, Short.MAX_VALUE))
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+            .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))))
         );
 
         jMenu1.setText("File");
@@ -359,7 +432,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(163, 163, 163)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -369,9 +442,9 @@ public class AdminFormGUI extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addGap(84, 84, 84)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
@@ -460,6 +533,195 @@ public class AdminFormGUI extends javax.swing.JFrame {
             Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        
+                try{
+                    System.out.println("1");
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    System.out.println("2");
+                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+                    System.out.println("3");
+                  
+                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+                    System.out.println("4"); 
+                    
+                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\Project1\\src\\Raportet\\LibriReport.jrxml" +"");
+                    System.out.println("5");
+                    
+                    Map<String,Object> parametrat = new HashMap<>();
+                    System.out.println("6");
+                    
+                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+                    System.out.println("7");
+                    
+                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+                        System.out.println("8");
+                        JasperViewer.viewReport(jasperprint);
+                        System.out.println("9");
+                        
+                      
+                        
+                            
+                        
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                        System.out.println("nuk");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        
+                try{
+                    System.out.println("1");
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    System.out.println("2");
+                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+                    System.out.println("3");
+                  
+                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+                    System.out.println("4"); 
+                    
+                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\Project1\\src\\Raportet\\KategoriaLibrit.jrxml"+"");
+                    System.out.println("5");
+                    
+                    Map<String,Object> parametrat = new HashMap<>();
+                    System.out.println("6");
+                    
+                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+                    System.out.println("7");
+                    
+                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+                        System.out.println("8");
+                        JasperViewer.viewReport(jasperprint);
+                        System.out.println("9");
+                        
+                      
+                        
+                            
+                        
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                        System.out.println("nuk");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+             
+            
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+       
+        
+             try{
+                    System.out.println("1");
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    System.out.println("2");
+                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+                    System.out.println("3");
+                  
+                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+                    System.out.println("4"); 
+                    
+                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\Project1\\src\\Raportet\\HuazimiLibritReport.jrxml" +"");
+                    System.out.println("5");
+                    
+                    Map<String,Object> parametrat = new HashMap<>();
+                    System.out.println("6");
+                    
+                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+                    System.out.println("7");
+                    
+                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+                        System.out.println("8");
+                        JasperViewer.viewReport(jasperprint);
+                        System.out.println("9");
+                        
+                      
+                        
+                            
+                        
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                        System.out.println("nuk");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        
+        //klientet
+        
+                try{
+                    System.out.println("1");
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    System.out.println("2");
+                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+                    System.out.println("3");
+                  
+                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+                    System.out.println("4"); 
+                    
+                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\Project1\\src\\Raportet\\KlientiReport.jrxml" +"");
+                    System.out.println("5");
+                    
+                    Map<String,Object> parametrat = new HashMap<>();
+                    System.out.println("6");
+                    
+                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+                    System.out.println("7");
+                    
+                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+                        System.out.println("8");
+                        JasperViewer.viewReport(jasperprint);
+                        System.out.println("9");
+                        
+                      
+                        
+                            
+                        
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                        System.out.println("nuk");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
     
     public void loading() {
         ImageIcon imageIcon = new ImageIcon("loadingIcon.gif");
@@ -513,6 +775,10 @@ public class AdminFormGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

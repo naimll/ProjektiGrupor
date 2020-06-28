@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null"  pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d7d8cf6e-41e9-47af-9c19-500db446da8a">
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Huazimi_Librit]]>
+	</queryString>
+	<field name="HL_Id" class="java.lang.Integer"/>
+	<field name="HL_Data_Leshimit" class="java.sql.Date"/>
+	<field name="HL_Data_Kthimit" class="java.sql.Date"/>
+	<field name="HL_Klienti_Id" class="java.lang.Integer"/>
+	<field name="HL_ISBN" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="412" height="33" uuid="f5c92b81-e267-4d76-b02d-d3885e70113f"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Raporti mbi huazimit e librave]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="c2c675aa-5a38-4fa9-9aa0-f91c3f4f77f7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="111" height="15" uuid="c23a8784-eaf5-42e8-ba78-6d8bb9d6b8e9"/>
+				<text><![CDATA[HL_Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="19" width="111" height="15" uuid="23dc994a-76af-451b-8ef1-fe679c3fe670"/>
+				<text><![CDATA[HL_Data_Leshimit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="222" y="19" width="111" height="15" uuid="7a6f2ffc-5fb9-4f35-a89c-19d0e9086b41"/>
+				<text><![CDATA[HL_Data_Kthimit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="333" y="19" width="111" height="15" uuid="6e3bcf46-a915-429e-90a4-da2dab9e333f"/>
+				<text><![CDATA[HL_Klienti_Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="19" width="111" height="15" uuid="73eca940-3672-4bc7-a9ee-82614f64a014"/>
+				<text><![CDATA[HL_ISBN]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="9f58207d-1d42-4ad5-b3cd-898f41e4bfd6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="111" height="15" uuid="870f9683-91ed-41a1-b801-41cdbde2f18b"/>
+				<textFieldExpression><![CDATA[$F{HL_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="111" height="15" uuid="0ed2fd0a-3788-4b5f-8793-5e70732ffc75"/>
+				<textFieldExpression><![CDATA[$F{HL_Data_Leshimit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="222" y="0" width="111" height="15" uuid="86126f27-8a82-4258-bcae-d600edb0df89"/>
+				<textFieldExpression><![CDATA[$F{HL_Data_Kthimit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="333" y="0" width="111" height="15" uuid="2f1ac6cb-3eec-454f-b0bc-c556fe23ff14"/>
+				<textFieldExpression><![CDATA[$F{HL_Klienti_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="444" y="0" width="111" height="15" uuid="f6f353ab-137c-4bfb-ba1f-eab8128f662f"/>
+				<textFieldExpression><![CDATA[$F{HL_ISBN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="cc713c4f-df2f-4fcc-8aa6-ba71814d04a6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="3a44bf1d-dba2-4094-970f-d0fedc14c81b"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="fe2901ef-d6cc-4b42-941d-7fa3e11b0b74"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="cd1d4b39-e057-4996-939f-bfebcd29e827"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
