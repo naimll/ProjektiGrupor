@@ -339,11 +339,15 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
                 try{
                     int row = table.getSelectedRow();
                     if(row != -1){
+                        Object[] ob = {"Yes","No"} ;
+                        int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                        if(i==0){                    
                         Autori a = atm.getAutori(row);
                         try{
                         arepo.delete(a);
                         }catch(LibraryException ex){
                         JOptionPane.showMessageDialog(this, "Author can't be deleted because it's an author of registred books");
+                        }
                         }
                     }else{
                         throw new LibraryException ("Please select an author from the table");

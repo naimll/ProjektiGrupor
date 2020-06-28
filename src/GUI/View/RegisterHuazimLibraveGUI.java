@@ -373,7 +373,9 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
             int row = table.getSelectedRow();
             if(row != -1){
                 HuazimiLibrit hl = huazimiLibritTableModel.getHuazimiLibrit(row);
-                
+                    Object[] ob = {"Yes","No"} ;
+                    int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                    if( i == 0){                    
                     Libri l = hl.getHlIsbn();
                     int sasia = l.getLSasia() + 1;
                     LibriRepository lrepo = new LibriRepository();
@@ -381,7 +383,7 @@ public class RegisterHuazimLibraveGUI extends javax.swing.JFrame {
                                  
                 huazimiRepository.delete(hl);               
                 lrepo.edit(l);
-
+                    }
             }else{
                 throw new LibraryException("Please select a category from the table");
             }

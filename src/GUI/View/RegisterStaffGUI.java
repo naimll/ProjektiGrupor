@@ -579,9 +579,13 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                     int row = table.getSelectedRow();
                     if(row != -1){
                         Object[] ob = {"Yes","No"} ;
-                        //int i = JoptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete");
-                        Stafi s = sbtm.getStafi(row);
-                        srepo.delete(s);
+                        int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                        
+                        if(i==0){
+                         Stafi s = sbtm.getStafi(row);
+                        srepo.delete(s);                       
+                        }
+
                     
                     }else{
                     throw new LibraryException("Please select a staff from the table");

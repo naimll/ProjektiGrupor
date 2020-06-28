@@ -324,11 +324,15 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
         try{
             int row = table.getSelectedRow();
             if(row != -1){
+                Object[] ob = {"Yes","No"} ;
+                int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                if(i == 0){                        
                 KategoriaLibrit k = ctm.getKategoriaLibrit(row);
                 try{
                 krepo.delete(k);
                 }catch(LibraryException ex){
                     JOptionPane.showMessageDialog(this, "The category can't be deleted because books are registred in this category");
+                }
                 }
             }else{
                 throw new LibraryException("Please select a category from the table");

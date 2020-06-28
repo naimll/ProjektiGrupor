@@ -661,20 +661,27 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                 try{
                     int row = table.getSelectedRow();
                     if(row != -1){
+                        Object[] ob = {"Yes","No"} ;
+                        int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                        if(i == 0){                    
                         Libri l = btm.getLibri(row);
                         KategoriaLibrit k = l.getLKategoriaId();
+                        try{
                         lrepo.delete(l);
+                        }catch(LibraryException ex){
+                        JOptionPane.showMessageDialog(this,"Please select a book from the table");
+                        }
                         int sasia = Integer.parseInt(k.getKLSasia()) - 1;
                         k.setKLSasia(Integer.toString(sasia));
                         KategoriaLibritRepository krepo = new KategoriaLibritRepository();
                         krepo.edit(k);
-                    
+                        }
                     }
             this.clear();
             this.loadBookTable();
         }   
         catch (Exception ex){
-                   JOptionPane.showMessageDialog(this, "Libri nuk mund te fshihet, pasi disa libra jane te huazuar");
+                   JOptionPane.showMessageDialog(this, "Book can not be deleted because it is borrowed");
           
         }
     }//GEN-LAST:event_DeleteClientButtonActionPerformed

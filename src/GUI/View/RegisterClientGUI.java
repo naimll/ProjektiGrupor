@@ -663,12 +663,16 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
                 try{
                     int row = table.getSelectedRow();
                     if(row != -1){
+                        Object[] ob = {"Yes","No"} ;
+                        int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                         if(i == 0){                   
                         Klienti k = ctm.getKlienti(row);
                         try{
                         krepo.delete(k);
                         }catch (LibraryException ex){
                             JOptionPane.showMessageDialog(this, "The client can't be deleted because the are records of client's borrowings");
                         }
+                         }
                     }else{
                     throw new LibraryException("Please select a a client from the table");
                     }
