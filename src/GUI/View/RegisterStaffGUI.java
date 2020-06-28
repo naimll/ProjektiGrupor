@@ -578,6 +578,8 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                 try{
                     int row = table.getSelectedRow();
                     if(row != -1){
+                        Object[] ob = {"Yes","No"} ;
+                        //int i = JoptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete");
                         Stafi s = sbtm.getStafi(row);
                         srepo.delete(s);
                     
