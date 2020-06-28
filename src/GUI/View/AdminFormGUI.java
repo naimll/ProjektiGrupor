@@ -8,18 +8,26 @@ package GUI.View;
 import BLL.Stafi;
 import DAL.LibraryException;
 import DAL.StafiRepository;
-import java.awt.Color;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -72,6 +80,8 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -303,6 +313,33 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
         jPanel3.add(jPanel13);
 
+        jPanel14.setBackground(new java.awt.Color(204, 204, 255));
+
+        jButton3.setText("Autoret");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jButton3)
+                .addContainerGap(632, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -321,6 +358,10 @@ public class AdminFormGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,7 +369,9 @@ public class AdminFormGUI extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 324, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         pack();
@@ -375,6 +418,48 @@ public class AdminFormGUI extends javax.swing.JFrame {
         }
        ea.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+     
+       
+                try{
+                    System.out.println("1");
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    System.out.println("2");
+                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+                    System.out.println("3");
+                  
+                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+                    System.out.println("4"); 
+                    
+                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\Project1\\src\\Raportet\\AutoriReport.jrxml" +"");
+                    System.out.println("5");
+                    
+                    Map<String,Object> parametrat = new HashMap<>();
+                    System.out.println("6");
+                    //Vetvendosej <333hahahahahahah 
+                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+                    System.out.println("7");
+                    
+                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+                        System.out.println("8");
+                        JasperViewer.viewReport(jasperprint);
+                        System.out.println("9");
+                        
+                      
+                        
+                            
+                        
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                        System.out.println("nuk");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
     
     public void loading() {
         ImageIcon imageIcon = new ImageIcon("loadingIcon.gif");
@@ -427,6 +512,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
     private javax.swing.JLabel adminName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -436,6 +522,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
