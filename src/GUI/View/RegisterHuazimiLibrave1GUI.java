@@ -429,15 +429,18 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         try{
             int row = table.getSelectedRow();
             if(row != -1){
+                
                 HuazimiLibrit hl = huazimiLibritTableModel.getHuazimiLibrit(row);
                 
-                    Libri l = hl.getHlIsbn();
-                    int sasia = l.getLSasia() + 1;
-                    LibriRepository lrepo = new LibriRepository();
-                    l.setLSasia(sasia);
+                if(hl.getIsActive() == 0){
+                
+                    
                     
                 huazimiRepository.delete(hl);
-                lrepo.edit(l);
+                }
+                else{
+                   throw new LibraryException("Please first set it to finished,('Active 0')"); 
+                }
 
             }
             else{
