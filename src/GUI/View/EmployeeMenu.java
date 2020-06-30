@@ -5,6 +5,9 @@
  */
 package GUI.View;
 
+import BLL.HuazimiLibrit;
+import DAL.HuazimiRepository;
+import DAL.LibraryException;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
@@ -292,7 +295,14 @@ public class EmployeeMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void test(){
+    HuazimiRepository hl=new HuazimiRepository();
+    try{
+    System.out.println(hl.findBorrowedBooks());
+    }catch(LibraryException e){
+    System.out.println(e.getLocalizedMessage());
+    }
+    }
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
       RegisterClientGUI rc=new RegisterClientGUI();
       rc.show();

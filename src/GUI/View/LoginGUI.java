@@ -306,7 +306,7 @@ public class LoginGUI extends javax.swing.JFrame {
                     //dritarja e adminit
                     this.dispose();
                     AdminFormGUI adminFormGUI = new AdminFormGUI();
-                      adminFormGUI.setNameLabel(s.getSEmri(),s.getStafiId());
+                      adminFormGUI.setNameLabel(s.getSEmri(),s.getSMbiemri(),s.getStafiId());
                      
                     adminFormGUI.setVisible(true);
                     s=null;

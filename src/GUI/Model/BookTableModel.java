@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class BookTableModel extends AbstractTableModel{
     
     List<Libri> list;
-    String [] cols = {"Book Name" , "Author" , "Quantity"} ;
+    String [] cols = {"Book Name" , "Author" ,"Category", "Quantity"} ;
     
     public BookTableModel(){}
     
@@ -64,6 +64,8 @@ public class BookTableModel extends AbstractTableModel{
             case 1:
                 return l.getAutoriId();
             case 2:
+                return l.getLKategoriaId().getKLEmri();
+                case 3:
                 return l.getLSasia();
             default:
                 return null;

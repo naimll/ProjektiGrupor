@@ -35,6 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "HuazimiLibrit.findByHLDataLeshimit", query = "SELECT h FROM HuazimiLibrit h WHERE h.hLDataLeshimit = :hLDataLeshimit"),
     @NamedQuery(name = "HuazimiLibrit.findByHLDataKthimit", query = "SELECT h FROM HuazimiLibrit h WHERE h.hLDataKthimit = :hLDataKthimit")})
 public class HuazimiLibrit implements Serializable {
+
+    @Column(name = "isActive")
+    private Integer isActive;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -133,6 +136,14 @@ public class HuazimiLibrit implements Serializable {
     @Override
     public String toString() {
         return "BLL.HuazimiLibrit[ hLId=" + hLId + " ]";
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
     
 }

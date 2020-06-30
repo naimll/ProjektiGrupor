@@ -12,6 +12,7 @@ package DAL;
 import BLL.HuazimiLibrit;
 import BLL.Libri;
 import java.util.List;
+import javax.persistence.TypedQuery;
 public class HuazimiRepository extends EntMngClass implements HuazimiInterface{
 
     @Override
@@ -54,7 +55,7 @@ public class HuazimiRepository extends EntMngClass implements HuazimiInterface{
         try {
             HuazimiLibrit l=new HuazimiLibrit();
             l.setHLId(id);
-          return  (HuazimiLibrit) em.createQuery("SELECT hl FROM Huazimi_Librit hl WHERE hl.HL_Id= "+id).getSingleResult();
+          return  (HuazimiLibrit) em.createQuery("SELECT hl FROM Huazimi_Librit hl, Libri li  WHERE hl.HL_Id="+id).getSingleResult();
              
         } catch (Exception e) {
             throw new LibraryException(e.getMessage());
@@ -68,6 +69,14 @@ public class HuazimiRepository extends EntMngClass implements HuazimiInterface{
         }catch(Exception e){
             throw new LibraryException(e.getMessage());
         }
+    }
+    public List<HuazimiLibrit> findBorrowedBooks() throws LibraryException{
+    try{
+        return em.createQuery("getborrowedbooks").getResultList();
+    }catch(Exception e){
+    throw new LibraryException(e.getMessage());
+    }
+    
     }
     
 }

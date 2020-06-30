@@ -8,6 +8,7 @@ package GUI.View;
 import BLL.Stafi;
 import DAL.LibraryException;
 import DAL.StafiRepository;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,6 +78,7 @@ public class EditAdminProfileGUI extends javax.swing.JFrame {
             }
         });
 
+        id.setEnabled(false);
         id.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
@@ -267,7 +269,22 @@ public class EditAdminProfileGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nameActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+       Stafi st=new Stafi();
+       st.setStafiId(Integer.parseInt(TempData[0]));
+       st.setSEmri(TempData[1]);
+       st.setSMbiemri(TempData[2]);
+       st.setSTel(TempData[3]);
+       st.setSUser(TempData[4]);
+       st.setSPassword(TempData[5]);
+       st.setSRoli(TRole);
+       try{
+       sr.edit(st);
+       
+       JOptionPane.showMessageDialog(null,"Success");
+       this.dispose();
+       }catch(LibraryException le){
+       JOptionPane.showMessageDialog(null,le.getMessage());
+       }
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased

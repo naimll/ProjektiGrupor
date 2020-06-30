@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class ClientTableModel extends AbstractTableModel{
     
     List<Klienti> list ;
-    String[] cols ={"ID","Emri Mbiemri","Email"} ;
+    String[] cols ={"ID","Emri","Mbiemri","Email"} ;
     
     public ClientTableModel(){}
     
@@ -60,8 +60,10 @@ public class ClientTableModel extends AbstractTableModel{
             case 0:
                 return k.getKId();
             case 1:
-                return k.getKEmri()+" "+k.getKMbiemri();
+                return k.getKEmri();
             case 2:
+                return k.getKMbiemri();
+                case 3:
                 return k.getKEmail();
             default:
                 return null;
