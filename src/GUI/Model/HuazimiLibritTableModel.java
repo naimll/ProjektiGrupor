@@ -19,7 +19,7 @@ public class HuazimiLibritTableModel extends AbstractTableModel{
     List<HuazimiLibrit> list;
 
     
-    String [] cols = {"Name" , "Lastname","ISBN","Title","Date"};
+    String [] cols = {"Client" , "Book Title","Author","Borrowed Date","Receipt Date","Active"};
     
     public HuazimiLibritTableModel(){}
     
@@ -60,18 +60,27 @@ public class HuazimiLibritTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         HuazimiLibrit l = list.get(rowIndex);
+        String active ;
+        if(l.getIsActive() == 0){
+            active = "No" ;
+        }
+        else{
+            active = "Yes" ;
+        }
         switch(columnIndex){
         
             case 0:
-                return l.getHLKlientiId().getKEmri();
+                return l.getHLKlientiId().getKEmri() +" " + l.getHLKlientiId().getKMbiemri() ;
             case 1:
-                return l.getHLKlientiId().getKEmri();
-            case 2:
-                return l.getHlIsbn().getIsbn();
-            case 3:
                 return l.getHlIsbn().getLTitulli();
+            case 2:
+                return l.getHlIsbn().getAutoriId().getAEmri() + " " +l.getHlIsbn().getAutoriId().getAMbiemri();
+            case 3:
+                return l.getHLDataLeshimit();
             case 4:
                 return l.getHLDataLeshimit();
+            case 5: 
+                return active ;
             default:
                 return null;
             
