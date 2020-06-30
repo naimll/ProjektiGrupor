@@ -61,7 +61,7 @@ public class HuazimiLibrit implements Serializable {
     private Libri hlIsbn;
 
     public HuazimiLibrit() {
-        this.isActive = 0 ;
+        this.isActive = 1 ;
     }
 
     public HuazimiLibrit(Integer hLId) {

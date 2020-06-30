@@ -62,7 +62,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
             klientetCmb.repaint();
             
         } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterHuazimiLibrave1GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -74,7 +74,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
             libricmb.repaint();
             
         } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterHuazimiLibrave1GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -85,7 +85,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
             table.setModel(huazimiLibritTableModel);
             huazimiLibritTableModel.fireTableDataChanged();
         } catch (LibraryException ex) {
-            Logger.getLogger(RegisterHuazimLibraveGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterHuazimiLibrave1GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
 
@@ -214,6 +214,11 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         SetToFinished.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SetToFinishedMouseClicked(evt);
+            }
+        });
+        SetToFinished.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SetToFinishedActionPerformed(evt);
             }
         });
 
@@ -366,6 +371,10 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddClientButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddClientButtonMouseClicked
+  
+    }//GEN-LAST:event_AddClientButtonMouseClicked
+
+    private void AddClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClientButtonActionPerformed
         
             try{
                 int row = table.getSelectedRow();
@@ -413,19 +422,38 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
             
             
             
-        
-    }//GEN-LAST:event_AddClientButtonMouseClicked
-
-    private void AddClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClientButtonActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_AddClientButtonActionPerformed
 
     private void DeleteClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteClientButtonActionPerformed
-        // TODO add your handling code here:
+        try{
+            int row = table.getSelectedRow();
+            if(row != -1){
+                HuazimiLibrit hl = huazimiLibritTableModel.getHuazimiLibrit(row);
+                
+                    Libri l = hl.getHlIsbn();
+                    int sasia = l.getLSasia() + 1;
+                    LibriRepository lrepo = new LibriRepository();
+                    l.setLSasia(sasia);
+                    
+                huazimiRepository.delete(hl);
+                lrepo.edit(l);
+
+            }
+            else{
+                throw new LibraryException("Please select one from the table");
+            }
+            this.clear();
+            this.loadTableHuazimi();
+        }
+        catch (LibraryException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_DeleteClientButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
+        this.table.clearSelection();
+        this.clear();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
@@ -458,8 +486,11 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                     if(p.getIsActive() == 1){
                         SetToFinished.setVisible(true);
                     }
+                    
                    klientetCmb.getModel().setSelectedItem(p.getHLKlientiId());
+                   klientetCmb.repaint();
                    libricmb.getModel().setSelectedItem(p.getHlIsbn());
+                   libricmb.repaint();
                    
                    jDateChooser1.setDate(p.getHLDataLeshimit());
                    
@@ -469,37 +500,18 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         });
         }
     private void DeleteClientButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteClientButtonMouseClicked
-        try{
-            int row = table.getSelectedRow();
-            if(row != -1){
-                HuazimiLibrit hl = huazimiLibritTableModel.getHuazimiLibrit(row);
-                
-                    Libri l = hl.getHlIsbn();
-                    int sasia = l.getLSasia() + 1;
-                    LibriRepository lrepo = new LibriRepository();
-                    l.setLSasia(sasia);
-                    
-                huazimiRepository.delete(hl);
-                lrepo.edit(l);
 
-            }
-            else{
-                throw new LibraryException("Please select one from the table");
-            }
-            this.clear();
-            this.loadTableHuazimi();
-        }
-        catch (LibraryException ex){
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
     }//GEN-LAST:event_DeleteClientButtonMouseClicked
 
     private void CancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelButtonMouseClicked
-        this.table.clearSelection();
-        this.clear();
+
     }//GEN-LAST:event_CancelButtonMouseClicked
 
     private void SetToFinishedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetToFinishedMouseClicked
+
+    }//GEN-LAST:event_SetToFinishedMouseClicked
+
+    private void SetToFinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetToFinishedActionPerformed
             try{
                 int row = table.getSelectedRow();
                     if(row == -1){
@@ -521,13 +533,13 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                 }catch(LibraryException ex){
                 JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-    }//GEN-LAST:event_SetToFinishedMouseClicked
+    }//GEN-LAST:event_SetToFinishedActionPerformed
 
         public void clear(){
             
             libricmb.setSelectedIndex(-1);
             libricmb.repaint();
-            klientetCmb.setSelectedItem(-1);
+            klientetCmb.setSelectedIndex(-1);
             klientetCmb.repaint();
             jDateChooser1.setDate(null);
             jDateChooser2.setDate(null);
