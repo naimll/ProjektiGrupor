@@ -110,7 +110,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
         SurnameTextField = new javax.swing.JTextField();
         Delete = new javax.swing.JButton();
         AddAuthorButton = new javax.swing.JButton();
-        DeleteAuthorButton = new javax.swing.JButton();
+        Cancel = new javax.swing.JButton();
         Birthplace = new javax.swing.JLabel();
         VendlindjaTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -192,19 +192,19 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
 
         AddAuthorButton.setBackground(new java.awt.Color(51, 255, 51));
         AddAuthorButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AddAuthorButton.setText("Add ");
+        AddAuthorButton.setText("Save");
         AddAuthorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddAuthorButtonActionPerformed(evt);
             }
         });
 
-        DeleteAuthorButton.setBackground(new java.awt.Color(102, 204, 255));
-        DeleteAuthorButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DeleteAuthorButton.setText("Cancel");
-        DeleteAuthorButton.addActionListener(new java.awt.event.ActionListener() {
+        Cancel.setBackground(new java.awt.Color(102, 204, 255));
+        Cancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteAuthorButtonActionPerformed(evt);
+                CancelActionPerformed(evt);
             }
         });
 
@@ -232,7 +232,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DeleteAuthorButton)
+                        .addComponent(Cancel)
                         .addGap(28, 28, 28)
                         .addComponent(AddAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
@@ -274,7 +274,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddAuthorButton)
-                    .addComponent(DeleteAuthorButton)
+                    .addComponent(Cancel)
                     .addComponent(Delete))
                 .addGap(50, 50, 50))
         );
@@ -448,10 +448,10 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
              
     }//GEN-LAST:event_AddAuthorButtonActionPerformed
 
-    private void DeleteAuthorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAuthorButtonActionPerformed
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         this.table.clearSelection();
         clear();
-    }//GEN-LAST:event_DeleteAuthorButtonActionPerformed
+    }//GEN-LAST:event_CancelActionPerformed
 
     private void VendlindjaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendlindjaTextFieldActionPerformed
         // TODO add your handling code here:
@@ -512,8 +512,8 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAuthorButton;
     private javax.swing.JLabel Birthplace;
+    private javax.swing.JButton Cancel;
     private javax.swing.JButton Delete;
-    private javax.swing.JButton DeleteAuthorButton;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JLabel SurnameLabel;

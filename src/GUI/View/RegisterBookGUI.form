@@ -181,31 +181,30 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="AddClientButton" min="-2" pref="82" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="AuthorLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              <Component id="AuthorComboBox" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="AuthorLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                                  <Component id="AuthorComboBox" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="QuantityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="PublishingYearLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TitleLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="QuantityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="PublishingYearLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="TitleLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="QuantityTextField" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="TitleTextField" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="PublishigYearDate" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="QuantityTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TitleTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="PublishigYearDate" alignment="0" pref="150" max="32767" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="AddClientButton" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -274,9 +273,9 @@
                       </Group>
                       <EmptySpace pref="141" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="AddClientButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="DeleteClientButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AddClientButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                   </Group>

@@ -547,6 +547,10 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                     if(row == -1){
                         throw new LibraryException ("Please select one from the table");
                 }else{
+                    Object[] ob = {"Yes","No"} ;
+                int i = JOptionPane.showOptionDialog(this,"Would you like to set it to finished ?","Set to finished", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                    
+                if(i == 0){
                     HuazimiLibrit p = this.huazimiLibritTableModel.getHuazimiLibrit(row);
                     p.setIsActive(0);
                     
@@ -559,7 +563,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                     this.clear();
                     this.loadTableHuazimi();
                     }
-                  
+                    }
                 }catch(LibraryException ex){
                 JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
