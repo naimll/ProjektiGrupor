@@ -11,6 +11,9 @@ import DAL.StafiRepository;
 import GUI.Model.StaffTableModel;
 import com.sun.glass.events.KeyEvent;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
@@ -37,10 +40,16 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         loadTableModel();
         this.tableSelectedIndexChange();
         IdTextField.setEnabled(true);
+        centreWindow(this);
     }
  
     
-    
+        public static void centreWindow(Window frame) {
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    frame.setLocation(x, y);
+}
     
     public void tableSelectedIndexChange(){
          final ListSelectionModel rowSM = table.getSelectionModel();
@@ -120,6 +129,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
 
         WelcomePanel = new javax.swing.JPanel();
         WelcomeLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         RegiserPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         NameLabel = new javax.swing.JLabel();
@@ -146,8 +156,8 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
+        setUndecorated(true);
         setResizable(false);
 
         WelcomePanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -160,6 +170,14 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         WelcomeLabel.setText("Register Staff");
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout WelcomePanelLayout = new javax.swing.GroupLayout(WelcomePanel);
         WelcomePanel.setLayout(WelcomePanelLayout);
         WelcomePanelLayout.setHorizontalGroup(
@@ -167,12 +185,16 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
             .addGroup(WelcomePanelLayout.createSequentialGroup()
                 .addGap(475, 475, 475)
                 .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(481, Short.MAX_VALUE))
+            .addGroup(WelcomePanelLayout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         WelcomePanelLayout.setVerticalGroup(
             WelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WelcomePanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addComponent(jButton1)
+                .addGap(4, 4, 4)
                 .addComponent(WelcomeLabel)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -447,7 +469,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
               
               //if(IdTextField.getText())
               
-              if(IdTextField.getText() == "" || IdTextField.getText().length() < 3){                   
+              if(IdTextField.getText().equals("") || IdTextField.getText().length() < 3){                   
                   throw new LibraryException("Id should not be null or shorter than 3");
                  
               }
@@ -460,17 +482,17 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
              
             }
             System.out.println("Hej2");
-              if(NameTextField.getText() == "" || NameTextField.getText().length() < 3){
+              if(NameTextField.getText().equals("") || NameTextField.getText().length() < 3){
                   throw new LibraryException("Name should not be null or shorter than 3");                  
               }
               s.setSEmri(NameTextField.getText());
               
-              if(SurnameTextField.getText() == "" || SurnameTextField.getText().length() < 3){
+              if(SurnameTextField.getText().equals("") || SurnameTextField.getText().length() < 3){
                   throw new LibraryException("Surname should not be null or shorter than 3");                  
               }              
               s.setSMbiemri(SurnameTextField.getText());
               
-              if(TelephoneTextField.getText() == "" || TelephoneTextField.getText().length() < 9){
+              if(TelephoneTextField.getText().equals("") || TelephoneTextField.getText().length() < 9){
                   throw new LibraryException("Phone Number should not be null or shorter than 9");                  
               }              
               s.setSTel(TelephoneTextField.getText());
@@ -485,12 +507,12 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                   s.setSRoli(0);
               }
 
-              if(UsernameTextField.getText() == "" || UsernameTextField.getText().length() < 6){
+              if(UsernameTextField.getText().equals("") || UsernameTextField.getText().length() < 6){
                   throw new LibraryException("Username should not be null or shorter than 6");                  
               }              
               s.setSUser(UsernameTextField.getText());
               
-              if(PasswordField.getText() == "" || PasswordField.getText().length() < 6){
+              if(PasswordField.getText().equals("") || PasswordField.getText().length() < 6){
                   throw new LibraryException("Password should not be null or shorter than 6");                  
               }              
               s.setSPassword(PasswordField.getText());
@@ -510,19 +532,19 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                 Stafi s= sbtm.getStafi(row);
                
               //ID nuk ben te ndryshohet
-              if(NameTextField.getText() == "" || NameTextField.getText().length() < 6){
+              if(NameTextField.getText().equals("") || NameTextField.getText().length() < 3){
                   
-                  throw new LibraryException("Name should not be null or shorter than 6");
+                  throw new LibraryException("Name should not be null or shorter than 3");
                                       
               }              
               s.setSEmri(NameTextField.getText());
-              if(SurnameTextField.getText() == "" || SurnameTextField.getText().length() < 6){
-                  throw new LibraryException ("Surname should not be null or shorter than 6");                  
+              if(SurnameTextField.getText().equals("") || SurnameTextField.getText().length() < 3){
+                  throw new LibraryException ("Surname should not be null or shorter than 3");                  
               }              
               s.setSMbiemri(SurnameTextField.getText());
               
-              if(TelephoneTextField.getText() == "" || TelephoneTextField.getText().length() < 6){
-                  throw new LibraryException("Phone Number should not be null or shorter than 6");                  
+              if(TelephoneTextField.getText().equals("") || TelephoneTextField.getText().length() < 9){
+                  throw new LibraryException("Phone Number should not be null or shorter than 9");                  
               }              
               s.setSTel(TelephoneTextField.getText());
               
@@ -536,12 +558,12 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
                   s.setSRoli(0);
               }
 
-              if(UsernameTextField.getText() == "" || UsernameTextField.getText().length() < 6){
+              if(UsernameTextField.getText().equals("") || UsernameTextField.getText().length() < 6){
                   throw new LibraryException("Username should not be null or shorter than 3");                  
               }              
               s.setSUser(UsernameTextField.getText());
               
-              if(PasswordField.getText() == "" || PasswordField.getText().length() < 6){
+              if(PasswordField.getText().equals("") || PasswordField.getText().length() < 6){
                   throw new LibraryException("Password should not be null or shorter than 6");                  
               }              
               s.setSPassword(PasswordField.getText());
@@ -625,6 +647,10 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_IdTextFieldKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -682,6 +708,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel WelcomeLabel;
     private javax.swing.JPanel WelcomePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

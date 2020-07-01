@@ -20,6 +20,9 @@ import GUI.Model.BookTableModel;
 import GUI.Model.CategoryComboBoxModel;
 import com.sun.glass.events.KeyEvent;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import static java.time.Clock.system;
 import java.util.Collection;
 import java.util.Date;
@@ -58,11 +61,18 @@ public class RegisterBookGUI extends javax.swing.JFrame {
          this.tableSelectedIndexChange();
          loadAuthorComboBox();
          loadBookTable();
-        
+         this.IsbnTextField.setEnabled(true);
+         centreWindow(this);
+         
     }
     
 
-    
+        public static void centreWindow(Window frame) {
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    frame.setLocation(x, y);
+}
     
     
 
@@ -83,10 +93,13 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                     PublisherTextField.setText(l.getLShtepiaBotuese().toString());
                     PublishigYearDate.setYear(l.getLVitiBotimit());                
                     CategoryComboBox.setSelectedItem(l.getLKategoriaId());
+                    CategoryComboBox.repaint();
                     AuthorComboBox.setSelectedItem(l.getAutoriId());
+                    AuthorComboBox.repaint();
                     QuantityTextField.setText(Integer.toString(l.getLSasia()));
                     PriceTextField.setText(Double.toString(l.getLCmimiMujor()));
                     IsbnTextField.setText(l.getIsbn());
+                    IsbnTextField.setEnabled(false);
                         
                 }
             }
@@ -105,6 +118,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         this.AuthorComboBox.repaint();
         this.IsbnTextField.setText("");
         this.PriceTextField.setText("");
+        this.IsbnTextField.setEnabled(true);
         
         
     }
@@ -165,6 +179,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
 
         TitelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         AddClientPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         TitleLabel = new javax.swing.JLabel();
@@ -194,6 +209,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 800));
         setResizable(false);
 
@@ -206,19 +222,31 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Register Book");
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TitelPanelLayout = new javax.swing.GroupLayout(TitelPanel);
         TitelPanel.setLayout(TitelPanelLayout);
         TitelPanelLayout.setHorizontalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(505, 505, 505)
+                .addGap(479, 479, 479)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(510, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(TitelPanelLayout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         TitelPanelLayout.setVerticalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addComponent(jButton1)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel1)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -529,12 +557,12 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             int row = table.getSelectedRow();
             if(row == -1){
               Libri l = new Libri();
-              if(TitleTextField.getText() == "" || TitleTextField.getText() == null || TitleTextField.getText().length() < 3){
+              if(TitleTextField.getText().equals("")|| TitleTextField.getText().equals(null) || TitleTextField.getText().length() < 3){
                   throw new LibraryException("Title should not be null or shorter than 3");
               }
               l.setLTitulli(TitleTextField.getText());
               
-              if(PublisherTextField.getText() == "" || PublisherTextField.getText() == null || PublisherTextField.getText().length() < 3){
+              if(PublisherTextField.getText().equals("") || PublisherTextField.getText().equals(null) || PublisherTextField.getText().length() < 3){
                   throw new LibraryException("Publisher should not be null or shorter than 3");
               }              
               l.setLShtepiaBotuese(PublisherTextField.getText());
@@ -559,17 +587,17 @@ public class RegisterBookGUI extends javax.swing.JFrame {
               }              
               l.setAutoriId((Autori) this.AuthorComboBox.getSelectedItem());
               
-              if(QuantityTextField.getText() == "" || QuantityTextField.getText() == null || QuantityTextField.getText().length() < 1 || Integer.parseInt(QuantityTextField.getText()) < 1){
+              if(QuantityTextField.getText().equals("") || QuantityTextField.getText().equals(null) || QuantityTextField.getText().length() < 1 || Integer.parseInt(QuantityTextField.getText()) < 1){
                   throw new LibraryException("Quantity should not be null or lower than 1");
               }
               l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
               
-              if(PriceTextField.getText() == "" || PriceTextField.getText() == null || PriceTextField.getText().length() < 0 || Double.parseDouble(PriceTextField.getText()) < 0){
+              if(PriceTextField.getText().equals("") || PriceTextField.getText().equals(null) || PriceTextField.getText().length() < 0 || Double.parseDouble(PriceTextField.getText()) < 0){
                   throw new LibraryException("Price should not be null or lower than 0");                  
               }
               l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
               
-              if(IsbnTextField.getText() == "" || IsbnTextField.getText() == null || (IsbnTextField.getText().length()== 10 || IsbnTextField.getText().length() == 13)){
+              if(IsbnTextField.getText().equals("") || IsbnTextField.getText().equals(null) || (IsbnTextField.getText().length()== 10 || IsbnTextField.getText().length() == 13)){
                   throw new LibraryException("Isbn should not be null, and should contain 10 or 13 digits");
               }
               l.setIsbn(IsbnTextField.getText());
@@ -583,12 +611,12 @@ public class RegisterBookGUI extends javax.swing.JFrame {
             }else{
                 Libri l = btm.getLibri(row);
                
-              if(TitleTextField.getText() == "" || TitleTextField.getText() == null || TitleTextField.getText().length() < 3){
+              if(TitleTextField.getText().equals("") || TitleTextField.getText().equals(null) || TitleTextField.getText().length() < 3){
                   throw new LibraryException("Title should not be null or shorter than 3");
               }
               l.setLTitulli(TitleTextField.getText());
               
-              if(PublisherTextField.getText() == "" || PublisherTextField.getText() == null || PublisherTextField.getText().length() < 3){
+              if(PublisherTextField.getText().equals("") || PublisherTextField.getText().equals(null) || PublisherTextField.getText().length() < 3){
                   throw new LibraryException("Publisher should not be null or shorter than 3");
               }              
               l.setLShtepiaBotuese(PublisherTextField.getText());
@@ -613,17 +641,17 @@ public class RegisterBookGUI extends javax.swing.JFrame {
               }              
               l.setAutoriId((Autori) this.AuthorComboBox.getSelectedItem());
               
-              if(QuantityTextField.getText() == "" || QuantityTextField.getText() == null || QuantityTextField.getText().length() < 1 || Integer.parseInt(QuantityTextField.getText()) < 1){
+              if(QuantityTextField.getText().equals("") || QuantityTextField.getText().equals(null) || QuantityTextField.getText().length() < 1 || Integer.parseInt(QuantityTextField.getText()) < 1){
                   throw new LibraryException("Quantity should not be null or lower than 1");
               }
               l.setLSasia(Integer.parseInt(QuantityTextField.getText()));
               
-              if(PriceTextField.getText() == "" || PriceTextField.getText() == null || PriceTextField.getText().length() < 0 || Double.parseDouble(PriceTextField.getText()) < 0){
+              if(PriceTextField.getText().equals("") || PriceTextField.getText().equals(null) || PriceTextField.getText().length() < 0 || Double.parseDouble(PriceTextField.getText()) < 0){
                   throw new LibraryException("Price should not be null or lower than 0");                  
               }
               l.setLCmimiMujor(Double.parseDouble(PriceTextField.getText()));
               
-              if(IsbnTextField.getText() == "" || IsbnTextField.getText() == null || (IsbnTextField.getText().length()== 10 || IsbnTextField.getText().length() == 13)){
+              if(IsbnTextField.getText().equals("") || IsbnTextField.getText().equals(null) || (IsbnTextField.getText().length()== 10 || IsbnTextField.getText().length() == 13)){
                   throw new LibraryException("Isbn should not be null, and should contain 10 or 13 digits");
               }
               l.setIsbn(IsbnTextField.getText());
@@ -663,22 +691,25 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                         if(i == 0){                    
                         Libri l = btm.getLibri(row);
                         KategoriaLibrit k = l.getLKategoriaId();
-                        try{
-                        lrepo.delete(l);
-                        }catch(LibraryException ex){
-                        JOptionPane.showMessageDialog(this,"Please select a book from the table");
-                        }
-                        int sasia = Integer.parseInt(k.getKLSasia()) - 1;
-                        k.setKLSasia(Integer.toString(sasia));
-                        KategoriaLibritRepository krepo = new KategoriaLibritRepository();
-                        krepo.edit(k);
+                            try{
+                                lrepo.delete(l);
+                                int sasia = Integer.parseInt(k.getKLSasia()) - 1;
+                                k.setKLSasia(Integer.toString(sasia));
+                                KategoriaLibritRepository krepo = new KategoriaLibritRepository();
+                                krepo.edit(k);
+                            }catch(LibraryException ex){
+                                JOptionPane.showMessageDialog(this,"Book can not be deleted because it is borrowed");
+                            }
+
                         }
                     }
+                    else
+                        throw new LibraryException("Please select a book from the table");
             this.clear();
             this.loadBookTable();
         }   
         catch (Exception ex){
-                   JOptionPane.showMessageDialog(this, "Book can not be deleted because it is borrowed");
+                   JOptionPane.showMessageDialog(this, ex.getMessage());
           
         }
     }//GEN-LAST:event_DeleteClientButtonActionPerformed
@@ -757,6 +788,10 @@ public class RegisterBookGUI extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_IsbnTextFieldKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -817,6 +852,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
     private javax.swing.JPanel TitelPanel;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JTextField TitleTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;

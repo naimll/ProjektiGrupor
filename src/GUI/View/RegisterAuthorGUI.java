@@ -9,6 +9,9 @@ import BLL.Autori;
 import DAL.AutoriRepository;
 import DAL.LibraryException;
 import GUI.Model.AuthorTableModel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
@@ -34,8 +37,17 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
         initComponents();
         this.loadTable();
         this.tableSelectedIndexChange();
+        centreWindow(this);
     }
 
+    
+        public static void centreWindow(Window frame) {
+           
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    frame.setLocation(x, y);
+}
     public void clear(){
         this.NameTextField.setText("");
         this.SurnameTextField.setText("");
@@ -89,6 +101,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         NameLabel = new javax.swing.JLabel();
@@ -109,6 +122,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -119,10 +133,21 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Register Author");
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,9 +156,10 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -368,17 +394,17 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
             if(row == -1){
               Autori a = new Autori();
               
-              if(NameTextField.getText() == "" || NameTextField.getText() == null || NameTextField.getText().length() < 4){
+              if(NameTextField.getText().equals("") || NameTextField.getText() == null || NameTextField.getText().length() < 4){
                   throw new LibraryException("Name should not be null or shorter than 4");
               }
               a.setAEmri(NameTextField.getText());
               
-               if(SurnameTextField.getText() == "" || SurnameTextField.getText() == null || SurnameTextField.getText().length() < 4){
+               if(SurnameTextField.getText().equals("") || SurnameTextField.getText() == null || SurnameTextField.getText().length() < 4){
                throw new LibraryException("Surname should not be null or shorter than 4");
               }
               a.setAMbiemri(SurnameTextField.getText());
               
-               if(VendlindjaTextField.getText() == "" || VendlindjaTextField.getText() == null || VendlindjaTextField.getText().length() < 5){
+               if(VendlindjaTextField.getText().equals("") || VendlindjaTextField.getText() == null || VendlindjaTextField.getText().length() < 5){
                throw new LibraryException("Birthplace should not be null or shorter than 5");
               }              
               a.setAVendlindja(VendlindjaTextField.getText());
@@ -392,17 +418,17 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
             }else{
                 Autori a = this.atm.getAutori(row) ;
                
-              if(NameTextField.getText() == "" || NameTextField.getText() == null || NameTextField.getText().length() < 4){
+              if(NameTextField.getText().equals("") || NameTextField.getText() == null || NameTextField.getText().length() < 4){
                   throw new LibraryException("Name should not be null or shorter than 4");
               }
               a.setAEmri(NameTextField.getText());
               
-               if(SurnameTextField.getText() == "" || SurnameTextField.getText() == null || SurnameTextField.getText().length() < 4){
+               if(SurnameTextField.getText().equals("") || SurnameTextField.getText() == null || SurnameTextField.getText().length() < 4){
                throw new LibraryException("Surname should not be null or shorter than 4");
               }
               a.setAMbiemri(SurnameTextField.getText());
               
-               if(VendlindjaTextField.getText() == "" || VendlindjaTextField.getText() == null || VendlindjaTextField.getText().length() < 5){
+               if(VendlindjaTextField.getText().equals("") || VendlindjaTextField.getText() == null || VendlindjaTextField.getText().length() < 5){
                throw new LibraryException("Birthplace should not be null or shorter than 5");
               }              
               a.setAVendlindja(VendlindjaTextField.getText());
@@ -442,6 +468,10 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -489,6 +519,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel SurnameLabel;
     private javax.swing.JTextField SurnameTextField;
     private javax.swing.JTextField VendlindjaTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

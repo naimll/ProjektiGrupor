@@ -9,6 +9,9 @@ import BLL.KategoriaLibrit;
 import DAL.KategoriaLibritRepository;
 import DAL.LibraryException;
 import GUI.Model.CategoryTableModel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
@@ -33,7 +36,15 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
         initComponents();
         this.loadTable();
         this.tableSelectedIndexChange();
+        centreWindow(this);
     }
+    
+        public static void centreWindow(Window frame) {
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    frame.setLocation(x, y);
+}
     
         public void loadTable(){
         try{    
@@ -85,6 +96,7 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         NameTextField = new javax.swing.JTextField();
@@ -101,6 +113,7 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 800));
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -109,6 +122,14 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Register Category");
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -116,12 +137,16 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(488, 488, 488)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(484, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addComponent(jButton1)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel1)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
@@ -295,7 +320,7 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
             System.out.println("row = " +row);
             if (row == -1){
                 KategoriaLibrit k = new KategoriaLibrit() ;
-                if(this.NameTextField.getText() == "" || this.NameTextField.getText().length() < 3){
+                if(this.NameTextField.getText().equals("") || this.NameTextField.getText().length() < 3){
                     throw new LibraryException("Name should not be null or shorter than 3");
                 }
                 k.setKLEmri(this.NameTextField.getText());
@@ -362,6 +387,10 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
         table.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search));    }//GEN-LAST:event_searchKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,6 +431,7 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
     private javax.swing.JButton Cancel;
     private javax.swing.JButton Delete;
     private javax.swing.JTextField NameTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

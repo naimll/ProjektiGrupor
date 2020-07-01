@@ -15,6 +15,9 @@ import DAL.LibriRepository;
 import GUI.Model.HuazimiLibritTableModel;
 import GUI.Model.KlientiComboBoxModel;
 import GUI.Model.LibriComboBoxModel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,9 +53,15 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
 	tabelaSelectedIndexChange();
         loadComboBoxLibrat();
         this.SetToFinished.setVisible(false);
+        centreWindow(this);
     }
     
-    
+        public static void centreWindow(Window frame) {
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    frame.setLocation(x, y);
+}
     
     public void loadComboBoxKlientet(){
         try{
@@ -100,6 +109,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
 
         TitelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         AddClientPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         PublishingYearLabel = new javax.swing.JLabel();
@@ -120,6 +130,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1328, 770));
 
         TitelPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -127,7 +138,15 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Regjistro Huazuesin e librit");
+        jLabel1.setText("Register the book borrowing");
+
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TitelPanelLayout = new javax.swing.GroupLayout(TitelPanel);
         TitelPanel.setLayout(TitelPanelLayout);
@@ -137,11 +156,15 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                 .addContainerGap(557, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(430, 430, 430))
+            .addGroup(TitelPanelLayout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         TitelPanelLayout.setVerticalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitelPanelLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40))
         );
@@ -151,10 +174,10 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         PublishingYearLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PublishingYearLabel.setText("Klienti");
+        PublishingYearLabel.setText("Client");
 
         QuantityLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        QuantityLabel.setText("Libri");
+        QuantityLabel.setText("Book");
 
         AddClientButton.setBackground(new java.awt.Color(51, 255, 51));
         AddClientButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -185,10 +208,10 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         });
 
         AuthorLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        AuthorLabel.setText("Data kthimit");
+        AuthorLabel.setText("Receipt Date");
 
         NrAuthorsLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        NrAuthorsLabel.setText("Data Leshimit");
+        NrAuthorsLabel.setText("Borrowing Date");
 
         CancelButton.setBackground(new java.awt.Color(0, 153, 255));
         CancelButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -429,22 +452,24 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         try{
             int row = table.getSelectedRow();
             if(row != -1){
-                
+                Object[] ob = {"Yes","No"} ;
+                int i = JOptionPane.showOptionDialog(this,"Would you like to delete the selected object ?","Delete", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                if(i == 0){
                 HuazimiLibrit hl = huazimiLibritTableModel.getHuazimiLibrit(row);
                 
-                if(hl.getIsActive() == 0){
+                    if(hl.getIsActive() == 0){       
+                        huazimiRepository.delete(hl);
+                    }
                 
-                    
-                    
-                huazimiRepository.delete(hl);
-                }
                 else{
-                   throw new LibraryException("Please first set it to finished,('Active 0')"); 
+                   throw new LibraryException("Please first set it to finished,(Active= 'No')"); 
                 }
+                    }
 
             }
             else{
                 throw new LibraryException("Please select one from the table");
+            
             }
             this.clear();
             this.loadTableHuazimi();
@@ -488,6 +513,8 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                     
                     if(p.getIsActive() == 1){
                         SetToFinished.setVisible(true);
+                    }else{
+                        SetToFinished.setVisible(false);
                     }
                     
                    klientetCmb.getModel().setSelectedItem(p.getHLKlientiId());
@@ -537,6 +564,10 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
     }//GEN-LAST:event_SetToFinishedActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
         public void clear(){
             
@@ -595,6 +626,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
     private javax.swing.JTextField Search;
     private javax.swing.JButton SetToFinished;
     private javax.swing.JPanel TitelPanel;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;

@@ -11,6 +11,9 @@ import DAL.LibraryException;
 import GUI.Model.ClientTableModel;
 import com.sun.glass.events.KeyEvent;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.Calendar;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
@@ -44,9 +47,16 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         this.loadTable();
         this.tableSelectedIndexChange();
         this.IdTextField.setEnabled(true);
+        centreWindow(this);
     }
     
     
+        public static void centreWindow(Window frame) {
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    frame.setLocation(x, y);
+}
     
     public void tableSelectedIndexChange(){
          
@@ -67,11 +77,13 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                     AgeTextField.setText(Integer.toString(k.getKMosha()));
                     
                     String Gender = k.getKGjinia().toLowerCase();
-                    if(Gender=="male"){
+                    if(Gender.equals("male")){
+                        
                         MaleRadioButton.setSelected(true);
                         FemaleRadioButton.setSelected(false);
                     }
-                    else if(Gender =="female"){
+                    else if(Gender.equals("female")){
+                        
                         MaleRadioButton.setSelected(false);
                         FemaleRadioButton.setSelected(true);                   
                     }
@@ -131,6 +143,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
 
         TitelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         AddClientPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         NameLabel = new javax.swing.JLabel();
@@ -161,6 +174,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
+        setUndecorated(true);
         setResizable(false);
 
         TitelPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -173,6 +187,14 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Register Client");
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TitelPanelLayout = new javax.swing.GroupLayout(TitelPanel);
         TitelPanel.setLayout(TitelPanelLayout);
         TitelPanelLayout.setHorizontalGroup(
@@ -180,12 +202,16 @@ public class RegisterClientGUI extends javax.swing.JFrame {
             .addGroup(TitelPanelLayout.createSequentialGroup()
                 .addGap(489, 489, 489)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(526, Short.MAX_VALUE))
+            .addGroup(TitelPanelLayout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         TitelPanelLayout.setVerticalGroup(
             TitelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitelPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addComponent(jButton1)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -530,17 +556,17 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
              Klienti k = new Klienti();
               
              
-             if(NameTextField.getText() == "" || NameTextField.getText().length() < 3){
+             if(NameTextField.getText().equals("") || NameTextField.getText().length() < 3){
                  throw new LibraryException("Name should not be null or shorter than 3");
              }
              k.setKEmri(NameTextField.getText());
              
-             if(SurnameTextField.getText() == "" || SurnameTextField.getText().length() < 3){
+             if(SurnameTextField.getText().equals("") || SurnameTextField.getText().length() < 3){
                  throw new LibraryException("Surname should not be null or shorter than 3");
              }                        
              k.setKMbiemri(this.SurnameTextField.getText());
                                                         
-                if(AgeTextField.getText() == "" || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
+                if(AgeTextField.getText().equals("") || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
                 
                  throw new LibraryException("Age should not be null or lower than 10"); 
                 }            
@@ -568,14 +594,14 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
              k.setKShteti(this.StateTextField.getText());
              
              
-             if(EmailTextField.getText() == "" || EmailTextField.getText().length() < 5 || !EmailTextField.getText().contains("@")){
-                 throw new LibraryException("Email length should not be shorter 5 and should contatin @ character");   
+             if(EmailTextField.getText().equals("") || EmailTextField.getText().length() < 5 || !EmailTextField.getText().contains("@")){
+                 throw new LibraryException("Email length should not be shorter than 5 and should contatin @ character");   
              }
 
              
              k.setKEmail(this.EmailTextField.getText());
              
-             if(IdTextField.getText() == "" || IdTextField.getText().length() < 9 ){
+             if(IdTextField.getText().equals("") || IdTextField.getText().length() < 9 ){
                  throw new LibraryException ("Personal number should not be shorter than 9 numbers");
              }
              k.setKId(Integer.parseInt(this.IdTextField.getText()));
@@ -590,17 +616,17 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
             }else{
                 
                 Klienti k = ctm.getKlienti(row);
-             if(NameTextField.getText() =="" || NameTextField.getText().length() < 3){
+             if(NameTextField.getText().equals("") || NameTextField.getText().length() < 3){
                  throw new LibraryException("Name should not be null or shorter than 3");
              }
              k.setKEmri(NameTextField.getText());
              
-             if(SurnameTextField.getText() =="" || SurnameTextField.getText().length() < 3){
+             if(SurnameTextField.getText().equals("") || SurnameTextField.getText().length() < 3){
                  throw new LibraryException("Surname should not be null or shorter than 3");
              }                        
              k.setKMbiemri(this.SurnameTextField.getText());
                                            
-              if(AgeTextField.getText() == "" || AgeTextField.getText().length() < 1 || Integer.parseInt(AgeTextField.getText()) < 10){
+              if(AgeTextField.getText().equals("") || AgeTextField.getText().length() < 2 || Integer.parseInt(AgeTextField.getText()) < 10){
                 
                  throw new LibraryException("Age should not be null or lower than 10"); 
              }
@@ -627,8 +653,8 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
              k.setKShteti(this.StateTextField.getText());
              
              
-             if(EmailTextField.getText() == "" || EmailTextField.getText().length() < 5 || EmailTextField.getText().contains("@")){
-                 throw new LibraryException("Email length should not be shorter 5 and should contatin @ character");   
+             if(EmailTextField.getText().equals("") || EmailTextField.getText().length() < 5 || !EmailTextField.getText().contains("@")){
+                 throw new LibraryException("Email length should not be shorter than 5 and should contatin @ character");   
              }
 
              
@@ -732,6 +758,10 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
        
        }
     }//GEN-LAST:event_IdTextFieldKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -791,6 +821,7 @@ private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {
     private javax.swing.JLabel SurnameLabel;
     private javax.swing.JTextField SurnameTextField;
     private javax.swing.JPanel TitelPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
